@@ -3,143 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S | Tu Casa Digital - Elite</title>
+    <title>Superarationebook | Elite Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde-pro: #0f3d24;
-            --dorado: #ffcc00;
-            --rojo-oferta: #e74c3c;
-            --blanco: #ffffff;
-            --gris-fondo: #f8faf9;
+            --verde-obscuro: #0a2617;
+            --verde-premium: #0f3d24;
+            --dorado-brillante: #ffcc00;
+            --dorado-mate: #d4af37;
+            --rojo-alerta: #ff4757;
+            --blanco-puro: #ffffff;
+            --gris-suave: #f1f2f6;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-fondo); color: #333; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-suave); color: #2f3542; }
 
-        /* HEADER Y LOGO */
-        .brand-header { text-align: center; padding: 20px; background: var(--blanco); }
-        .s-logo { 
-            width: 70px; height: 70px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
-            display: inline-flex; align-items: center; justify-content: center; 
-            border-radius: 20px; color: var(--dorado); font-size: 45px; 
-            font-weight: 800; border: 3px solid var(--dorado);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        /* HEADER PREMIUM */
+        .brand-header { 
+            text-align: center; padding: 30px 15px; background: white; 
+            border-bottom: 4px solid var(--dorado-brillante);
+        }
+        .full-logo { 
+            font-size: 28px; font-weight: 800; color: var(--verde-premium); 
+            letter-spacing: -1px; text-transform: uppercase;
+        }
+        .full-logo span { color: var(--dorado-mate); }
+
+        /* NAV STICKY CON CRONÓMETRO */
+        .sticky-nav { 
+            position: sticky; top: 0; z-index: 2000; 
+            background: linear-gradient(135deg, var(--verde-obscuro), var(--verde-premium)); 
+            padding: 15px 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .global-timer {
+            text-align: center; color: var(--dorado-brillante); font-weight: 800;
+            font-size: 14px; margin-bottom: 10px; text-transform: uppercase;
+        }
+        .search-input { 
+            width: 90%; max-width: 500px; display: block; margin: auto; 
+            padding: 12px 25px; border-radius: 30px; border: 2px solid var(--dorado-mate); 
+            outline: none; font-weight: 600;
         }
 
-        /* NAVEGACIÓN Y FILTROS */
-        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .search-input { width: 90%; max-width: 500px; display: block; margin: 5px auto 12px; padding: 10px 20px; border-radius: 25px; border: none; outline: none; }
+        .age-filters { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .btn-age { 
+            padding: 10px 18px; border-radius: 25px; border: 1.5px solid var(--dorado-mate); 
+            background: transparent; color: white; cursor: pointer; font-size: 12px; font-weight: 700;
+            transition: all 0.3s;
+        }
+        .btn-age.active { background: var(--dorado-brillante); color: var(--verde-premium); border-color: var(--dorado-brillante); }
+
+        /* SECCIONES Y TARJETAS */
+        .container { max-width: 1200px; margin: auto; padding: 25px; }
+        .section-title { 
+            font-size: 20px; font-weight: 800; color: var(--verde-premium); 
+            margin: 40px 0 20px; text-transform: uppercase; display: flex; align-items: center;
+        }
+        .section-title::after { content: ""; flex: 1; height: 3px; background: var(--dorado-brillante); margin-left: 15px; border-radius: 10px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 25px; }
+        .card { 
+            background: white; border-radius: 20px; overflow: hidden; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06); text-align: center; 
+            cursor: pointer; position: relative; transition: 0.4s; border: 1px solid #eee;
+        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--dorado-mate); }
         
-        .age-filters { display: flex; justify-content: center; gap: 10px; padding-bottom: 5px; }
-        .btn-age { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--dorado); background: transparent; color: white; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; }
-        .btn-age.active { background: var(--dorado); color: var(--verde-pro); }
+        .se-mini-logo {
+            position: absolute; top: 10px; right: 10px; background: var(--dorado-brillante);
+            color: var(--verde-premium); font-weight: 800; padding: 4px 8px; 
+            border-radius: 8px; font-size: 10px; z-index: 10;
+        }
 
-        /* SECCIONES */
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .section-title { font-size: 22px; font-weight: 800; color: var(--verde-pro); margin: 40px 0 20px; border-left: 5px solid var(--dorado); padding-left: 15px; }
+        .badge-oferta { 
+            position: absolute; top: 10px; left: 10px; background: var(--rojo-alerta); 
+            color: white; padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: 800; z-index: 10;
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .badge-oferta { position: absolute; top: 10px; left: 10px; background: var(--rojo-oferta); color: white; padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; z-index: 10; }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 12px; }
-        .price { color: var(--verde-pro); font-weight: 800; font-size: 16px; }
+        .card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 15px; }
+        .price { color: var(--verde-premium); font-weight: 800; font-size: 18px; margin-top: 5px; }
 
-        /* GARANTÍA S */
-        .garantia-badge { background: #e8f5e9; border: 1px solid var(--verde-pro); color: var(--verde-pro); padding: 10px; border-radius: 10px; font-size: 12px; margin-top: 15px; font-weight: 600; }
+        /* MODAL GLASSMORPHISM */
+        .modal { 
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(10, 38, 23, 0.9); z-index: 5000; justify-content: center; align-items: center; 
+            backdrop-filter: blur(10px); 
+        }
+        .modal-content { 
+            background: white; width: 90%; max-width: 420px; border-radius: 35px; 
+            padding: 30px; position: relative; text-align: center; border: 3px solid var(--dorado-brillante);
+        }
+        .modal-timer { 
+            background: #fff5f5; border: 2px dashed var(--rojo-alerta); color: var(--rojo-alerta);
+            padding: 10px; border-radius: 15px; font-weight: 800; margin-bottom: 20px; font-size: 14px;
+        }
 
-        /* MODAL */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .modal-content { background: white; width: 90%; max-width: 400px; border-radius: 25px; padding: 25px; position: relative; text-align: center; }
-        .timer-box { background: #fff3f2; border: 1px dashed var(--rojo-oferta); padding: 8px; border-radius: 12px; color: var(--rojo-oferta); font-weight: 800; font-size: 13px; margin-bottom: 15px; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
-        .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
-        .btn-buy { background: var(--verde-pro); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; margin-bottom: 10px; }
-        .btn-gift { background: #fff; color: var(--verde-pro); border: 2px solid var(--verde-pro); padding: 10px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 14px; }
+        .btn-buy { 
+            background: linear-gradient(to right, var(--verde-premium), #1a6d3d); 
+            color: white; border: none; padding: 18px; border-radius: 15px; 
+            font-weight: 800; width: 100%; cursor: pointer; font-size: 16px; margin-bottom: 12px;
+            box-shadow: 0 5px 15px rgba(15, 61, 36, 0.3);
+        }
 
-        /* VISIÓN */
-        .vision-section { background: white; padding: 40px 20px; border-radius: 30px; margin: 40px 0; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
-        .vision-text { max-width: 800px; margin: auto; line-height: 1.8; color: #555; font-size: 15px; }
+        /* VISIÓN PROFESIONAL */
+        .vision-container { 
+            background: var(--verde-obscuro); color: white; padding: 50px 30px; 
+            border-radius: 40px; margin: 60px 0; position: relative; overflow: hidden;
+        }
+        .vision-container::before {
+            content: "S.E"; position: absolute; font-size: 150px; font-weight: 900;
+            color: rgba(255, 204, 0, 0.05); bottom: -20px; right: -20px;
+        }
 
-        .footer { background: var(--verde-pro); color: white; padding: 40px 20px; text-align: center; }
+        .footer { background: #05140c; color: white; padding: 50px 20px; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="brand-header">
-    <div class="s-logo">S</div>
-    <h2 style="margin-top:10px; color:var(--verde-pro); letter-spacing: 2px;">TU CASA DIGITAL</h2>
+    <div class="full-logo">Superaration<span>ebook</span></div>
 </div>
 
 <div class="sticky-nav">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar packs, guías o libros..." onkeyup="app.render()">
+    <div class="global-timer">⚡ Ofertas de Superación expiran en: <span class="timer-display">09:59</span></div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar en la biblioteca S.E..." onkeyup="app.render()">
     <div class="age-filters">
-        <button id="btnAll" class="btn-age active" onclick="app.setAge('Todos')">🌟 Todos</button>
-        <button id="btnMen" class="btn-age" onclick="app.setAge('Menores')">👦 Menores</button>
-        <button id="btnMay" class="btn-age" onclick="app.setAge('Mayores')">👤 Mayores</button>
+        <button id="btnAll" class="btn-age active" onclick="app.setAge('Todos')">TODOS</button>
+        <button id="btnMen" class="btn-age" onclick="app.setAge('Menores')">JÓVENES (S.E)</button>
+        <button id="btnMay" class="btn-age" onclick="app.setAge('Mayores')">PRO (S.E)</button>
     </div>
 </div>
 
 <div class="container" id="mainCatalog"></div>
 
 <div class="container">
-    <div class="vision-section">
-        <h3 style="color: var(--verde-pro); margin-bottom: 20px;">Nuestra Visión de Superación</h3>
-        <p class="vision-text">
-            "Como joven emprendedor de 16 años, fundé **S | Tu Casa Digital** con una misión clara: democratizar el acceso al conocimiento práctico y profesional. Creemos que la **Superación (S)** no es un destino, sino un hábito diario que se alimenta de curiosidad y herramientas de calidad. Nuestra visión es convertirnos en la biblioteca digital líder para emprendedores, ofreciendo materiales que transforman la mentalidad. Cada guía ha sido seleccionada para impulsar tu crecimiento personal, técnico y financiero."
+    <div class="vision-container">
+        <h2 style="color: var(--dorado-brillante); margin-top: 0;">VISIÓN ESTRATÉGICA Superarationebook</h2>
+        <p style="line-height: 2; font-size: 16px; opacity: 0.9;">
+            "En **Superarationebook**, nuestra misión trasciende la simple venta de archivos digitales. A mis 16 años, entiendo que el acceso a información de élite es la clave para romper los ciclos de estancamiento. Bajo las siglas **S.E (Superación Estratégica)**, hemos consolidado una biblioteca de alto valor diseñada para transformar mentes inquietas en perfiles altamente competitivos. Nuestra visión es convertirnos en el ecosistema educativo digital más importante para la nueva generación de emprendedores, proporcionando guías prácticas, libros de mentalidad y combos técnicos que no se encuentran en la educación tradicional. Cada vez que adquieres un producto S.E, estás invirtiendo en una versión superior de ti mismo."
         </p>
-        <div class="garantia-badge">🛡️ GARANTÍA S: Si el material no cumple tus expectativas, te asesoramos personalmente en tu proceso.</div>
     </div>
 </div>
 
 <div id="infoModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="app.closeM()">&times;</span>
-        <div class="timer-box">⏱ Oferta exclusiva termina en: <span id="timer">09:59</span></div>
+        <span class="close-modal" onclick="app.closeM()" style="cursor:pointer; position:absolute; right:20px; top:15px; font-size:24px;">&times;</span>
+        <div class="modal-timer">⏱️ ¡PRECIO ESPECIAL S.E TERMINA EN: <span class="timer-display">09:59</span>!</div>
         <img id="mImg" class="modal-img">
-        <h2 id="mTitle" style="margin: 5px 0;"></h2>
-        <p id="mDesc" style="color: #666; font-size: 13px; margin-bottom: 20px;"></p>
-        <div id="mPrice" style="font-size: 26px; font-weight: 800; color: var(--verde-pro); margin-bottom: 20px;"></div>
+        <h2 id="mTitle" style="color:var(--verde-premium); margin: 10px 0;"></h2>
+        <p id="mDesc" style="font-size: 14px; color:#555; line-height: 1.6; margin-bottom: 25px;"></p>
+        <div id="mPrice" style="font-size: 32px; font-weight: 800; color: var(--verde-premium); margin-bottom: 20px;"></div>
         <button class="btn-buy" onclick="app.buy(false)">ADQUIRIR AHORA 💬</button>
-        <button class="btn-gift" onclick="app.buy(true)">🎁 ENVIAR COMO REGALO</button>
+        <button style="background:none; border:none; color:var(--verde-premium); font-weight:700; cursor:pointer;" onclick="app.buy(true)">🎁 ENVIAR COMO REGALO S.E.</button>
     </div>
 </div>
 
-<div class="footer">
-    <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
-    <p>&copy; 2024 S-Tu Casa Digital. Conocimiento que Transforma.</p>
-</div>
+<footer class="footer">
+    <div class="full-logo" style="color: white; margin-bottom: 20px;">Superaration<span>ebook</span></div>
+    <p style="opacity: 0.6; font-size: 13px;">S.E &copy; 2024 - Innovación en Conocimiento Digital.</p>
+</footer>
 
 <script>
     const app = {
         tel: "573223693926",
         ageFilter: 'Todos',
-        timerInt: null,
+        timeLeft: 599,
         
         books: [
-            // PACKS (Combos)
-            { id: 100, tipo: "Pack", edad: "Mayores", t: "Pack Mecánico Experto", p: 45000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "INCLUYE: Guía Electricidad + Guía Porsy 11. ¡Ahorra 25% comprando el combo!" },
-            { id: 101, tipo: "Pack", edad: "Mayores", t: "Combo Mente Brillante", p: 35000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "INCLUYE: Hábitos Atómicos + Mente Sana. El pack definitivo para tu mentalidad." },
+            // COMBOS S.E.
+            { id: 100, tipo: "Pack S.E.", edad: "Mayores", t: "Master Combo Mecánico", p: 48000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Incluye: Guía Electricidad Pro + Porsy 11 + Inyección Electrónica. ¡El kit definitivo!" },
+            { id: 101, tipo: "Pack S.E.", edad: "Mayores", t: "Élite Mentalidad", p: 39000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Incluye: Hábitos Atómicos + Ego is the Enemy + Mente Sana." },
             
             // GUÍAS
-            { id: 1, tipo: "Guía", edad: "Mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=500", desc: "Diagnóstico y reparación de sistemas eléctricos modernos." },
-            { id: 2, tipo: "Guía", edad: "Mayores", t: "Porsy 11", p: 32000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Optimización de motores de alto rendimiento y técnica deportiva." },
-            { id: 3, tipo: "Guía", edad: "Menores", t: "Ser YouTuber/TikToker", p: 18000, img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500", desc: "Aprende a crear contenido viral, editar y perder el miedo a la cámara." },
-            { id: 4, tipo: "Guía", edad: "Mayores", t: "Importar de China", p: 30000, img: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=500", desc: "Cómo comprar en Alibaba y revender con alta rentabilidad." },
+            { id: 1, tipo: "Guía", edad: "Mayores", t: "Porsy 11 Automotriz", p: 32000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Manual avanzado de ingeniería de alto rendimiento para motores deportivos." },
+            { id: 2, tipo: "Guía", edad: "Mayores", t: "Importaciones Elite", p: 35000, img: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=500", desc: "Cómo importar de China y USA sin intermediarios y crear tu propia marca." },
+            { id: 3, tipo: "Guía", edad: "Menores", t: "Creador de Contenido S.E", p: 20000, img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500", desc: "Dominio de TikTok, Reels y YouTube para jóvenes emprendedores." },
+            { id: 4, tipo: "Guía", edad: "Mayores", t: "Mecánica Motos Pro", p: 28000, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=500", desc: "Manual completo de reparación y mantenimiento de motores 2T y 4T." },
             
             // LIBROS
-            { id: 5, tipo: "Libro", edad: "Mayores", t: "Hábitos Atómicos", p: 24000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Pequeños cambios para obtener resultados extraordinarios." },
-            { id: 6, tipo: "Libro", edad: "Menores", t: "Mi Primera Inversión", p: 15000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Finanzas explicadas de forma sencilla para jóvenes emprendedores." },
-            { id: 7, tipo: "Libro", edad: "Mayores", t: "Ego is the Enemy", p: 20000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Domina tu ego para alcanzar el éxito duradero." }
+            { id: 5, tipo: "Libro", edad: "Mayores", t: "Hábitos Atómicos", p: 24000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "El bestseller mundial sobre cómo construir sistemas de vida imparables." },
+            { id: 6, tipo: "Libro", edad: "Menores", t: "Inversionista Joven", p: 18000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Finanzas y ahorro inteligente para menores de edad con visión de futuro." },
+            { id: 7, tipo: "Libro", edad: "Mayores", t: "Psicología del Éxito", p: 22000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Herramientas mentales para mantener la calma bajo presión y dominar mercados." }
         ],
+
+        init() {
+            this.render();
+            this.startGlobalTimer();
+        },
+
+        startGlobalTimer() {
+            setInterval(() => {
+                this.timeLeft--;
+                if (this.timeLeft <= 0) this.timeLeft = 599;
+                let min = Math.floor(this.timeLeft / 60);
+                let sec = this.timeLeft % 60;
+                let str = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                document.querySelectorAll('.timer-display').forEach(el => el.innerText = str);
+            }, 1000);
+        },
 
         render() {
             const catalog = document.getElementById('mainCatalog');
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            ["Pack", "Guía", "Libro"].forEach(tipo => {
+            ["Pack S.E.", "Guía", "Libro"].forEach(tipo => {
                 const filtrados = this.books.filter(b => 
                     b.tipo === tipo && 
                     b.t.toLowerCase().includes(search) && 
@@ -147,10 +216,11 @@
                 );
                 
                 if (filtrados.length > 0) {
-                    let html = `<div class="section-title">${tipo === 'Pack' ? 'Combos de Ahorro' : tipo + 's Especializadas'}</div><div class="grid">`;
+                    let html = `<div class="section-title">${tipo}S</div><div class="grid">`;
                     filtrados.forEach(b => {
                         html += `
                             <div class="card" onclick="app.openM(${b.id})">
+                                <div class="se-mini-logo">S.E.</div>
                                 <div class="badge-oferta">OFERTA</div>
                                 <img src="${b.img}">
                                 <div class="card-body">
@@ -181,30 +251,18 @@
             document.getElementById('mPrice').innerText = `$${item.p.toLocaleString()}`;
             document.getElementById('mImg').src = item.img;
             document.getElementById('infoModal').style.display = 'flex';
-            this.startTimer();
         },
 
-        startTimer() {
-            let time = 599; clearInterval(this.timerInt);
-            this.timerInt = setInterval(() => {
-                let min = Math.floor(time / 60); let sec = time % 60;
-                document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
-                if (time <= 0) clearInterval(this.timerInt);
-                time--;
-            }, 1000);
-        },
-
-        closeM() { document.getElementById('infoModal').style.display = 'none'; clearInterval(this.timerInt); },
+        closeM() { document.getElementById('infoModal').style.display = 'none'; },
 
         buy(isGift) {
             const item = this.books.find(x => x.id === this.selectedId);
-            let texto = isGift ? `🎁 ¡Hola! Quiero regalar este material:\n- ${item.t}` : `¡Hola! 👋 Quiero aprovechar la oferta:\n- ${item.t}`;
-            texto += `\nPrecio: $${item.p.toLocaleString()}\n¡Espero tu respuesta!`;
+            let texto = isGift ? `🎁 ¡Hola Superarationebook! Quiero este regalo S.E:\n- ${item.t}` : `¡Hola! 👋 Vengo por la oferta S.E:\n- ${item.t}`;
+            texto += `\nInversión: $${item.p.toLocaleString()}`;
             window.open(`https://wa.me/${this.tel}?text=${encodeURIComponent(texto)}`, '_blank');
         }
     };
 
-    app.init = () => app.render();
     app.init();
 </script>
 </body>
