@@ -9,71 +9,80 @@
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
         header { background: var(--primary); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         .container { padding: 15px; max-width: 1000px; margin: 0 auto; }
-        
-        /* Títulos de secciones */
         h2 { color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; font-size: 1.3rem; padding-bottom: 5px; }
-        
-        /* Filas de libros */
         .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; scrollbar-width: none; }
         .book-row::-webkit-scrollbar { display: none; }
-        
-        /* Tarjeta de libro */
         .book-card { background: white; min-width: 160px; max-width: 160px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; cursor: pointer; }
         .book-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 10px; }
-        .book-title { font-weight: bold; margin-top: 8px; font-size: 0.9rem; color: #333; height: 35px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .book-title { font-weight: bold; margin-top: 8px; font-size: 0.85rem; color: #333; height: 35px; overflow: hidden; display: flex; align-items: center; justify-content: center; line-height: 1.1; }
         .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
-
-        /* Ventana Flotante (Modal) */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 85%; max-width: 380px; border-radius: 20px; text-align: center; position: relative; }
+        .modal-content { background: white; margin: 10% auto; padding: 20px; width: 85%; max-width: 380px; border-radius: 20px; text-align: center; position: relative; }
         .close { position: absolute; right: 15px; top: 10px; font-size: 28px; color: #999; cursor: pointer; }
-        #modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        #modal-img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; }
         #modal-desc { text-align: left; font-size: 0.9rem; color: #555; margin: 15px 0; background: #f9f9f9; padding: 10px; border-radius: 8px; line-height: 1.4; }
         .btn-ws { display: block; background: #25d366; color: white; text-decoration: none; padding: 12px; border-radius: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>
-    <div style="font-size: 1.5rem; font-weight: 900;">TU CASA DIGITAL</div>
-</header>
+<header><div style="font-size: 1.5rem; font-weight: 900;">TU CASA DIGITAL</div></header>
 
 <div class="container">
 
-    <h2>🥘 Gastronomía y Salud</h2>
+    <h2>🥘 Gastronomía</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Cocina para Diabéticos', '25.000', 'Recetas deliciosas diseñadas específicamente para mantener niveles de glucosa estables sin perder el sabor.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
+        <div class="book-card" onclick="openModal('Menú Diabéticos', '25.000', 'Recetas deliciosas de bajo índice glucémico para mantener tu salud bajo control.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400">
             <div class="book-title">Menú Diabéticos</div>
             <div class="price">$25.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Postres Saludables', '20.000', 'Aprende a preparar dulces y postres sin azúcar refinada. Ideal para cuidar tu peso y salud.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
+        <div class="book-card" onclick="openModal('Postres Saludables', '20.000', 'Dulces y postres sin azúcar refinada para disfrutar sin culpa.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400">
-            <div class="book-title">Postres Sin Culpa</div>
+            <div class="book-title">Postres Saludables</div>
             <div class="price">$20.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Comida Internacional', '35.000', 'Explora los mejores sabores del mundo con recetas paso a paso de Italia, México y más.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
+        <div class="book-card" onclick="openModal('Comida Internacional', '35.000', 'Los platos más famosos del mundo explicados paso a paso para tu cocina.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
             <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400">
-            <div class="book-title">Platos del Mundo</div>
+            <div class="book-title">Comida Internacional</div>
             <div class="price">$35.000</div>
         </div>
     </div>
 
     <h2>🌸 Bienestar</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Cuidado Propio', '15.000', 'Guía para mejorar tu salud mental y física con hábitos diarios efectivos.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
+        <div class="book-card" onclick="openModal('Cuidado Propio', '15.000', 'Guía detallada para mejorar tu salud física, mental y hábitos diarios.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400">
             <div class="book-title">Cuidado Propio</div>
             <div class="price">$15.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Mente Sana', '18.000', 'Estrategias para el manejo de la ansiedad y enfoque mental positivo.', 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400')">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400">
+            <div class="book-title">Mente Sana</div>
+            <div class="price">$18.000</div>
         </div>
     </div>
 
     <h2>🛠️ Mecánica</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Diagnosis Pro', '29.000', 'Manual de diagnosis electrónica, sensores y escaneo de fallas en motores modernos.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
+        <div class="book-card" onclick="openModal('Diagnosis Electrónica', '29.000', 'Aprende a usar escáneres OBD-II y sensores en motores modernos.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
             <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400">
-            <div class="book-title">Diagnosis</div>
+            <div class="book-title">Diagnosis Pro</div>
             <div class="price">$29.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Manual de Tuning', '30.000', 'Optimización de motores, ECUs y rendimiento vehicular avanzado.', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400')">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400">
+            <div class="book-title">Manual Tuning</div>
+            <div class="price">$30.000</div>
+        </div>
+    </div>
+
+    <h2>💻 Tecnología</h2>
+    <div class="book-row">
+        <div class="book-card" onclick="openModal('Dominio IA', '22.000', 'Domina la Inteligencia Artificial para aumentar tu productividad diaria.', 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400')">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400">
+            <div class="book-title">Dominio IA</div>
+            <div class="price">$22.000</div>
         </div>
     </div>
 
@@ -94,17 +103,11 @@
         document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-desc').innerText = desc;
         document.getElementById('modal-img').src = img;
-        document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Hola!%20Me%20interesa%20el%20libro%3A%20" + encodeURIComponent(title);
+        document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Quiero%20el%20ebook%3A%20" + encodeURIComponent(title);
         document.getElementById('bookModal').style.display = "block";
     }
-
-    function closeModal() {
-        document.getElementById('bookModal').style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('bookModal')) closeModal();
-    }
+    function closeModal() { document.getElementById('bookModal').style.display = "none"; }
+    window.onclick = function(e) { if (e.target == document.getElementById('bookModal')) closeModal(); }
 </script>
 
 </body>
