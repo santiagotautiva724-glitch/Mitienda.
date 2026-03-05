@@ -3,207 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital | S-Premium</title>
+    <title>Tu Casa Digital | S-Line Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde-metal: #0f3d24;
-            --dorado-brillante: #ffcc00;
+            --verde-pro: #0f3d24;
+            --dorado: #ffcc00;
             --blanco: #ffffff;
-            --gris-claro: #f0f2f5;
+            --gris: #f4f7f6;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-claro); color: #333; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris); color: #333; }
 
-        /* LOGO "S" PROFESIONAL */
-        .brand-header { text-align: center; padding: 30px 10px; background: var(--blanco); }
-        .s-logo-main { 
-            width: 90px; height: 90px; background: linear-gradient(145deg, var(--verde-metal), #1a6d3d); 
+        /* LOGO Y MARCA */
+        .brand-section { text-align: center; padding: 25px; background: var(--blanco); }
+        .s-logo { 
+            width: 70px; height: 70px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
             display: inline-flex; align-items: center; justify-content: center; 
-            border-radius: 22px; color: var(--dorado-brillante); font-size: 55px; 
-            font-weight: 800; border: 3px solid var(--dorado-brillante);
-            box-shadow: 0 15px 35px rgba(15,61,36,0.4);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-radius: 18px; color: var(--dorado); font-size: 45px; 
+            font-weight: 800; border: 3px solid var(--dorado);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* BARRA DE NAVEGACIÓN STICKY */
-        .nav-bar { background: var(--verde-metal); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .cart-icon { position: relative; cursor: pointer; font-size: 26px; }
-        .cart-count { position: absolute; top: -5px; right: -8px; background: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; font-weight: bold; border: 2px solid var(--verde-metal); }
+        /* NAVEGACIÓN Y BUSQUEDA (SOLICITADO) */
+        .sticky-header { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); color: white; padding: 10px; }
+        .search-box { padding: 10px; max-width: 600px; margin: auto; }
+        .search-input { width: 100%; padding: 12px 20px; border-radius: 25px; border: none; outline: none; font-size: 15px; }
 
-        /* GRILLA DE PRODUCTOS */
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        .category-title { color: var(--verde-metal); border-left: 6px solid var(--dorado-brillante); padding-left: 15px; margin: 40px 0 20px; font-weight: 800; font-size: 24px; }
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 25px; }
+        .filter-bar { display: flex; gap: 10px; overflow-x: auto; padding: 10px; background: #0b2e1b; scrollbar-width: none; }
+        .filter-bar::-webkit-scrollbar { display: none; }
+        .f-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--dorado); background: transparent; color: white; white-space: nowrap; cursor: pointer; font-size: 13px; }
+        .f-btn.active { background: var(--dorado); color: black; font-weight: bold; }
+
+        /* CARRITO ICONO */
+        .cart-trigger { position: fixed; bottom: 20px; right: 20px; background: var(--verde-pro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2500; }
+        .cart-badge { position: absolute; top: 0; right: 0; background: var(--dorado); color: black; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+
+        /* CONTENIDO */
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .category-title { color: var(--verde-pro); border-left: 5px solid var(--dorado); padding-left: 12px; margin: 30px 0 15px; font-weight: 800; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
         
-        /* TARJETAS DE PRODUCTO */
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.4s; position: relative; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
-        .card img { width: 100%; height: 220px; object-fit: cover; }
-        .card-body { padding: 15px; }
-        .card-title { font-size: 14px; font-weight: 600; color: #444; height: 40px; overflow: hidden; }
-        .card-price { color: var(--verde-metal); font-weight: 800; font-size: 18px; margin: 10px 0; }
-        .btn-add { background: var(--verde-metal); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .btn-add:hover { background: #1a6d3d; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-body { padding: 12px; text-align: center; }
+        .price { color: var(--verde-pro); font-weight: bold; font-size: 17px; margin: 8px 0; }
+        .btn-buy { background: var(--verde-pro); color: white; border: none; width: 100%; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 13px; }
 
-        /* PANEL LATERAL DEL CARRITO */
-        .side-panel { position: fixed; right: -100%; top: 0; width: 340px; height: 100%; background: white; z-index: 3000; box-shadow: -10px 0 40px rgba(0,0,0,0.2); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px; box-sizing: border-box; }
-        .side-panel.active { right: 0; }
-        .close-cart { font-size: 30px; cursor: pointer; color: #ccc; margin-bottom: 20px; display: block; }
-        .cart-item { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
+        /* PANEL CARRITO */
+        .cart-panel { position: fixed; right: -100%; top: 0; width: 320px; height: 100%; background: white; z-index: 3000; box-shadow: -5px 0 20px rgba(0,0,0,0.1); transition: 0.4s; padding: 20px; overflow-y: auto; }
+        .cart-panel.active { right: 0; }
 
-        /* RESEÑAS Y FEEDBACK */
-        .review-section { background: white; padding: 30px; border-radius: 25px; margin: 50px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .review-card { background: #f9fbf9; padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--dorado-brillante); }
+        /* RESEÑAS */
+        .reviews-section { background: white; padding: 25px; border-radius: 20px; margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .review-item { padding: 12px; border-bottom: 1px solid #eee; margin-bottom: 10px; }
 
-        /* FOOTER VISIÓN */
-        .footer { background: var(--verde-metal); color: white; padding: 80px 20px; text-align: center; border-radius: 50px 50px 0 0; }
-        .wa-final { background: #25d366; color: white; text-decoration: none; padding: 18px; border-radius: 15px; display: block; text-align: center; font-weight: 800; font-size: 18px; margin-top: 20px; }
+        .footer { background: var(--verde-pro); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<div class="brand-header">
-    <div class="s-logo-main">S</div>
-    <h1 style="margin: 15px 0 0; letter-spacing: 4px; color: var(--verde-metal); font-size: 28px;">TU CASA DIGITAL</h1>
+<div class="brand-section">
+    <div class="s-logo">S</div>
+    <h2 style="margin: 10px 0 0; color: var(--verde-pro); letter-spacing: 2px;">TU CASA DIGITAL</h2>
 </div>
 
-<div class="nav-bar">
-    <div style="font-weight: 800; font-size: 14px;">S-EXPERIENCE</div>
-    <div class="cart-icon" onclick="toggleCart()">
-        🛒 <span class="cart-count" id="cartCount">0</span>
+<div class="sticky-header">
+    <div class="search-box">
+        <input type="text" id="mainSearch" class="search-input" placeholder="🔍 Buscar temas o guías..." onkeyup="app.render()">
+    </div>
+    <div class="filter-bar">
+        <button class="f-btn active" onclick="app.setFilter('cat', 'Todos', this)">🌟 Todos</button>
+        <button class="f-btn" onclick="app.setFilter('age', 'menores', this)">👦 Menores</button>
+        <button class="f-btn" onclick="app.setFilter('age', 'mayores', this)">👤 Mayores</button>
+        <button class="f-btn" onclick="app.setFilter('cat', 'Gastronomía', this)">🍳 Gastronomía</button>
+        <button class="f-btn" onclick="app.setFilter('cat', 'Mecánica', this)">🔧 Mecánica</button>
+        <button class="f-btn" onclick="app.setFilter('cat', 'Bienestar', this)">🧘 Bienestar</button>
     </div>
 </div>
+
+<div class="container" id="catalog"></div>
 
 <div class="container">
-    <div id="dynamicCatalog"></div>
-
-    <div class="review-section">
-        <h3>🌟 Comunidad S-Line (Reseñas)</h3>
-        <div id="reviewsContainer">
-            <div class="review-card">
-                <strong>Andrés Felipe</strong> - ⭐⭐⭐⭐⭐<br>
-                "Compré la de Electricidad Automotriz y me sirvió para arreglar mi propio carro. ¡Recomendado!"
-            </div>
+    <div class="reviews-section">
+        <h3>💬 Reseñas de Clientes</h3>
+        <div id="reviewsList">
+            <div class="review-item"><strong>Carlos R.</strong>: "Excelente la guía de motores, muy completa." ⭐⭐⭐⭐⭐</div>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-            <input type="text" id="revName" placeholder="Tu Nombre" style="padding: 12px; border-radius: 10px; border: 1px solid #ddd;">
-            <textarea id="revText" placeholder="Cuéntanos tu experiencia..." style="padding: 12px; border-radius: 10px; border: 1px solid #ddd; height: 80px;"></textarea>
-            <button class="btn-add" onclick="postReview()">Enviar Reseña</button>
+        <div style="margin-top: 20px;">
+            <input type="text" id="revName" placeholder="Tu nombre" style="width: 100%; padding: 10px; margin-bottom: 5px; border: 1px solid #ddd; border-radius: 5px;">
+            <textarea id="revText" placeholder="Escribe tu opinión pública..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            <button class="btn-buy" style="margin-top: 10px; padding: 12px;" onclick="app.addReview()">Publicar para todos</button>
         </div>
     </div>
 </div>
 
-<div id="cartPanel" class="side-panel">
-    <span class="close-cart" onclick="toggleCart()">&times; Volver</span>
-    <h2 style="color: var(--verde-metal);">Mis Compras</h2>
-    <div id="cartItemsList"></div>
-    <div style="margin-top: 30px;">
-        <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800;">
-            <span>TOTAL:</span>
-            <span id="cartTotalPrice">$0</span>
-        </div>
-        <a id="waLink" href="#" target="_blank" class="wa-final">FINALIZAR PEDIDO (WHATSAPP)</a>
-    </div>
+<div class="cart-trigger" onclick="app.toggleCart()">
+    🛒 <div class="cart-badge" id="cartCount">0</div>
+</div>
 
-    <h3 style="margin-top: 50px; font-size: 16px; color: #888;">📦 Historial Reciente</h3>
-    <div id="orderHistory" style="font-size: 13px; color: #999;">Aún no hay compras procesadas.</div>
+<div id="cartPanel" class="cart-panel">
+    <h2 onclick="app.toggleCart()" style="cursor:pointer;">✖ Mi Carrito</h2>
+    <div id="cartItems"></div>
+    <hr>
+    <h3>Total: <span id="cartTotal">$0</span></h3>
+    <a id="waLink" href="#" target="_blank" class="btn-buy" style="display:block; text-align:center; background:#25d366; text-decoration:none; padding:15px; font-weight:bold;">COMPRAR POR WHATSAPP 💬</a>
 </div>
 
 <div class="footer">
-    <div class="s-logo-main" style="background: transparent; border-color: white; color: white; margin-bottom: 20px;">S</div>
-    <h2 style="font-size: 30px;">Nuestra Visión</h2>
-    <p style="max-width: 700px; margin: auto; font-style: italic; opacity: 0.8; line-height: 1.8;">
-        "Soy un joven emprendedor de 16 años convencido de que la educación digital es el motor del cambio. 
-        Con 'S' de Superación, esta plataforma es mi compromiso para entregarte las mejores guías del mercado."
+    <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
+    <h3>Visión de Emprendimiento</h3>
+    <p style="max-width:600px; margin:auto; opacity:0.8; font-style:italic;">
+        "Soy un joven de 16 años apasionado por la tecnología. 'S' de Superación es la base de Tu Casa Digital, un espacio diseñado para que aprendas habilidades reales."
     </p>
 </div>
 
 <script>
-    const data = {
-        whatsapp: "3223693926", // TU NÚMERO CORREGIDO
+    const app = {
+        whatsapp: "3223693926",
+        currentCat: 'Todos',
+        currentAge: 'Todos',
         cart: [],
-        products: [
-            { id: 101, cat: "Gastronomía", t: "Plan Diabéticos Saludable", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" },
-            { id: 102, cat: "Mecánica", t: "Electricidad Automotriz Pro", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500" },
-            { id: 103, cat: "Bienestar", t: "Mente Sana y Resiliencia", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500" },
-            { id: 104, cat: "Bienestar", t: "Yoga Total: Guía Práctica", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500" },
-            { id: 105, cat: "Tecnología", t: "Innovación: De Cero a Uno", p: 22000, img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500" }
+        
+        books: [
+            { id: 1, cat: "Gastronomía", age: "mayores", t: "Plan Diabéticos", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" },
+            { id: 2, cat: "Mecánica", age: "mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400" },
+            { id: 3, cat: "Bienestar", age: "mayores", t: "Mente Sana", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400" },
+            { id: 4, cat: "Bienestar", age: "menores", t: "Yoga Total", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
+            { id: 5, cat: "Mecánica", age: "mayores", t: "Motores Diésel", p: 30000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" }
         ],
 
         init() {
-            const catalog = document.getElementById('dynamicCatalog');
-            const cats = [...new Set(this.products.map(p => p.cat))];
-            
-            cats.forEach(c => {
-                let section = `<div class="category-title">${c}</div><div class="book-grid">`;
-                this.products.filter(p => p.cat === c).forEach(p => {
-                    section += `
-                        <div class="card">
-                            <img src="${p.img}">
-                            <div class="card-body">
-                                <div class="card-title">${p.t}</div>
-                                <div class="card-price">$${p.p.toLocaleString()}</div>
-                                <button class="btn-add" onclick="data.add(${p.id})">Añadir al Carrito</button>
-                            </div>
-                        </div>`;
+            this.render();
+            this.loadReviews();
+        },
+
+        render() {
+            const catalog = document.getElementById('catalog');
+            const search = document.getElementById('mainSearch').value.toLowerCase();
+            catalog.innerHTML = '';
+
+            const categories = [...new Set(this.books.map(b => b.cat))];
+            categories.forEach(c => {
+                const filtered = this.books.filter(b => {
+                    const mCat = (this.currentCat === 'Todos' || b.cat === this.currentCat);
+                    const mAge = (this.currentAge === 'Todos' || b.age === this.currentAge);
+                    const mSearch = b.t.toLowerCase().includes(search);
+                    return mCat && mAge && mSearch && b.cat === c;
                 });
-                catalog.innerHTML += section + '</div>';
+
+                if (filtered.length > 0) {
+                    let html = `<div class="category-title">${c}</div><div class="grid">`;
+                    filtered.forEach(b => {
+                        html += `
+                            <div class="card">
+                                <img src="${b.img}">
+                                <div class="card-body">
+                                    <div style="font-weight:600; font-size:14px;">${b.t}</div>
+                                    <div class="price">$${b.p.toLocaleString()}</div>
+                                    <button class="btn-buy" onclick="app.addToCart(${b.id})">Añadir</button>
+                                </div>
+                            </div>`;
+                    });
+                    catalog.innerHTML += html + '</div>';
+                }
             });
         },
 
-        add(id) {
-            const item = this.products.find(x => x.id === id);
-            this.cart.push(item);
-            this.update();
+        setFilter(type, val, btn) {
+            if(type === 'cat') this.currentCat = val;
+            if(type === 'age') this.currentAge = val;
+            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            this.render();
         },
 
-        update() {
+        addToCart(id) {
+            const item = this.books.find(x => x.id === id);
+            this.cart.push(item);
+            this.updateCart();
+        },
+
+        updateCart() {
             document.getElementById('cartCount').innerText = this.cart.length;
-            const list = document.getElementById('cartItemsList');
+            const list = document.getElementById('cartItems');
             let total = 0;
             list.innerHTML = '';
-            
             this.cart.forEach((it, idx) => {
                 total += it.p;
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${it.img}" width="50" height="50" style="border-radius:10px;">
-                        <div style="flex-grow:1;">
-                            <div style="font-size:13px; font-weight:600;">${it.t}</div>
-                            <div style="color:var(--verde-metal); font-size:13px; font-weight:bold;">$${it.p.toLocaleString()}</div>
-                        </div>
-                        <span onclick="data.remove(${idx})" style="cursor:pointer;">🗑️</span>
-                    </div>`;
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px;">
+                    <span>${it.t}</span><b>$${it.p.toLocaleString()}</b>
+                </div>`;
             });
-            
-            const totalStr = `$${total.toLocaleString()}`;
-            document.getElementById('cartTotalPrice').innerText = totalStr;
-            
-            const msg = encodeURIComponent(`¡Hola! 👋 Soy un cliente de Tu Casa Digital. Quiero comprar:\n${this.cart.map(c => `- ${c.t}`).join('\n')}\n\nTotal: ${totalStr}`);
+            document.getElementById('cartTotal').innerText = `$${total.toLocaleString()}`;
+            const msg = encodeURIComponent(`Hola Tu Casa Digital! Quiero comprar: ${this.cart.map(c => c.t).join(", ")}. Total: $${total.toLocaleString()}`);
             document.getElementById('waLink').href = `https://wa.me/${this.whatsapp}?text=${msg}`;
         },
 
-        remove(idx) {
-            this.cart.splice(idx, 1);
-            this.update();
+        toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); },
+
+        // SISTEMA DE RESEÑAS SIMULADO (Persiste en el navegador de quien lo usa)
+        addReview() {
+            const n = document.getElementById('revName').value;
+            const t = document.getElementById('revText').value;
+            if(n && t) {
+                const r = { name: n, text: t };
+                let reviews = JSON.parse(localStorage.getItem('public_reviews') || "[]");
+                reviews.push(r);
+                localStorage.setItem('public_reviews', JSON.stringify(reviews));
+                this.loadReviews();
+                document.getElementById('revName').value = '';
+                document.getElementById('revText').value = '';
+                alert("Reseña guardada en tu navegador. (Para que todos la vean en tiempo real necesitas un servidor como Firebase)");
+            }
+        },
+
+        loadReviews() {
+            const list = document.getElementById('reviewsList');
+            let reviews = JSON.parse(localStorage.getItem('public_reviews') || "[]");
+            let html = '<div class="review-item"><strong>Carlos R.</strong>: "Excelente la guía de motores, muy completa." ⭐⭐⭐⭐⭐</div>';
+            reviews.forEach(r => {
+                html += `<div class="review-item"><strong>${r.name}</strong>: "${r.text}" ⭐⭐⭐⭐⭐</div>`;
+            });
+            list.innerHTML = html;
         }
     };
 
-    function toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); }
-    
-    function postReview() {
-        const n = document.getElementById('revName').value;
-        const t = document.getElementById('revText').value;
-        if(n && t) {
-            const container = document.getElementById('reviewsContainer');
-            container.innerHTML = `<div class="review-card"><strong>${n}</strong> - ⭐⭐⭐⭐⭐<br>"${t}"</div>` + container.innerHTML;
-            document.getElementById('revName').value = '';
-            document.getElementById('revText').value = '';
-        }
-    }
-
-    data.init();
+    app.init();
 </script>
 </body>
 </html>
