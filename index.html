@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital - Mega Tienda</title>
+    <title>Tu Casa Digital - Catálogo Completo</title>
     <style>
         :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
@@ -19,7 +19,7 @@
         .book-card { background: white; min-width: 155px; max-width: 155px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; flex-shrink: 0; cursor: pointer; transition: 0.3s; }
         .book-card:hover { transform: translateY(-5px); }
         .book-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .book-title { font-weight: bold; margin-top: 8px; font-size: 0.8rem; color: #333; height: 32px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .book-title { font-weight: bold; margin-top: 8px; font-size: 0.8rem; color: #333; height: 32px; overflow: hidden; display: flex; align-items: center; justify-content: center; line-height: 1.1; }
         .price { color: var(--primary); font-weight: 800; font-size: 1rem; margin-top: 5px; }
         .badge { font-size: 0.7rem; background: #eee; padding: 2px 6px; border-radius: 5px; color: #666; display: inline-block; margin-bottom: 5px; }
 
@@ -39,93 +39,104 @@
 
 <div class="container">
 
-    <h2>🥘 Gastronomía y Salud</h2>
+    <h2>🥘 Gastronomía</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Menú Diabéticos', '25.000', 'Recetas de bajo índice glucémico.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
+        <div class="book-card" onclick="openModal('Menú Diabéticos', '25.000', 'Recetas saludables de bajo índice glucémico.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400">
             <div class="book-title">Menú Diabéticos</div>
             <div class="price">$25.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Postres Saludables', '20.000', 'Dulces sin azúcar refinada.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
+        <div class="book-card" onclick="openModal('Postres Saludables', '20.000', 'Dulces deliciosos sin azúcar refinada.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400">
             <div class="book-title">Postres Saludables</div>
             <div class="price">$20.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Comida Internacional', '35.000', 'Platos del mundo para tu mesa.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400">
+            <div class="book-title">Comida Internacional</div>
+            <div class="price">$35.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Repostería Creativa', '22.000', 'Técnicas modernas para decorar y hornear pasteles increíbles.', 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400')">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400">
+            <div class="book-title">Repostería Pro</div>
+            <div class="price">$22.000</div>
         </div>
     </div>
 
     <h2>🌸 Bienestar</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Cuidado Propio', '15.000', 'Hábitos diarios efectivos.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
+        <div class="book-card" onclick="openModal('Cuidado Propio', '15.000', 'Mejora tus hábitos diarios.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400">
             <div class="book-title">Cuidado Propio</div>
             <div class="price">$15.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Mente Sana', '18.000', 'Estrategias contra la ansiedad.', 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400')">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400">
+            <div class="book-title">Mente Sana</div>
+            <div class="price">$18.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Yoga en Casa', '16.000', 'Guía paso a paso para estiramientos y equilibrio físico desde tu hogar.', 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400')">
+            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400">
+            <div class="book-title">Yoga Total</div>
+            <div class="price">$16.000</div>
         </div>
     </div>
 
     <h2>🛠️ Tecnología y Motores</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Diagnosis Pro', '29.000', 'Escáneres y sensores.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
+        <div class="book-card" onclick="openModal('Diagnosis Pro', '29.000', 'Escáneres OBD-II y sensores.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
             <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400">
             <div class="book-title">Diagnosis</div>
             <div class="price">$29.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Manual de Tuning', '30.000', 'Optimización de ECUs.', 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400')">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400">
+            <div class="book-title">Manual Tuning</div>
+            <div class="price">$30.000</div>
         </div>
         <div class="book-card" onclick="openModal('Dominio IA', '22.000', 'Productividad con Inteligencia Artificial.', 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400')">
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400">
             <div class="book-title">Dominio IA</div>
             <div class="price">$22.000</div>
         </div>
+        <div class="book-card" onclick="openModal('Electricidad Automotriz', '27.000', 'Sistemas eléctricos del vehículo, baterías, alternadores y cableado.', 'https://images.unsplash.com/photo-1487754169491-0f2022722b1e?w=400')">
+            <img src="https://images.unsplash.com/photo-1487754169491-0f2022722b1e?w=400">
+            <div class="book-title">Electricidad Auto</div>
+            <div class="price">$27.000</div>
+        </div>
     </div>
 
     <h2>📚 Ficción y Literatura</h2>
-    
     <h3>Jóvenes y Menores</h3>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Reino Mágico', '12.000', 'Fantasía épica para jóvenes lectores llena de dragones y aventuras.', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400')">
+        <div class="book-card" onclick="openModal('Reino Mágico', '12.000', 'Fantasía para todas las edades.', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400')">
             <span class="badge">Menores</span>
             <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400">
-            <div class="book-title">Reino de Fantasía</div>
+            <div class="book-title">Reino Mágico</div>
             <div class="price">$12.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Detectives Juveniles', '14.000', 'Misterio y suspenso adaptado para mentes curiosas.', 'https://images.unsplash.com/photo-1589998059171-988d887df646?w=400')">
-            <span class="badge">Menores</span>
-            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?w=400">
-            <div class="book-title">Misterio Escolar</div>
-            <div class="price">$14.000</div>
-        </div>
     </div>
-
     <h3>Adultos (+18)</h3>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Suspenso en la Sombra', '25.000', 'Thriller psicológico intenso solo para adultos.', 'https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?w=400')">
+        <div class="book-card" onclick="openModal('Suspenso Oscuro', '25.000', 'Thriller psicológico para adultos.', 'https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?w=400')">
             <span class="badge">Adultos</span>
             <img src="https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?w=400">
             <div class="book-title">Suspenso Oscuro</div>
             <div class="price">$25.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Pasión y Romance', '20.000', 'Novela romántica contemporánea con temas maduros.', 'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=400')">
-            <span class="badge">Adultos</span>
-            <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=400">
-            <div class="book-title">Romance Real</div>
-            <div class="price">$20.000</div>
-        </div>
     </div>
 
     <h2>📈 Éxito y Crecimiento</h2>
     <div class="book-row">
-        <div class="book-card" onclick="openModal('Finanzas Personales', '30.000', 'Aprende a invertir y ahorrar para alcanzar tu libertad financiera.', 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400')">
+        <div class="book-card" onclick="openModal('Finanzas', '30.000', 'Libertad financiera.', 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400')">
             <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400">
             <div class="book-title">Mente Millonaria</div>
             <div class="price">$30.000</div>
         </div>
-        <div class="book-card" onclick="openModal('Fitness Total', '18.000', 'Rutinas y salud física para un cuerpo fuerte y sano.', 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400')">
+        <div class="book-card" onclick="openModal('Fitness 360', '18.000', 'Rutinas y salud física.', 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400')">
             <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400">
             <div class="book-title">Fitness 360</div>
             <div class="price">$18.000</div>
-        </div>
-        <div class="book-card" onclick="openModal('Desarrollo Profesional', '22.000', 'Habilidades clave para destacar en el mundo laboral moderno.', 'https://images.unsplash.com/photo-1454165833767-027ee6a7cdee?w=400')">
-            <img src="https://images.unsplash.com/photo-1454165833767-027ee6a7cdee?w=400">
-            <div class="book-title">Líder Pro</div>
-            <div class="price">$22.000</div>
         </div>
     </div>
 
@@ -144,6 +155,18 @@
 <script>
     function openModal(title, price, desc, img) {
         document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('modal-img').src = img;
+        document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Quiero%20el%20ebook%3A%20" + encodeURIComponent(title);
+        document.getElementById('bookModal').style.display = "block";
+    }
+    function closeModal() { document.getElementById('bookModal').style.display = "none"; }
+    window.onclick = function(e) { if (e.target == document.getElementById('bookModal')) closeModal(); }
+</script>
+
+</body>
+</html>
+document.getElementById('modal-title').innerText = title;
         document.getElementById('modal-desc').innerText = desc;
         document.getElementById('modal-img').src = img;
         document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Me%20interesa%20el%20libro%3A%20" + encodeURIComponent(title);
