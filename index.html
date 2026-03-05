@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S | Tu Casa Digital - Premium</title>
+    <title>S | Tu Casa Digital - Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -26,7 +26,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* NAVEGACIÓN, BUSQUEDA Y FILTROS EDAD */
+        /* NAVEGACIÓN Y FILTROS */
         .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
         .search-input { width: 90%; max-width: 500px; display: block; margin: 5px auto 12px; padding: 10px 20px; border-radius: 25px; border: none; outline: none; }
         
@@ -46,15 +46,19 @@
         .card-body { padding: 12px; }
         .price { color: var(--verde-pro); font-weight: 800; font-size: 16px; }
 
+        /* GARANTÍA S */
+        .garantia-badge { background: #e8f5e9; border: 1px solid var(--verde-pro); color: var(--verde-pro); padding: 10px; border-radius: 10px; font-size: 12px; margin-top: 15px; font-weight: 600; }
+
         /* MODAL */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
         .modal-content { background: white; width: 90%; max-width: 400px; border-radius: 25px; padding: 25px; position: relative; text-align: center; }
         .timer-box { background: #fff3f2; border: 1px dashed var(--rojo-oferta); padding: 8px; border-radius: 12px; color: var(--rojo-oferta); font-weight: 800; font-size: 13px; margin-bottom: 15px; }
         .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
         .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
-        .btn-buy { background: var(--verde-pro); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; }
+        .btn-buy { background: var(--verde-pro); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; margin-bottom: 10px; }
+        .btn-gift { background: #fff; color: var(--verde-pro); border: 2px solid var(--verde-pro); padding: 10px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 14px; }
 
-        /* VISIÓN LARGA */
+        /* VISIÓN */
         .vision-section { background: white; padding: 40px 20px; border-radius: 30px; margin: 40px 0; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
         .vision-text { max-width: 800px; margin: auto; line-height: 1.8; color: #555; font-size: 15px; }
 
@@ -69,7 +73,7 @@
 </div>
 
 <div class="sticky-nav">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar contenido..." onkeyup="app.render()">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar packs, guías o libros..." onkeyup="app.render()">
     <div class="age-filters">
         <button id="btnAll" class="btn-age active" onclick="app.setAge('Todos')">🌟 Todos</button>
         <button id="btnMen" class="btn-age" onclick="app.setAge('Menores')">👦 Menores</button>
@@ -83,8 +87,9 @@
     <div class="vision-section">
         <h3 style="color: var(--verde-pro); margin-bottom: 20px;">Nuestra Visión de Superación</h3>
         <p class="vision-text">
-            "Como joven emprendedor de 16 años, fundé **S | Tu Casa Digital** con una misión clara: democratizar el acceso al conocimiento práctico y profesional. Creemos que la **Superación (S)** no es un destino, sino un hábito diario que se alimenta de curiosidad y herramientas de calidad. Nuestra visión a largo plazo es convertirnos en la biblioteca digital líder para emprendedores y mentes inquietas, ofreciendo guías y libros que no solo enseñan una habilidad, sino que transforman la mentalidad de quienes los leen. Cada material en este catálogo ha sido seleccionado para impulsar tu crecimiento personal, técnico y financiero, rompiendo las barreras de la educación tradicional."
+            "Como joven emprendedor de 16 años, fundé **S | Tu Casa Digital** con una misión clara: democratizar el acceso al conocimiento práctico y profesional. Creemos que la **Superación (S)** no es un destino, sino un hábito diario que se alimenta de curiosidad y herramientas de calidad. Nuestra visión es convertirnos en la biblioteca digital líder para emprendedores, ofreciendo materiales que transforman la mentalidad. Cada guía ha sido seleccionada para impulsar tu crecimiento personal, técnico y financiero."
         </p>
+        <div class="garantia-badge">🛡️ GARANTÍA S: Si el material no cumple tus expectativas, te asesoramos personalmente en tu proceso.</div>
     </div>
 </div>
 
@@ -96,33 +101,37 @@
         <h2 id="mTitle" style="margin: 5px 0;"></h2>
         <p id="mDesc" style="color: #666; font-size: 13px; margin-bottom: 20px;"></p>
         <div id="mPrice" style="font-size: 26px; font-weight: 800; color: var(--verde-pro); margin-bottom: 20px;"></div>
-        <button class="btn-buy" onclick="app.buy()">PEDIR AHORA POR WHATSAPP 💬</button>
+        <button class="btn-buy" onclick="app.buy(false)">ADQUIRIR AHORA 💬</button>
+        <button class="btn-gift" onclick="app.buy(true)">🎁 ENVIAR COMO REGALO</button>
     </div>
 </div>
 
 <div class="footer">
     <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
-    <p>&copy; 2024 S-Tu Casa Digital. Todos los derechos reservados.</p>
+    <p>&copy; 2024 S-Tu Casa Digital. Conocimiento que Transforma.</p>
 </div>
 
 <script>
     const app = {
-        tel: "573223693926", // Número internacional corregido
+        tel: "573223693926",
         ageFilter: 'Todos',
         timerInt: null,
         
         books: [
+            // PACKS (Combos)
+            { id: 100, tipo: "Pack", edad: "Mayores", t: "Pack Mecánico Experto", p: 45000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "INCLUYE: Guía Electricidad + Guía Porsy 11. ¡Ahorra 25% comprando el combo!" },
+            { id: 101, tipo: "Pack", edad: "Mayores", t: "Combo Mente Brillante", p: 35000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "INCLUYE: Hábitos Atómicos + Mente Sana. El pack definitivo para tu mentalidad." },
+            
             // GUÍAS
-            { id: 1, tipo: "Guía", edad: "Mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Manual técnico para diagnosticar y reparar sistemas eléctricos modernos." },
-            { id: 2, tipo: "Guía", edad: "Mayores", t: "Porsy 11", p: 32000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía avanzada de alto rendimiento automotriz y optimización de motores deportivos." },
-            { id: 3, tipo: "Guía", edad: "Mayores", t: "Nutrición Pro", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "Plan alimenticio especializado para salud metabólica y control de peso." },
-            { id: 4, tipo: "Guía", edad: "Menores", t: "Robótica Kids", p: 15000, img: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=500", desc: "Introducción divertida al mundo de los circuitos y la programación básica." },
+            { id: 1, tipo: "Guía", edad: "Mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=500", desc: "Diagnóstico y reparación de sistemas eléctricos modernos." },
+            { id: 2, tipo: "Guía", edad: "Mayores", t: "Porsy 11", p: 32000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Optimización de motores de alto rendimiento y técnica deportiva." },
+            { id: 3, tipo: "Guía", edad: "Menores", t: "Ser YouTuber/TikToker", p: 18000, img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500", desc: "Aprende a crear contenido viral, editar y perder el miedo a la cámara." },
+            { id: 4, tipo: "Guía", edad: "Mayores", t: "Importar de China", p: 30000, img: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=500", desc: "Cómo comprar en Alibaba y revender con alta rentabilidad." },
             
             // LIBROS
-            { id: 5, tipo: "Libro", edad: "Mayores", t: "Mente Sana", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Psicología aplicada para vencer el estrés y mejorar el enfoque." },
-            { id: 6, tipo: "Libro", edad: "Mayores", t: "Hábitos Atómicos", p: 24000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "La metodología definitiva para crear rutinas de éxito." },
-            { id: 7, tipo: "Libro", edad: "Mayores", t: "Ego is the Enemy", p: 20000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Cómo dominar tu ego para alcanzar tu máximo potencial." },
-            { id: 8, tipo: "Libro", edad: "Menores", t: "Lógica Divertida", p: 12000, img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500", desc: "Acertijos y desafíos mentales para desarrollar el pensamiento crítico joven." }
+            { id: 5, tipo: "Libro", edad: "Mayores", t: "Hábitos Atómicos", p: 24000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Pequeños cambios para obtener resultados extraordinarios." },
+            { id: 6, tipo: "Libro", edad: "Menores", t: "Mi Primera Inversión", p: 15000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Finanzas explicadas de forma sencilla para jóvenes emprendedores." },
+            { id: 7, tipo: "Libro", edad: "Mayores", t: "Ego is the Enemy", p: 20000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Domina tu ego para alcanzar el éxito duradero." }
         ],
 
         render() {
@@ -130,7 +139,7 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            ["Guía", "Libro"].forEach(tipo => {
+            ["Pack", "Guía", "Libro"].forEach(tipo => {
                 const filtrados = this.books.filter(b => 
                     b.tipo === tipo && 
                     b.t.toLowerCase().includes(search) && 
@@ -138,7 +147,7 @@
                 );
                 
                 if (filtrados.length > 0) {
-                    let html = `<div class="section-title">${tipo}s Disponibles</div><div class="grid">`;
+                    let html = `<div class="section-title">${tipo === 'Pack' ? 'Combos de Ahorro' : tipo + 's Especializadas'}</div><div class="grid">`;
                     filtrados.forEach(b => {
                         html += `
                             <div class="card" onclick="app.openM(${b.id})">
@@ -166,6 +175,7 @@
 
         openM(id) {
             const item = this.books.find(x => x.id === id);
+            this.selectedId = id;
             document.getElementById('mTitle').innerText = item.t;
             document.getElementById('mDesc').innerText = item.desc;
             document.getElementById('mPrice').innerText = `$${item.p.toLocaleString()}`;
@@ -175,11 +185,9 @@
         },
 
         startTimer() {
-            let time = 599; 
-            clearInterval(this.timerInt);
+            let time = 599; clearInterval(this.timerInt);
             this.timerInt = setInterval(() => {
-                let min = Math.floor(time / 60);
-                let sec = time % 60;
+                let min = Math.floor(time / 60); let sec = time % 60;
                 document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
                 if (time <= 0) clearInterval(this.timerInt);
                 time--;
@@ -188,15 +196,16 @@
 
         closeM() { document.getElementById('infoModal').style.display = 'none'; clearInterval(this.timerInt); },
 
-        buy() {
-            const title = document.getElementById('mTitle').innerText;
-            const price = document.getElementById('mPrice').innerText;
-            const msg = encodeURIComponent(`¡Hola S-Tu Casa Digital! 👋 Quiero aprovechar la oferta:\n- ${title}\nPrecio: ${price}`);
-            window.open(`https://wa.me/${this.tel}?text=${msg}`, '_blank');
+        buy(isGift) {
+            const item = this.books.find(x => x.id === this.selectedId);
+            let texto = isGift ? `🎁 ¡Hola! Quiero regalar este material:\n- ${item.t}` : `¡Hola! 👋 Quiero aprovechar la oferta:\n- ${item.t}`;
+            texto += `\nPrecio: $${item.p.toLocaleString()}\n¡Espero tu respuesta!`;
+            window.open(`https://wa.me/${this.tel}?text=${encodeURIComponent(texto)}`, '_blank');
         }
     };
 
-    app.render();
+    app.init = () => app.render();
+    app.init();
 </script>
 </body>
 </html>
