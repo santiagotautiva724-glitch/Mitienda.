@@ -3,135 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital | S-Line Elite</title>
+    <title>S | Tu Casa Digital - Premium Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --verde-pro: #0f3d24;
             --dorado: #ffcc00;
             --blanco: #ffffff;
-            --gris: #f4f7f6;
+            --gris-fondo: #f8faf9;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris); color: #333; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-fondo); color: #333; }
 
-        /* LOGO Y MARCA */
-        .brand-section { text-align: center; padding: 25px; background: var(--blanco); }
-        .s-logo { 
-            width: 70px; height: 70px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
+        /* HEADER & LOGO "S" */
+        .header-brand { text-align: center; padding: 25px 10px; background: var(--blanco); }
+        .s-logo-circle { 
+            width: 75px; height: 75px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
             display: inline-flex; align-items: center; justify-content: center; 
-            border-radius: 18px; color: var(--dorado); font-size: 45px; 
+            border-radius: 20px; color: var(--dorado); font-size: 48px; 
             font-weight: 800; border: 3px solid var(--dorado);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(15,61,36,0.25);
         }
 
-        /* NAVEGACIÓN Y BUSQUEDA (SOLICITADO) */
-        .sticky-header { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); color: white; padding: 10px; }
-        .search-box { padding: 10px; max-width: 600px; margin: auto; }
-        .search-input { width: 100%; padding: 12px 20px; border-radius: 25px; border: none; outline: none; font-size: 15px; }
+        /* BUSCADOR Y FILTROS STICKY */
+        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .search-container { padding: 12px 15px; max-width: 600px; margin: auto; }
+        .search-input { width: 100%; padding: 12px 25px; border-radius: 30px; border: none; font-size: 15px; outline: none; }
 
-        .filter-bar { display: flex; gap: 10px; overflow-x: auto; padding: 10px; background: #0b2e1b; scrollbar-width: none; }
-        .filter-bar::-webkit-scrollbar { display: none; }
-        .f-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--dorado); background: transparent; color: white; white-space: nowrap; cursor: pointer; font-size: 13px; }
-        .f-btn.active { background: var(--dorado); color: black; font-weight: bold; }
+        .category-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px 15px; background: #0b2e1b; scrollbar-width: none; }
+        .category-scroll::-webkit-scrollbar { display: none; }
+        .btn-filter { padding: 8px 18px; border-radius: 20px; border: 1.2px solid var(--dorado); background: transparent; color: white; white-space: nowrap; cursor: pointer; font-size: 13px; transition: 0.3s; }
+        .btn-filter.active { background: var(--dorado); color: var(--verde-pro); font-weight: 800; }
 
-        /* CARRITO ICONO */
-        .cart-trigger { position: fixed; bottom: 20px; right: 20px; background: var(--verde-pro); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 25px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 2500; }
-        .cart-badge { position: absolute; top: 0; right: 0; background: var(--dorado); color: black; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-
-        /* CONTENIDO */
+        /* CATÁLOGO */
         .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .category-title { color: var(--verde-pro); border-left: 5px solid var(--dorado); padding-left: 12px; margin: 30px 0 15px; font-weight: 800; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .cat-label { color: var(--verde-pro); border-left: 5px solid var(--dorado); padding-left: 12px; margin: 30px 0 15px; font-weight: 800; text-transform: uppercase; }
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
         
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 12px; text-align: center; }
-        .price { color: var(--verde-pro); font-weight: bold; font-size: 17px; margin: 8px 0; }
-        .btn-buy { background: var(--verde-pro); color: white; border: none; width: 100%; padding: 8px; border-radius: 8px; cursor: pointer; font-size: 13px; }
+        .book-card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
+        .book-card:hover { transform: translateY(-7px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .book-card img { width: 100%; height: 200px; object-fit: cover; }
+        .card-info { padding: 12px; text-align: center; }
+        .card-price { color: var(--verde-pro); font-weight: 800; font-size: 18px; margin: 8px 0; }
+        .btn-add { background: var(--verde-pro); color: white; border: none; width: 100%; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; }
 
-        /* PANEL CARRITO */
-        .cart-panel { position: fixed; right: -100%; top: 0; width: 320px; height: 100%; background: white; z-index: 3000; box-shadow: -5px 0 20px rgba(0,0,0,0.1); transition: 0.4s; padding: 20px; overflow-y: auto; }
-        .cart-panel.active { right: 0; }
+        /* CARRITO FLOTANTE */
+        .cart-fab { position: fixed; bottom: 25px; right: 25px; background: var(--dorado); color: var(--verde-pro); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 3000; }
+        .badge { position: absolute; top: 2px; right: 2px; background: var(--verde-pro); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+
+        /* PANEL LATERAL */
+        .panel { position: fixed; right: -100%; top: 0; width: 330px; height: 100%; background: white; z-index: 4000; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; padding: 25px; box-sizing: border-box; }
+        .panel.active { right: 0; }
 
         /* RESEÑAS */
-        .reviews-section { background: white; padding: 25px; border-radius: 20px; margin-top: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .review-item { padding: 12px; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+        .review-box { background: white; padding: 25px; border-radius: 20px; margin: 40px 0; border-top: 4px solid var(--dorado); }
+        .rev-item { padding: 15px 0; border-bottom: 1px solid #eee; }
 
-        .footer { background: var(--verde-pro); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; }
+        .footer { background: var(--verde-pro); color: white; padding: 60px 20px; text-align: center; border-radius: 40px 40px 0 0; }
     </style>
 </head>
 <body>
 
-<div class="brand-section">
-    <div class="s-logo">S</div>
-    <h2 style="margin: 10px 0 0; color: var(--verde-pro); letter-spacing: 2px;">TU CASA DIGITAL</h2>
+<div class="header-brand">
+    <div class="s-logo-circle">S</div>
+    <h2 style="margin: 15px 0 0; letter-spacing: 3px; color: var(--verde-pro);">TU CASA DIGITAL</h2>
 </div>
 
-<div class="sticky-header">
-    <div class="search-box">
-        <input type="text" id="mainSearch" class="search-input" placeholder="🔍 Buscar temas o guías..." onkeyup="app.render()">
+<div class="sticky-nav">
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ¿Qué quieres aprender hoy?" onkeyup="app.render()">
     </div>
-    <div class="filter-bar">
-        <button class="f-btn active" onclick="app.setFilter('cat', 'Todos', this)">🌟 Todos</button>
-        <button class="f-btn" onclick="app.setFilter('age', 'menores', this)">👦 Menores</button>
-        <button class="f-btn" onclick="app.setFilter('age', 'mayores', this)">👤 Mayores</button>
-        <button class="f-btn" onclick="app.setFilter('cat', 'Gastronomía', this)">🍳 Gastronomía</button>
-        <button class="f-btn" onclick="app.setFilter('cat', 'Mecánica', this)">🔧 Mecánica</button>
-        <button class="f-btn" onclick="app.setFilter('cat', 'Bienestar', this)">🧘 Bienestar</button>
+    <div class="category-scroll">
+        <button class="btn-filter active" onclick="app.setF('cat', 'Todos', this)">Todo</button>
+        <button class="btn-filter" onclick="app.setF('age', 'menores', this)">👦 Menores</button>
+        <button class="btn-filter" onclick="app.setF('age', 'mayores', this)">👤 Mayores</button>
+        <button class="btn-filter" onclick="app.setF('cat', 'Gastronomía', this)">Gastronomía</button>
+        <button class="btn-filter" onclick="app.setF('cat', 'Mecánica', this)">Mecánica</button>
+        <button class="btn-filter" onclick="app.setF('cat', 'Bienestar', this)">Bienestar</button>
     </div>
 </div>
 
 <div class="container" id="catalog"></div>
 
 <div class="container">
-    <div class="reviews-section">
-        <h3>💬 Reseñas de Clientes</h3>
-        <div id="reviewsList">
-            <div class="review-item"><strong>Carlos R.</strong>: "Excelente la guía de motores, muy completa." ⭐⭐⭐⭐⭐</div>
+    <div class="review-box">
+        <h3>💬 Opiniones de la Comunidad S</h3>
+        <div id="publicReviews">
+            <div class="rev-item"><strong>Mateo V.</strong>: "La guía de electricidad es brutal, muy recomendada." ⭐⭐⭐⭐⭐</div>
         </div>
-        <div style="margin-top: 20px;">
-            <input type="text" id="revName" placeholder="Tu nombre" style="width: 100%; padding: 10px; margin-bottom: 5px; border: 1px solid #ddd; border-radius: 5px;">
-            <textarea id="revText" placeholder="Escribe tu opinión pública..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-            <button class="btn-buy" style="margin-top: 10px; padding: 12px;" onclick="app.addReview()">Publicar para todos</button>
+        <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="nameIn" placeholder="Tu nombre" style="padding:12px; border-radius:8px; border:1px solid #ddd;">
+            <textarea id="textIn" placeholder="Deja tu reseña pública..." style="padding:12px; border-radius:8px; border:1px solid #ddd; height:80px;"></textarea>
+            <button class="btn-add" onclick="app.postReview()">Publicar Reseña</button>
         </div>
     </div>
 </div>
 
-<div class="cart-trigger" onclick="app.toggleCart()">
-    🛒 <div class="cart-badge" id="cartCount">0</div>
+<div class="cart-fab" onclick="app.toggleCart()">
+    🛒 <div class="badge" id="cartCount">0</div>
 </div>
 
-<div id="cartPanel" class="cart-panel">
+<div id="cartPanel" class="panel">
     <h2 onclick="app.toggleCart()" style="cursor:pointer;">✖ Mi Carrito</h2>
-    <div id="cartItems"></div>
+    <div id="cartList" style="margin: 20px 0;"></div>
     <hr>
-    <h3>Total: <span id="cartTotal">$0</span></h3>
-    <a id="waLink" href="#" target="_blank" class="btn-buy" style="display:block; text-align:center; background:#25d366; text-decoration:none; padding:15px; font-weight:bold;">COMPRAR POR WHATSAPP 💬</a>
+    <div style="font-size:20px; font-weight:800; display:flex; justify-content:space-between; margin: 20px 0;">
+        <span>Total:</span> <span id="cartTotal">$0</span>
+    </div>
+    <a id="waLink" href="#" target="_blank" class="btn-add" style="display:block; text-align:center; text-decoration:none; background:#25d366; padding:18px; font-size:16px;">PEDIR POR WHATSAPP 💬</a>
 </div>
 
 <div class="footer">
-    <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
-    <h3>Visión de Emprendimiento</h3>
-    <p style="max-width:600px; margin:auto; opacity:0.8; font-style:italic;">
-        "Soy un joven de 16 años apasionado por la tecnología. 'S' de Superación es la base de Tu Casa Digital, un espacio diseñado para que aprendas habilidades reales."
+    <div class="s-logo-circle" style="background:none; border-color:white; color:white; margin-bottom:20px;">S</div>
+    <h2>Emprender es el Futuro</h2>
+    <p style="max-width:650px; margin:auto; opacity:0.8; font-style:italic; line-height:1.7;">
+        "Tengo 16 años y he creado esta plataforma bajo la filosofía de la Superación (S). Cada guía aquí presente ha sido seleccionada para que logres tus objetivos de manera práctica."
     </p>
 </div>
 
 <script>
     const app = {
-        whatsapp: "3223693926",
-        currentCat: 'Todos',
-        currentAge: 'Todos',
+        tel: "3223693926", // TU NÚMERO ACTUALIZADO
+        cat: 'Todos',
+        age: 'Todos',
         cart: [],
         
         books: [
-            { id: 1, cat: "Gastronomía", age: "mayores", t: "Plan Diabéticos", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400" },
-            { id: 2, cat: "Mecánica", age: "mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400" },
-            { id: 3, cat: "Bienestar", age: "mayores", t: "Mente Sana", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400" },
-            { id: 4, cat: "Bienestar", age: "menores", t: "Yoga Total", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" },
-            { id: 5, cat: "Mecánica", age: "mayores", t: "Motores Diésel", p: 30000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400" }
+            { id: 1, c: "Gastronomía", a: "mayores", t: "Guía Diabéticos Pro", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" },
+            { id: 2, c: "Mecánica", a: "mayores", t: "Electricidad Automotriz", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500" },
+            { id: 3, c: "Bienestar", a: "mayores", t: "Mente Sana en Casa", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500" },
+            { id: 4, c: "Bienestar", a: "menores", t: "Yoga Juvenil", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500" },
+            { id: 5, c: "Mecánica", a: "mayores", t: "Inyección Electrónica", p: 30000, img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=500" },
+            { id: 6, c: "Gastronomía", a: "menores", t: "Postres Saludables", p: 20000, img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500" }
         ],
 
         init() {
@@ -141,28 +144,29 @@
 
         render() {
             const catalog = document.getElementById('catalog');
-            const search = document.getElementById('mainSearch').value.toLowerCase();
+            const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            const categories = [...new Set(this.books.map(b => b.cat))];
-            categories.forEach(c => {
+            const activeCats = [...new Set(this.books.map(b => b.c))];
+            
+            activeCats.forEach(catName => {
                 const filtered = this.books.filter(b => {
-                    const mCat = (this.currentCat === 'Todos' || b.cat === this.currentCat);
-                    const mAge = (this.currentAge === 'Todos' || b.age === this.currentAge);
+                    const mCat = (this.cat === 'Todos' || b.c === this.cat);
+                    const mAge = (this.age === 'Todos' || b.a === this.age);
                     const mSearch = b.t.toLowerCase().includes(search);
-                    return mCat && mAge && mSearch && b.cat === c;
+                    return mCat && mAge && mSearch && b.c === catName;
                 });
 
                 if (filtered.length > 0) {
-                    let html = `<div class="category-title">${c}</div><div class="grid">`;
+                    let html = `<div class="cat-label">${catName}</div><div class="book-grid">`;
                     filtered.forEach(b => {
                         html += `
-                            <div class="card">
+                            <div class="book-card">
                                 <img src="${b.img}">
-                                <div class="card-body">
-                                    <div style="font-weight:600; font-size:14px;">${b.t}</div>
-                                    <div class="price">$${b.p.toLocaleString()}</div>
-                                    <button class="btn-buy" onclick="app.addToCart(${b.id})">Añadir</button>
+                                <div class="card-info">
+                                    <div style="font-weight:600; font-size:14px; height:38px; overflow:hidden;">${b.t}</div>
+                                    <div class="card-price">$${b.p.toLocaleString()}</div>
+                                    <button class="btn-add" onclick="app.add(${b.id})">Añadir al Carrito</button>
                                 </div>
                             </div>`;
                     });
@@ -171,62 +175,62 @@
             });
         },
 
-        setFilter(type, val, btn) {
-            if(type === 'cat') this.currentCat = val;
-            if(type === 'age') this.currentAge = val;
-            document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+        setF(type, val, btn) {
+            if(type === 'cat') this.cat = val;
+            if(type === 'age') this.age = val;
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             this.render();
         },
 
-        addToCart(id) {
+        add(id) {
             const item = this.books.find(x => x.id === id);
             this.cart.push(item);
-            this.updateCart();
+            this.updateUI();
         },
 
-        updateCart() {
+        updateUI() {
             document.getElementById('cartCount').innerText = this.cart.length;
-            const list = document.getElementById('cartItems');
+            const list = document.getElementById('cartList');
             let total = 0;
             list.innerHTML = '';
+            
             this.cart.forEach((it, idx) => {
                 total += it.p;
-                list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px; font-size:13px;">
-                    <span>${it.t}</span><b>$${it.p.toLocaleString()}</b>
+                list.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
+                    <span style="font-size:13px;">${it.t}</span>
+                    <b style="color:var(--verde-pro);">$${it.p.toLocaleString()}</b>
                 </div>`;
             });
+            
             document.getElementById('cartTotal').innerText = `$${total.toLocaleString()}`;
-            const msg = encodeURIComponent(`Hola Tu Casa Digital! Quiero comprar: ${this.cart.map(c => c.t).join(", ")}. Total: $${total.toLocaleString()}`);
-            document.getElementById('waLink').href = `https://wa.me/${this.whatsapp}?text=${msg}`;
+            const msg = encodeURIComponent(`¡Hola! Vengo de S-Tu Casa Digital. Quiero comprar:\n${this.cart.map(c => `- ${c.t}`).join('\n')}\n\nTotal: $${total.toLocaleString()}`);
+            document.getElementById('waLink').href = `https://wa.me/${this.tel}?text=${msg}`;
         },
 
         toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); },
 
-        // SISTEMA DE RESEÑAS SIMULADO (Persiste en el navegador de quien lo usa)
-        addReview() {
-            const n = document.getElementById('revName').value;
-            const t = document.getElementById('revText').value;
+        postReview() {
+            const n = document.getElementById('nameIn').value;
+            const t = document.getElementById('textIn').value;
             if(n && t) {
-                const r = { name: n, text: t };
-                let reviews = JSON.parse(localStorage.getItem('public_reviews') || "[]");
-                reviews.push(r);
-                localStorage.setItem('public_reviews', JSON.stringify(reviews));
+                let revs = JSON.parse(localStorage.getItem('s_reviews') || "[]");
+                revs.push({n, t});
+                localStorage.setItem('s_reviews', JSON.stringify(revs));
                 this.loadReviews();
-                document.getElementById('revName').value = '';
-                document.getElementById('revText').value = '';
-                alert("Reseña guardada en tu navegador. (Para que todos la vean en tiempo real necesitas un servidor como Firebase)");
+                document.getElementById('nameIn').value = '';
+                document.getElementById('textIn').value = '';
             }
         },
 
         loadReviews() {
-            const list = document.getElementById('reviewsList');
-            let reviews = JSON.parse(localStorage.getItem('public_reviews') || "[]");
-            let html = '<div class="review-item"><strong>Carlos R.</strong>: "Excelente la guía de motores, muy completa." ⭐⭐⭐⭐⭐</div>';
-            reviews.forEach(r => {
-                html += `<div class="review-item"><strong>${r.name}</strong>: "${r.text}" ⭐⭐⭐⭐⭐</div>`;
+            const box = document.getElementById('publicReviews');
+            let revs = JSON.parse(localStorage.getItem('s_reviews') || "[]");
+            let html = '<div class="rev-item"><strong>Mateo V.</strong>: "La guía de electricidad es brutal, muy recomendada." ⭐⭐⭐⭐⭐</div>';
+            revs.forEach(r => {
+                html += `<div class="rev-item"><strong>${r.n}</strong>: "${r.t}" ⭐⭐⭐⭐⭐</div>`;
             });
-            list.innerHTML = html;
+            box.innerHTML = html;
         }
     };
 
