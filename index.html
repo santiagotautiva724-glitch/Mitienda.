@@ -1,68 +1,88 @@
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.E. Premium - Superarationebook</title>
+    <title>S.E. Elite - Superarationebook</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde-obscuro: #0a2617;
+            --fondo-dark: #050a08;
+            --verde-neon: #00ff88;
             --verde-premium: #0f3d24;
-            --dorado-brillante: #ffcc00;
-            --dorado-mate: #d4af37;
-            --rojo-alerta: #ff4757;
-            --blanco-puro: #ffffff;
-            --gris-suave: #f1f2f6;
+            --dorado: #ffcc00;
+            --cristal: rgba(255, 255, 255, 0.05);
+            --blanco: #ffffff;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-suave); color: #2f3542; padding-bottom: 50px; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background: var(--fondo-dark) url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); 
+            color: var(--blanco); 
+            padding-bottom: 50px; 
+        }
 
-        .brand-header { text-align: center; padding: 20px 15px; background: white; border-bottom: 3px solid var(--dorado-brillante); }
-        .full-logo { font-size: 24px; font-weight: 800; color: var(--verde-premium); letter-spacing: -1px; text-transform: uppercase; }
-        .full-logo span { color: var(--dorado-mate); }
+        .brand-header { 
+            text-align: center; padding: 30px 15px; 
+            background: linear-gradient(to bottom, #000, transparent);
+            border-bottom: 2px solid var(--dorado);
+        }
+        .full-logo { font-size: 26px; font-weight: 800; color: var(--blanco); text-transform: uppercase; letter-spacing: 2px; }
+        .full-logo span { color: var(--dorado); }
 
-        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: linear-gradient(135deg, var(--verde-obscuro), var(--verde-premium)); padding: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .global-timer { text-align: center; color: var(--dorado-brillante); font-weight: 800; font-size: 13px; margin-bottom: 8px; text-transform: uppercase; }
+        .sticky-nav { 
+            position: sticky; top: 0; z-index: 2000; 
+            background: rgba(10, 38, 23, 0.95); 
+            backdrop-filter: blur(10px);
+            padding: 15px 10px; border-bottom: 1px solid var(--verde-neon);
+        }
+        .global-timer { text-align: center; color: var(--verde-neon); font-weight: 800; font-size: 13px; margin-bottom: 10px; text-shadow: 0 0 10px var(--verde-neon); }
         
-        .search-container { display: flex; justify-content: center; padding: 0 10px; }
-        .search-input { width: 100%; max-width: 400px; padding: 10px 20px; border-radius: 25px; border: 2px solid var(--dorado-mate); outline: none; font-weight: 600; font-size: 14px; }
+        .search-input { 
+            width: 90%; max-width: 450px; display: block; margin: auto;
+            padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
+            background: rgba(0,0,0,0.5); color: white; outline: none;
+        }
 
-        .filters-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px; }
+        .filters-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 15px; }
         .age-filters, .cat-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .btn-filter { 
+            padding: 8px 16px; border-radius: 20px; border: 1px solid var(--verde-neon); 
+            background: transparent; color: var(--verde-neon); cursor: pointer; font-size: 11px; font-weight: 700; transition: 0.3s;
+        }
+        .btn-filter.active { background: var(--verde-neon); color: black; box-shadow: 0 0 15px var(--verde-neon); }
+
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .section-title { font-size: 20px; font-weight: 800; color: var(--dorado); margin: 40px 0 20px; text-transform: uppercase; border-left: 4px solid var(--verde-neon); padding-left: 15px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .card { 
+            background: var(--cristal); border-radius: 20px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; position: relative;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--verde-neon); background: rgba(0, 255, 136, 0.05); }
         
-        .btn-filter { padding: 8px 15px; border-radius: 20px; border: 1.5px solid var(--dorado-mate); background: transparent; color: white; cursor: pointer; font-size: 12px; font-weight: 700; transition: 0.3s; }
-        .btn-filter.active { background: var(--dorado-brillante); color: var(--verde-premium); border-color: var(--dorado-brillante); }
+        .card img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.8); }
+        .card-body { padding: 15px; }
+        .price { color: var(--verde-neon); font-weight: 800; font-size: 18px; }
 
-        .container { max-width: 1200px; margin: auto; padding: 15px; }
-        .section-title { font-size: 18px; font-weight: 800; color: var(--verde-premium); margin: 30px 0 15px; text-transform: uppercase; display: flex; align-items: center; }
-        .section-title::after { content: ""; flex: 1; height: 2px; background: var(--dorado-brillante); margin-left: 10px; border-radius: 10px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.06); text-align: center; cursor: pointer; position: relative; transition: 0.4s; border: 1px solid #eee; }
-        .card:hover { transform: translateY(-5px); border-color: var(--dorado-mate); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
+        .modal-content { 
+            background: #0a0a0a; width: 90%; max-width: 450px; border-radius: 30px; 
+            padding: 25px; border: 1px solid var(--verde-neon); color: white; max-height: 85vh; overflow-y: auto;
+        }
         
-        .se-mini-logo { position: absolute; top: 8px; right: 8px; background: var(--dorado-brillante); color: var(--verde-premium); font-weight: 800; padding: 3px 6px; border-radius: 6px; font-size: 9px; z-index: 10; }
-        .badge-oferta { position: absolute; top: 8px; left: 8px; background: var(--rojo-alerta); color: white; padding: 3px 8px; border-radius: 6px; font-size: 9px; font-weight: 800; z-index: 10; }
+        .combo-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 15px; margin-bottom: 8px; }
+        .combo-item img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
 
-        .card img { width: 100%; height: 150px; object-fit: cover; }
-        .card-body { padding: 10px; }
-        .price { color: var(--verde-premium); font-weight: 800; font-size: 16px; margin-top: 5px; }
+        .btn-buy { 
+            background: var(--verde-neon); color: black; border: none; padding: 18px; 
+            border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 16px; margin-top: 15px;
+        }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(10, 38, 23, 0.9); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .modal-content { background: white; width: 92%; max-width: 400px; border-radius: 25px; padding: 20px; position: relative; text-align: center; border: 2px solid var(--dorado-brillante); max-height: 90vh; overflow-y: auto; }
-        
-        .combo-details { text-align: left; margin: 15px 0; border-top: 1px solid #eee; padding-top: 10px;}
-        .combo-item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #f9f9f9;}
-        .combo-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 6px; }
-        .combo-item-title { font-size: 12px; font-weight: 600; color: #333; }
-        .combo-item-price { font-size: 11px; color: var(--verde-premium); font-weight: bold; }
-
-        .btn-buy { background: linear-gradient(to right, var(--verde-premium), #1a6d3d); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; font-size: 15px; margin-bottom: 10px; }
-        .btn-gift { background:none; border:none; color:var(--verde-premium); font-weight:700; cursor:pointer; font-size: 13px; }
-
-        .vision-container { background: var(--verde-obscuro); color: white; padding: 30px 20px; border-radius: 25px; margin: 40px 0; position: relative; overflow: hidden; }
-        .footer { background: #05140c; color: white; padding: 30px 15px; text-align: center; font-size: 12px;}
+        .vision-container { background: var(--cristal); padding: 40px; border-radius: 30px; border: 1px solid var(--dorado); margin: 50px 0; }
+        .footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
@@ -72,18 +92,16 @@
 </div>
 
 <div class="sticky-nav">
-    <div class="global-timer">⚡ Ofertas S.E. expiran en: <span class="timer-display">09:59</span></div>
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar guías o combos S.E..." onkeyup="app.render()">
-    </div>
+    <div class="global-timer">⚡ ACCESO ELITE TERMINA EN: <span class="timer-display">09:59</span></div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento S.E..." onkeyup="app.render()">
     <div class="filters-container">
         <div class="age-filters">
-            <button id="btnAgeTodos" class="btn-filter active" onclick="app.setAge('Todos')">TODOS</button>
+            <button id="btnAgeTodos" class="btn-filter active" onclick="app.setAge('Todos')">TODO</button>
             <button id="btnAgeMenores" class="btn-filter" onclick="app.setAge('Menores')">JÓVENES</button>
             <button id="btnAgeMayores" class="btn-filter" onclick="app.setAge('Mayores')">PRO S.E.</button>
         </div>
         <div class="cat-filters">
-            <button id="btnCatTodos" class="btn-filter active" onclick="app.setCat('Todos')">TODO</button>
+            <button id="btnCatTodos" class="btn-filter active" onclick="app.setCat('Todos')">VER TODO</button>
             <button id="btnCatPacks" class="btn-filter" onclick="app.setCat('Packs')">COMBOS</button>
             <button id="btnCatGuias" class="btn-filter" onclick="app.setCat('Guias')">GUÍAS</button>
             <button id="btnCatLibros" class="btn-filter" onclick="app.setCat('Libros')">LIBROS</button>
@@ -95,22 +113,24 @@
 
 <div id="infoModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="app.closeM()">&times;</span>
-        <div class="global-timer" style="color:var(--rojo-alerta)">⏱️ ¡OFERTA TERMINA EN: <span class="timer-display">09:59</span>!</div>
-        <img id="mImg" style="width:100%; height:180px; object-fit:cover; border-radius:15px; margin-bottom:10px;">
-        <h3 id="mTitle" style="color:var(--verde-premium); margin:5px 0; font-size:18px;"></h3>
-        <p id="mDesc" style="font-size:12px; color:#555; text-align:left; margin-bottom:15px;"></p>
+        <span onclick="app.closeM()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
+        <img id="mImg" style="width:100%; border-radius:20px; margin: 15px 0;">
+        <h2 id="mTitle" style="color:var(--verde-neon)"></h2>
+        <p id="mDesc" style="font-size:14px; line-height:1.6; color:#ccc;"></p>
         
-        <div id="mComboDetails" class="combo-details" style="display:none;">
-            <div style="font-size:12px; font-weight:700; color:var(--verde-premium); margin-bottom:10px;">Artículos Incluidos:</div>
+        <div id="mComboDetails" style="display:none; margin: 20px 0;">
+            <p style="font-weight:800; color:var(--dorado)">CONTENIDO DEL PACK:</p>
             <div id="mComboItemsList"></div>
         </div>
 
-        <div id="mPrice" style="font-size:28px; font-weight:800; color:var(--verde-premium); margin-bottom:15px;"></div>
-        <button class="btn-buy" onclick="app.buy(false)">ADQUIRIR POR WHATSAPP 💬</button>
-        <button class="btn-gift" onclick="app.buy(true)">🎁 ENVIAR COMO REGALO S.E.</button>
+        <div id="mPrice" style="font-size:32px; font-weight:800; color:var(--verde-neon); text-align:center;"></div>
+        <button class="btn-buy" onclick="app.buy()">ADQUIRIR ACCESO INMEDIATO 💬</button>
     </div>
 </div>
+
+<footer class="footer">
+    <p>Superarationebook S.E. © 2024 | El conocimiento es la nueva moneda.</p>
+</footer>
 
 <script>
     const app = {
@@ -119,51 +139,57 @@
         catFilter: 'Todos',
         timeLeft: 599,
 
-        // Ítems individuales para el desglose de combos
         items: {
-            g1: { t: "Electricidad Auto Pro", p: 15000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=150" },
-            g2: { t: "Porsy 11 Automotriz", p: 18000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=150" },
-            g3: { t: "Inyección Electrónica", p: 15000, img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=150" },
-            l1: { t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=150" },
-            l2: { t: "Ego is the Enemy", p: 12000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=150" }
+            m1: { t: "Mecánica Automotriz Pro", p: 18000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=200" },
+            m2: { t: "Electricidad y Sensores", p: 15000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=200" },
+            m3: { t: "Inyección Electrónica", p: 15000, img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200" },
+            l1: { t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=200" },
+            l2: { t: "Ego is the Enemy", p: 12000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200" },
+            l3: { t: "Psicología del Éxito", p: 13000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=200" }
         },
 
-        // Base de datos de productos con categorías corregidas
         products: [
-            { id: 101, tipo: "Packs", edad: "Mayores", t: "Master Combo Mecánico", p: 48000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Kit experto automotriz.", items: ['g1', 'g2', 'g3'] },
-            { id: 1, tipo: "Guias", edad: "Mayores", t: "Porsy 11 Automotriz", p: 18000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Ingeniería de motores." },
-            { id: 9, tipo: "Libros", edad: "Menores", t: "Inversionista Joven", p: 10000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Finanzas para jóvenes." },
-            { id: 6, tipo: "Libros", edad: "Mayores", t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Cambia tu vida." }
+            // PACKS
+            { id: 101, tipo: "Packs", edad: "Mayores", t: "Master Combo Mecánico", p: 48000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "El ecosistema definitivo para el técnico automotriz. Incluye manuales de Inyección, Electricidad y Mecánica General Avanzada para diagnósticos precisos.", items: ['m1', 'm2', 'm3'] },
+            { id: 102, tipo: "Packs", edad: "Mayores", t: "Élite Mentalidad", p: 39000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Colección curada de los libros que han forjado a los millonarios actuales. Domina tu disciplina y destruye el ego que frena tu éxito.", items: ['l1', 'l2', 'l3'] },
+            
+            // GUÍAS (MÁS GUÍAS)
+            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz Pro", p: 18000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía técnica detallada sobre motores de alto rendimiento, optimización de combustible y reparación de transmisiones modernas." },
+            { id: 2, tipo: "Guias", edad: "Mayores", t: "Importaciones Elite", p: 25000, img: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=500", desc: "Aprende el proceso exacto para traer mercancía de China y USA, evitando estafas y maximizando el margen de ganancia por producto." },
+            { id: 4, tipo: "Guias", edad: "Mayores", t: "Mecánica de Motos", p: 16000, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=500", desc: "Manual completo para motores 2T y 4T. Desde mantenimiento básico hasta reconstrucción total de motores de alta cilindrada." },
+            { id: 10, tipo: "Guias", edad: "Mayores", t: "Reparación de Celulares", p: 22000, img: "https://images.unsplash.com/photo-1512428559083-a40ea4458f4c?w=500", desc: "Domina el hardware móvil: cambio de pantallas, microsoldadura y diagnóstico de placas base de última generación." },
+            { id: 11, tipo: "Guias", edad: "Mayores", t: "E-Commerce con Shopify", p: 27000, img: "https://images.unsplash.com/photo-1556742049-02e48f49511a?w=500", desc: "Monta tu tienda online profesional. Estrategias de venta, pasarelas de pago y gestión de envíos sin stock." },
+            { id: 3, tipo: "Guias", edad: "Menores", t: "Creador Digital S.E", p: 12000, img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500", desc: "Estrategias de viralidad para jóvenes en TikTok e Instagram. Cómo monetizar tu imagen y crear una marca personal desde cero." },
+            
+            // LIBROS (MÁS LIBROS)
+            { id: 5, tipo: "Libros", edad: "Mayores", t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Descubre cómo pequeños cambios de 1% pueden transformarse en resultados masivos. La biblia de la productividad moderna." },
+            { id: 7, tipo: "Libros", edad: "Mayores", t: "La Psicología del Dinero", p: 15000, img: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=500", desc: "Entiende por qué tomamos decisiones financieras erróneas y cómo programar tu mente para la acumulación de riqueza a largo plazo." },
+            { id: 12, tipo: "Libros", edad: "Mayores", t: "Padre Rico Padre Pobre", p: 13000, img: "https://images.unsplash.com/photo-1592492159418-39f319320569?w=500", desc: "El clásico de Robert Kiyosaki que destruye los mitos sobre el dinero y enseña la diferencia real entre activos y pasivos." },
+            { id: 13, tipo: "Libros", edad: "Mayores", t: "El Hombre más Rico de Babilonia", p: 11000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Las leyes inmutables del éxito financiero reveladas a través de parábolas antiguas. Aprende a pagarle a tu yo del futuro primero." },
+            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven", p: 10000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Guía financiera para menores de 18 años. Aprende a ahorrar, gestionar tu primera cuenta y entender el interés compuesto." },
+            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 9000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Libro diseñado para adolescentes que quieren destacar en el deporte, el estudio y los negocios. Disciplina extrema." }
         ],
 
-        init() {
-            this.render();
-            this.startTimer();
-        },
+        init() { this.render(); this.startTimer(); },
 
         startTimer() {
             setInterval(() => {
                 this.timeLeft--;
                 if (this.timeLeft <= 0) this.timeLeft = 599;
-                let min = Math.floor(this.timeLeft / 60);
-                let sec = this.timeLeft % 60;
-                let str = `${min}:${sec < 10 ? '0' : ''}${sec}`;
-                document.querySelectorAll('.timer-display').forEach(el => el.innerText = str);
+                let m = Math.floor(this.timeLeft / 60); let s = this.timeLeft % 60;
+                document.querySelectorAll('.timer-display').forEach(el => el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`);
             }, 1000);
         },
 
-        setAge(val) {
-            this.ageFilter = val;
-            document.querySelectorAll('.age-filters .btn-filter').forEach(b => b.classList.remove('active'));
-            document.getElementById('btnAge' + val).classList.add('active');
-            this.render();
-        },
+        setAge(v) { this.ageFilter = v; this.updateUI(); this.render(); },
+        setCat(v) { this.catFilter = v; this.updateUI(); this.render(); },
 
-        setCat(val) {
-            this.catFilter = val;
-            document.querySelectorAll('.cat-filters .btn-filter').forEach(b => b.classList.remove('active'));
-            document.getElementById('btnCat' + val).classList.add('active');
-            this.render();
+        updateUI() {
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            const ageBtn = document.getElementById('btnAge' + this.ageFilter.replace(/\s/g, ''));
+            const catBtn = document.getElementById('btnCat' + this.catFilter);
+            if(ageBtn) ageBtn.classList.add('active');
+            if(catBtn) catBtn.classList.add('active');
         },
 
         render() {
@@ -175,22 +201,16 @@
 
             types.forEach(tipo => {
                 const filtered = this.products.filter(p => 
-                    p.tipo === tipo && 
-                    p.t.toLowerCase().includes(search) && 
-                    (this.ageFilter === 'Todos' || p.edad === this.ageFilter)
+                    p.tipo === tipo && p.t.toLowerCase().includes(search) && (this.ageFilter === 'Todos' || p.edad === this.ageFilter)
                 );
 
                 if (filtered.length > 0) {
-                    let html = `<div class="section-title">${tipo}</div><div class="grid">`;
+                    let html = `<div class="section-title">${tipo === 'Guias' ? 'Guías Técnicas S.E.' : (tipo === 'Libros' ? 'Biblioteca de Mentalidad' : 'Combos de Alto Valor')}</div><div class="grid">`;
                     filtered.forEach(p => {
                         html += `<div class="card" onclick="app.openM(${p.id})">
-                            <div class="se-mini-logo">S.E.</div>
-                            <img src="${p.img}">
-                            <div class="card-body">
-                                <div style="font-weight:600; font-size:12px; height:32px; overflow:hidden;">${p.t}</div>
-                                <div class="price">$${p.p.toLocaleString()}</div>
-                            </div>
-                        </div>`;
+                            <img src="${p.img}"><div class="card-body">
+                            <div style="font-size:11px; height:32px; overflow:hidden; margin-bottom:10px; font-weight:600;">${p.t}</div>
+                            <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
                     });
                     catalog.innerHTML += html + '</div>';
                 }
@@ -209,25 +229,20 @@
             const list = document.getElementById('mComboItemsList');
             if (p.items) {
                 comboDiv.style.display = 'block';
-                list.innerHTML = p.items.map(id => {
-                    const i = this.items[id];
-                    return `<div class="combo-item">
-                        <img src="${i.img}">
-                        <div class="combo-item-title">${i.t} <br><span class="combo-item-price">$${i.p.toLocaleString()}</span></div>
-                    </div>`;
-                }).join('');
-            } else {
-                comboDiv.style.display = 'none';
-            }
+                list.innerHTML = p.items.map(itemId => `
+                    <div class="combo-item">
+                        <img src="${this.items[itemId].img}">
+                        <div style="font-size:11px;">${this.items[itemId].t} <br><b>$${this.items[itemId].p.toLocaleString()}</b></div>
+                    </div>`).join('');
+            } else { comboDiv.style.display = 'none'; }
             document.getElementById('infoModal').style.display = 'flex';
         },
 
         closeM() { document.getElementById('infoModal').style.display = 'none'; },
 
-        buy(gift) {
+        buy() {
             const p = this.products.find(x => x.id === this.selectedId);
-            const msg = encodeURIComponent(`${gift ? '🎁 Regalo:' : '👋 Hola!'} quiero ${p.t} ($${p.p.toLocaleString()})`);
-            window.open(`https://wa.me/${this.tel}?text=${msg}`);
+            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero adquirir este material de Superarationebook: ${p.t}`);
         }
     };
 
