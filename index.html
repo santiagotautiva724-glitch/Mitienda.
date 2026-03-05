@@ -7,9 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --fondo-dark: #050a08;
+            --fondo-dark: #020504;
             --verde-neon: #00ff88;
-            --verde-premium: #0f3d24;
             --dorado: #ffcc00;
             --cristal: rgba(255, 255, 255, 0.05);
             --blanco: #ffffff;
@@ -20,136 +19,141 @@
             margin: 0; 
             background: var(--fondo-dark) url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); 
             color: var(--blanco); 
-            padding-bottom: 50px; 
+            overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* HEADER & LOGO */
         .brand-header { 
-            text-align: center; padding: 30px 15px; 
-            background: linear-gradient(to bottom, #000, transparent);
+            text-align: center; padding: 40px 15px; 
             border-bottom: 2px solid var(--dorado);
         }
-        .full-logo { font-size: 26px; font-weight: 800; color: var(--blanco); text-transform: uppercase; letter-spacing: 2px; }
+        .full-logo { font-size: 28px; font-weight: 800; color: var(--blanco); text-transform: uppercase; letter-spacing: 3px; }
         .full-logo span { color: var(--dorado); }
 
-        /* NAV STICKY */
+        /* BARRA DE URGENCIA */
+        .urgency-bar {
+            background: var(--dorado); color: black; text-align: center;
+            padding: 5px; font-size: 11px; font-weight: 800; text-transform: uppercase;
+        }
+
+        /* STICKY NAV */
         .sticky-nav { 
             position: sticky; top: 0; z-index: 2000; 
-            background: rgba(10, 38, 23, 0.95); 
-            backdrop-filter: blur(10px);
+            background: rgba(2, 5, 4, 0.9); backdrop-filter: blur(15px);
             padding: 15px 10px; border-bottom: 1px solid var(--verde-neon);
         }
-        .global-timer { text-align: center; color: var(--verde-neon); font-weight: 800; font-size: 13px; margin-bottom: 10px; text-shadow: 0 0 10px var(--verde-neon); }
+        .global-timer { text-align: center; color: var(--verde-neon); font-weight: 800; font-size: 13px; margin-bottom: 10px; }
         
-        .search-container { position: relative; width: 90%; max-width: 450px; margin: auto; }
         .search-input { 
-            width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
-            background: rgba(0,0,0,0.5); color: white; outline: none; box-sizing: border-box;
+            width: 100%; max-width: 400px; display: block; margin: auto;
+            padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
+            background: rgba(255,255,255,0.05); color: white; outline: none;
         }
 
         .filters-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 15px; }
         .btn-filter { 
-            padding: 8px 16px; border-radius: 20px; border: 1px solid var(--verde-neon); 
-            background: transparent; color: var(--verde-neon); cursor: pointer; font-size: 11px; font-weight: 700; transition: 0.3s;
-            text-transform: uppercase;
+            padding: 8px 15px; border-radius: 20px; border: 1px solid var(--verde-neon); 
+            background: transparent; color: var(--verde-neon); cursor: pointer; font-size: 10px; font-weight: 700; transition: 0.3s;
         }
         .btn-filter.active { background: var(--verde-neon); color: black; box-shadow: 0 0 15px var(--verde-neon); }
 
         /* GRID */
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        .section-title { font-size: 20px; font-weight: 800; color: var(--dorado); margin: 40px 0 20px; text-transform: uppercase; border-left: 4px solid var(--verde-neon); padding-left: 15px; }
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .section-title { font-size: 18px; font-weight: 800; color: var(--dorado); margin: 40px 0 20px; text-transform: uppercase; border-left: 4px solid var(--verde-neon); padding-left: 15px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
         .card { 
-            background: var(--cristal); border-radius: 20px; overflow: hidden; 
+            background: var(--cristal); border-radius: 15px; overflow: hidden; 
             border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; position: relative;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--verde-neon); }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 15px; }
-        .price { color: var(--verde-neon); font-weight: 800; font-size: 18px; }
+        .card:hover { transform: scale(1.03); border-color: var(--verde-neon); }
+        .card img { width: 100%; height: 160px; object-fit: cover; }
+        .card-body { padding: 12px; }
+        .price { color: var(--verde-neon); font-weight: 800; font-size: 17px; }
 
-        .best-seller-badge { position: absolute; top: 10px; left: 10px; background: var(--dorado); color: black; padding: 5px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; }
-
-        /* SECCIONES EXTRA */
-        .vision-container { 
-            background: var(--cristal); padding: 40px; border-radius: 30px; 
-            border: 1px solid var(--dorado); margin: 60px 0; text-align: center;
-        }
-        .faq-section { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; margin-top: 40px; }
-        .faq-item { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .faq-q { color: var(--verde-neon); font-weight: 600; font-size: 14px; }
-        .faq-a { font-size: 13px; opacity: 0.7; margin-top: 5px; }
+        /* TESTIMONIOS */
+        .testimonials { display: flex; overflow-x: auto; gap: 15px; padding: 20px 0; scrollbar-width: none; }
+        .testi-card { min-width: 250px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid var(--verde-premium); }
+        .testi-text { font-size: 12px; font-style: italic; opacity: 0.8; }
+        .testi-user { font-weight: 800; color: var(--dorado); font-size: 11px; margin-top: 10px; display: block; }
 
         /* MODAL */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; justify-content: center; align-items: center; padding: 10px; }
         .modal-content { 
-            background: #0a0a0a; width: 90%; max-width: 450px; border-radius: 30px; 
-            padding: 25px; border: 1px solid var(--verde-neon); color: white; max-height: 85vh; overflow-y: auto;
+            background: #0a0a0a; width: 100%; max-width: 400px; border-radius: 25px; 
+            padding: 20px; border: 2px solid var(--verde-neon); color: white; position: relative;
         }
-        .btn-buy { background: var(--verde-neon); color: black; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 15px; }
+        .stock-tag { color: #ff4444; font-size: 12px; font-weight: 800; text-align: center; margin-bottom: 10px; }
+        .bonus-tag { background: var(--verde-premium); color: var(--verde-neon); padding: 10px; border-radius: 10px; font-size: 11px; margin: 15px 0; border: 1px dashed var(--verde-neon); }
+        
+        .btn-buy { background: var(--verde-neon); color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; font-size: 15px; }
+
+        /* FOOTER VISION */
+        .footer-vision { background: var(--cristal); padding: 30px; border-radius: 20px; border: 1px solid var(--dorado); margin: 40px 0; text-align: center; }
     </style>
 </head>
 <body>
 
+<div class="urgency-bar">🎁 BONO EXTRA: Recibe "Lectura Rápida S.E." por cualquier compra hoy</div>
+
 <div class="brand-header">
     <div class="full-logo">Superation<span>Ebook</span></div>
+    <p style="font-size: 10px; letter-spacing: 2px; opacity: 0.6;">ESTRATEGIA • DISCIPLINA • RESULTADOS</p>
 </div>
 
 <div class="sticky-nav">
-    <div class="global-timer">⚡ OFERTAS ÉLITE EXPIRAN EN: <span class="timer-display">09:59</span></div>
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento S.E..." onkeyup="app.render()">
-    </div>
+    <div class="global-timer">OFERTA TERMINA EN: <span id="timer">09:59</span></div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento..." onkeyup="app.render()">
     <div class="filters-container">
-        <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <div style="display:flex; gap:8px;">
             <button id="btnAgeTodos" class="btn-filter active" onclick="app.setAge('Todos')">TODO</button>
             <button id="btnAgeMenores" class="btn-filter" onclick="app.setAge('Menores')">MENORES</button>
             <button id="btnAgeMayores" class="btn-filter" onclick="app.setAge('Mayores')">MAYORES</button>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-            <button id="btnCatTodos" class="btn-filter active" onclick="app.setCat('Todos')">VER TODO</button>
-            <button id="btnCatPacks" class="btn-filter" onclick="app.setCat('Packs')">COMBOS</button>
-            <button id="btnCatGuias" class="btn-filter" onclick="app.setCat('Guias')">GUÍAS</button>
-            <button id="btnCatLibros" class="btn-filter" onclick="app.setCat('Libros')">LIBROS</button>
-        </div>
     </div>
 </div>
 
-<div class="container" id="mainCatalog"></div>
-
 <div class="container">
-    <div class="vision-container">
-        <h2 style="color:var(--dorado)">Misión Estratégica S.E.</h2>
-        <p style="line-height:1.8; opacity:0.8; max-width: 800px; margin: auto;">
-            A mis 16 años, he diseñado **SuperationEbook** como una plataforma de alto rendimiento para quienes buscan resultados reales. Bajo el sello **S.E. (Superación Estratégica)**, entregamos las herramientas técnicas y mentales que el sistema educativo ignora. No vendemos PDFs, vendemos el mapa para tu libertad financiera y profesional.
-        </p>
+    <div id="mainCatalog"></div>
+    
+    <div class="section-title">Resultados SuperationEbook</div>
+    <div class="testimonials">
+        <div class="testi-card">
+            <p class="testi-text">"Traje mi primer pedido de China gracias a la guía de Importaciones. Recuperé la inversión en 1 semana."</p>
+            <span class="testi-user">@Carlos_Mkt</span>
+        </div>
+        <div class="testi-card">
+            <p class="testi-text">"Tengo 17 años y el libro de Inversionista Joven me abrió los ojos. Ya tengo mi primera cuenta de ahorros activa."</p>
+            <span class="testi-user">@Kevin_S</span>
+        </div>
+        <div class="testi-card">
+            <p class="testi-text">"El combo mecánico es de otro nivel. Los diagramas de inyección son muy claros."</p>
+            <span class="testi-user">@Taller_Pro</span>
+        </div>
     </div>
 
-    <div class="faq-section">
-        <h3 style="text-align:center; color:var(--dorado)">Preguntas Frecuentes</h3>
-        <div class="faq-item">
-            <div class="faq-q">¿Cómo recibo mi acceso?</div>
-            <div class="faq-a">Tras el pago por WhatsApp, recibes un enlace de descarga inmediata con todo el material organizado por SuperationEbook.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q">¿El pago es mensual?</div>
-            <div class="faq-a">No. Es un pago único de por vida. Tendrás acceso permanente a las actualizaciones del material.</div>
-        </div>
-        <div class="faq-item" style="text-align:center; margin-top:20px; border:none;">
-            <div style="color:var(--verde-neon); font-size:12px; font-weight:800;">🚀 +1,500 ALUMNOS ACTIVOS ESTE MES</div>
-        </div>
+    <div class="footer-vision">
+        <h3 style="color:var(--dorado); margin-top:0;">Misión Estratégica S.E.</h3>
+        <p style="font-size:13px; opacity:0.8; line-height:1.6;">A mis 16 años, creé **SuperationEbook** para hackear el sistema. No te damos teoría, te damos las armas técnicas para tu libertad. +1,500 alumnos ya están en el siguiente nivel.</p>
     </div>
 </div>
 
 <div id="infoModal" class="modal">
     <div class="modal-content">
-        <span onclick="app.closeM()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
-        <img id="mImg" style="width:100%; border-radius:20px; margin: 15px 0;">
-        <h2 id="mTitle" style="color:var(--verde-neon)"></h2>
-        <p id="mDesc" style="font-size:14px; line-height:1.6; color:#ccc;"></p>
-        <div id="mPrice" style="font-size:32px; font-weight:800; color:var(--verde-neon); text-align:center;"></div>
-        <button class="btn-buy" onclick="app.buy()">SOLICITAR ACCESO POR WHATSAPP 💬</button>
+        <div class="stock-tag">⚠️ SOLO QUEDAN 3 ACCESOS DISPONIBLES</div>
+        <span onclick="app.closeM()" style="position:absolute; right:20px; top:15px; cursor:pointer; font-size:24px;">&times;</span>
+        <img id="mImg" style="width:100%; border-radius:15px; margin-bottom:15px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+        <h2 id="mTitle" style="color:var(--verde-neon); margin:0; font-size:18px;"></h2>
+        <p id="mDesc" style="font-size:12px; color:#bbb; line-height:1.5; margin:10px 0;"></p>
+        
+        <div class="bonus-tag">
+            <strong>BONO S.E. INCLUIDO:</strong><br>
+            Acceso a la comunidad privada + Guía de Productividad Élite.
+        </div>
+
+        <div id="mPrice" style="font-size:30px; font-weight:800; color:var(--verde-neon); text-align:center; margin-bottom:15px;"></div>
+        <button class="btn-buy" onclick="app.buy()">ADQUIRIR ACCESO INMEDIATO 💬</button>
+        <p style="font-size:9px; text-align:center; opacity:0.5; margin-top:10px;">Garantía de satisfacción SuperationEbook</p>
     </div>
 </div>
 
@@ -157,15 +161,14 @@
     const app = {
         tel: "573223693926",
         ageFilter: 'Todos',
-        catFilter: 'Todos',
         timeLeft: 599,
 
         products: [
-            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "La biblia del técnico automotriz. Material certificado por SuperationEbook." },
-            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "El mapa definitivo para importar desde China y USA sin errores." },
-            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz", p: 35000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Optimización de motores de última generación." },
-            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven S.E.", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Educación financiera real para jóvenes." },
-            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Disciplina y enfoque extremo." }
+            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Formación completa en inyección y electricidad. Olvida los cursos caros, aquí tienes el conocimiento real." },
+            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "Aprende a importar y revender. El mapa exacto que los grandes proveedores no quieren que sepas." },
+            { id: 12, tipo: "Guias", edad: "Mayores", t: "Crypto & Trading S.E.", p: 55000, img: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=500", desc: "No regales tu dinero al mercado. Aprende gestión de riesgo y análisis técnico profesional." },
+            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Para menores que no quieren depender de sus padres. Mentalidad y ahorro estratégico." },
+            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "El libro que debieron enseñarte en la escuela. Disciplina de acero." }
         ],
 
         init() { this.render(); this.startTimer(); },
@@ -175,21 +178,14 @@
                 this.timeLeft--;
                 if (this.timeLeft <= 0) this.timeLeft = 599;
                 let m = Math.floor(this.timeLeft / 60); let s = this.timeLeft % 60;
-                document.querySelectorAll('.timer-display').forEach(el => el.innerText = `${m}:${s < 10 ? '0' : ''}${s}`);
+                document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
             }, 1000);
         },
 
         setAge(v) { 
             this.ageFilter = v; 
-            document.querySelectorAll('.age-filters .btn-filter').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             document.getElementById('btnAge' + v).classList.add('active');
-            this.render(); 
-        },
-
-        setCat(v) { 
-            this.catFilter = v; 
-            document.querySelectorAll('.cat-filters .btn-filter').forEach(b => b.classList.remove('active'));
-            document.getElementById('btnCat' + v).classList.add('active');
             this.render(); 
         },
 
@@ -198,32 +194,30 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            if(!search && this.catFilter === 'Todos') {
-                const bests = this.products.filter(p => p.best && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
-                if(bests.length > 0) {
-                    let html = `<div class="section-title">⭐ Best Sellers S.E.</div><div class="grid">`;
-                    bests.forEach(p => {
-                        html += `<div class="card" onclick="app.openM(${p.id})">
-                            <div class="best-seller-badge">ÉLITE</div>
-                            <img src="${p.img}"><div class="card-body">
-                            <div style="font-size:11px; height:32px; overflow:hidden; margin-bottom:10px; font-weight:800;">${p.t}</div>
-                            <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
-                    });
-                    catalog.innerHTML += html + '</div>';
-                }
+            // Mostrar "Destacados" primero
+            const bests = this.products.filter(p => p.best && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
+            if(bests.length > 0 && !search) {
+                let html = `<div class="section-title">🔥 Más vendidos S.E.</div><div class="grid">`;
+                bests.forEach(p => {
+                    html += `<div class="card" onclick="app.openM(${p.id})">
+                        <div class="best-seller-badge">TOP</div>
+                        <img src="${p.img}"><div class="card-body">
+                        <div style="font-size:11px; height:32px; font-weight:800;">${p.t}</div>
+                        <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
+                });
+                catalog.innerHTML += html + '</div>';
             }
 
-            const types = this.catFilter === 'Todos' ? ["Packs", "Guias", "Libros"] : [this.catFilter];
-            types.forEach(tipo => {
-                const filtered = this.products.filter(p => 
-                    p.tipo === tipo && p.t.toLowerCase().includes(search) && (this.ageFilter === 'Todos' || p.edad === this.ageFilter)
-                );
-                if (filtered.length > 0) {
-                    let html = `<div class="section-title">${tipo}</div><div class="grid">`;
-                    filtered.forEach(p => {
+            // Resto de categorías
+            const categories = ["Guias", "Libros"];
+            categories.forEach(cat => {
+                const items = this.products.filter(p => p.tipo === cat && p.t.toLowerCase().includes(search) && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
+                if(items.length > 0) {
+                    let html = `<div class="section-title">${cat}</div><div class="grid">`;
+                    items.forEach(p => {
                         html += `<div class="card" onclick="app.openM(${p.id})">
                             <img src="${p.img}"><div class="card-body">
-                            <div style="font-size:11px; height:32px; overflow:hidden; margin-bottom:10px; font-weight:600;">${p.t}</div>
+                            <div style="font-size:11px; height:32px; font-weight:600;">${p.t}</div>
                             <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
                     });
                     catalog.innerHTML += html + '</div>';
@@ -245,7 +239,7 @@
 
         buy() {
             const p = this.products.find(x => x.id === this.selectedId);
-            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero el material de SuperationEbook: ${p.t}`);
+            window.open(`https://wa.me/${this.tel}?text=Hola! Vengo de la web y quiero mi acceso Élite a: ${p.t}. Aplicar bono de regalo.`);
         }
     };
 
