@@ -3,71 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital - Ebooks de Expertos</title>
+    <title>Tu Casa Digital - Ebooks</title>
     <style>
-        :root {
-            --primary: #1a5631;
-            --accent: #f59e0b;
-            --bg: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-        }
-        
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; color: var(--text-main); }
-        
-        header { background-color: var(--primary); color: white; padding: 20px 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
-        .brand { font-size: 1.75rem; font-weight: 800; }
-        
+        :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; --card-bg: #ffffff; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; color: #1f2937; }
+        header { background-color: var(--primary); color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
         .container { padding: 10px 15px 40px; max-width: 1200px; margin: 0 auto; }
-        h2.section-title { font-size: 1.5rem; color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; }
+        h2.section-title { font-size: 1.4rem; color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; }
+        
+        /* Contenedor de scroll horizontal */
+        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; scrollbar-width: none; }
+        .book-row::-webkit-scrollbar { display: none; }
 
-        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; }
-        .book-card { background: var(--card-bg); min-width: 200px; border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
-        
-        /* Estilos de la ventana que flota */
+        /* Tarjeta de cada libro */
+        .book-card { background: var(--card-bg); min-width: 180px; max-width: 180px; border-radius: 12px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; }
+        .book-cover-placeholder { width: 100%; height: 240px; background: #e5e7eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #9ca3af; font-size: 0.9rem; margin-bottom: 10px; cursor: pointer; }
+        .book-title { font-weight: bold; font-size: 0.9rem; height: 35px; overflow: hidden; margin-bottom: 5px; }
+        .price { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
-        .modal-contenido { background: white; margin: 15% auto; padding: 20px; width: 85%; max-width: 400px; border-radius: 20px; position: relative; text-align: center; }
+        .modal-contenido { background: white; margin: 10% auto; padding: 20px; width: 85%; max-width: 400px; border-radius: 20px; position: relative; text-align: center; }
         .cerrar { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
-        
-        .buy-btn { display: block; background-color: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+        .buy-btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="brand">Tu Casa Digital</div>
+    <div style="font-size: 1.5rem; font-weight: 800;">Tu Casa Digital</div>
 </header>
 
 <div class="container">
+    
     <h2 class="section-title">🌸 Bienestar Integral</h2>
     <div class="book-row">
         <div class="book-card">
-            <img src="https://picsum.photos/id/24/400/600" alt="Portada" onclick="abrirModal()" style="cursor:pointer; width:100%; border-radius:10px;">
-            <div onclick="abrirModal()" style="cursor:pointer;">
-                <div style="font-weight:bold; margin-top:10px;">El Arte del Cuidado Propio</div>
-                <div style="color:var(--primary); font-weight:bold;">$15.000</div>
-            </div>
+            <img src="https://picsum.photos/id/24/400/600" onclick="abrirModal('El Arte del Cuidado Propio', '15.000', 'Guía completa para tu bienestar diario.')" style="width:100%; border-radius:8px; cursor:pointer;">
+            <div class="book-title">Cuidado Propio</div>
+            <div class="price">$15.000</div>
+        </div>
+        <div class="book-card">
+            <div class="book-cover-placeholder" onclick="abrirModal('Mente Sana', '18.000', 'Mejora tu salud mental y enfoque.')">FOTO AQUÍ</div>
+            <div class="book-title">Mente Sana</div>
+            <div class="price">$18.000</div>
+        </div>
+        <div class="book-card">
+            <div class="book-cover-placeholder" onclick="abrirModal('Hábitos Atómicos', '20.000', 'Pequeños cambios, grandes resultados.')">FOTO AQUÍ</div>
+            <div class="book-title">Hábitos</div>
+            <div class="price">$20.000</div>
         </div>
     </div>
+
+    <h2 class="section-title">🛠️ Mecánica & Motores</h2>
+    <div class="book-row">
+        <div class="book-card">
+            <div class="book-cover-placeholder" onclick="abrirModal('Manual de Motores', '25.000', 'Todo sobre mecánica básica y avanzada.')">FOTO AQUÍ</div>
+            <div class="book-title">Manual Motores</div>
+            <div class="price">$25.000</div>
+        </div>
+        <div class="book-card">
+            <div class="book-cover-placeholder" onclick="abrirModal('Tuning Pro', '30.000', 'Mejora el rendimiento de tu vehículo.')">FOTO AQUÍ</div>
+            <div class="book-title">Tuning Pro</div>
+            <div class="price">$30.000</div>
+        </div>
+        <div class="book-card">
+            <div class="book-cover-placeholder" onclick="abrirModal('Electricidad Automotriz', '22.000', 'Sistemas eléctricos modernos.')">FOTO AQUÍ</div>
+            <div class="book-title">Electricidad</div>
+            <div class="price">$22.000</div>
+        </div>
+    </div>
+
 </div>
 
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img src="https://picsum.photos/id/24/400/600" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
-        <h2>El Arte del Cuidado Propio</h2>
-        <p>Guía completa para tu bienestar.</p>
-        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20el%20libro" class="buy-btn">Comprar por WhatsApp</a>
+        <div id="modal-img-container">
+             <img src="https://picsum.photos/id/24/400/600" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        </div>
+        <h2 id="modal-titulo" style="color:var(--primary); margin:0;"></h2>
+        <p id="modal-desc" style="color:#555;"></p>
+        <a id="modal-link" href="" class="buy-btn">Comprar por WhatsApp - $<span id="modal-precio"></span></a>
     </div>
 </div>
 
 <script>
-    function abrirModal() { document.getElementById("miModal").style.display = "block"; }
-    function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
-    window.onclick = function(event) {
-        if (event.target == document.getElementById("miModal")) { cerrarModal(); }
+    function abrirModal(titulo, precio, desc) {
+        document.getElementById("modal-titulo").innerText = titulo;
+        document.getElementById("modal-precio").innerText = precio;
+        document.getElementById("modal-desc").innerText = desc;
+        // Cambia el mensaje de WhatsApp según el libro
+        document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Hola!%20Quiero%20el%20libro%3A%20" + encodeURIComponent(titulo);
+        document.getElementById("miModal").style.display = "block";
     }
+    function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
+    window.onclick = function(event) { if (event.target == document.getElementById("miModal")) { cerrarModal(); } }
 </script>
 
 </body>
