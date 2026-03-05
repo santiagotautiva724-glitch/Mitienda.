@@ -28,7 +28,6 @@
 
         .book-card { background: var(--card-bg); min-width: 200px; max-width: 200px; border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         
-        /* --- ESTILOS DE LA VENTANA MODAL (FLOTANTE) --- */
         .modal { 
             display: none; 
             position: fixed; 
@@ -48,7 +47,6 @@
             border-radius: 20px; 
             position: relative; 
             text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         .cerrar { 
             position: absolute; 
@@ -59,7 +57,6 @@
             cursor: pointer; 
             color: #aaa;
         }
-        .cerrar:hover { color: black; }
 
         .buy-btn { 
             display: block; 
@@ -84,43 +81,22 @@
     <h2 class="section-title">🌸 Bienestar Integral</h2>
     <div class="book-row">
         <div class="book-card">
-            <img src="portada1.png" alt="Portada.png" onclick="abrirModal()" style="cursor:pointer; width:100%; border-radius:10px;">
+            <img src="https://m.media-amazon.com/images/I/71Yf0pUvXBL._AC_UF1000,1000_QL80_.jpg" alt="Portada" onclick="abrirModal()" style="cursor:pointer; width:100%; height:250px; object-fit:cover; border-radius:10px;">
             <div style="cursor:pointer;" onclick="abrirModal()">
-                <div class="book-title" style="font-weight:bold; margin-top:10px; height: 40px; overflow: hidden;">El Arte del Cuidado Propio</div>
+                <div style="font-weight:bold; margin-top:10px;">El Arte del Cuidado Propio</div>
                 <div style="color:var(--text-muted); font-size:0.85rem;">Santiago Tautiva</div>
                 <div style="color:var(--primary); font-weight:bold; font-size:1.2rem; margin: 10px 0;">$15.000</div>
             </div>
         </div>
-
-        <div class="book-card">
-            <div style="background: #e1f5fe; height: 260px; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #01579b;">Mente Sana</div>
-            <div class="book-title" style="font-weight:bold; margin-top:10px;">Mente Sana en Cuerpo Sano</div>
-            <div style="color:var(--text-muted); font-size:0.85rem;">Santiago Tautiva</div>
-            <div style="color:var(--primary); font-weight:bold;">$18.000</div>
-        </div>
-    </div>
-
-    <h2 class="section-title">🛠️ Mecánica & Motores</h2>
-    <div class="book-row">
-        <div class="book-card">
-            <div style="background: #eee; height: 260px; display: flex; align-items: center; justify-content: center; border-radius: 10px;">Motores</div>
-            <div class="book-title" style="font-weight:bold; margin-top:10px;">Manual de Motores</div>
-            <div style="color:var(--primary); font-weight:bold; margin: 10px 0;">$25.000</div>
-            <a href="https://wa.me/573223693926" class="buy-btn" style="padding: 8px; font-size: 0.8rem;">COMPRAR</a>
-        </div>
     </div>
 </div>
-
-<footer>
-    <p>&copy; 2024 Tu Casa Digital. Libros digitales de descarga inmediata.</p>
-</footer>
 
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img src="vista-previa.png" alt="Vista previa.png." style="width:100%; border-radius:10px; margin-bottom:15px; border: 1px solid #ddd;">
+        <img src="https://m.media-amazon.com/images/I/71Yf0pUvXBL._AC_UF1000,1000_QL80_.jpg" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
         <h2 style="margin: 0; color: var(--primary);">El Arte del Cuidado Propio</h2>
-        <p style="text-align:left; color:#555; font-size: 0.9rem;">Guía completa para mejorar tu bienestar físico y emocional con rutinas prácticas diarias.</p>
+        <p style="text-align:left; color:#555; font-size: 0.9rem;">Guía completa para mejorar tu bienestar físico y emocional.</p>
         <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20libro%20de%20Cuidado%20Propio" class="buy-btn">
            Comprar por WhatsApp - $15.000
         </a>
@@ -128,16 +104,10 @@
 </div>
 
 <script>
-    function abrirModal() { 
-        document.getElementById("miModal").style.display = "block"; 
-    }
-    function cerrarModal() { 
-        document.getElementById("miModal").style.display = "none"; 
-    }
-    // Cerrar si hacen clic fuera de la cajita blanca
+    function abrirModal() { document.getElementById("miModal").style.display = "block"; }
+    function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
     window.onclick = function(event) {
-        let modal = document.getElementById("miModal");
-        if (event.target == modal) { cerrarModal(); }
+        if (event.target == document.getElementById("miModal")) { cerrarModal(); }
     }
 </script>
 
