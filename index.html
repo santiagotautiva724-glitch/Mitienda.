@@ -3,170 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S | Tu Casa Digital - Premium Store</title>
+    <title>S | Tu Casa Digital - Ofertas Relámpago</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --verde-pro: #0f3d24;
             --dorado: #ffcc00;
+            --rojo-oferta: #e74c3c;
             --blanco: #ffffff;
             --gris-fondo: #f8faf9;
         }
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-fondo); color: #333; }
 
-        /* HEADER & LOGO "S" */
-        .header-brand { text-align: center; padding: 25px 10px; background: var(--blanco); }
-        .s-logo-circle { 
-            width: 75px; height: 75px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
+        /* HEADER */
+        .brand-header { text-align: center; padding: 20px; background: var(--blanco); }
+        .s-logo { 
+            width: 65px; height: 65px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
             display: inline-flex; align-items: center; justify-content: center; 
-            border-radius: 20px; color: var(--dorado); font-size: 48px; 
+            border-radius: 18px; color: var(--dorado); font-size: 40px; 
             font-weight: 800; border: 3px solid var(--dorado);
-            box-shadow: 0 10px 25px rgba(15,61,36,0.25);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* BUSCADOR Y FILTROS STICKY */
-        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        .search-container { padding: 12px 15px; max-width: 600px; margin: auto; }
-        .search-input { width: 100%; padding: 12px 25px; border-radius: 30px; border: none; font-size: 15px; outline: none; }
+        /* BUSCADOR */
+        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); padding: 12px; }
+        .search-input { width: 90%; max-width: 500px; display: block; margin: auto; padding: 12px 25px; border-radius: 30px; border: none; outline: none; }
 
-        .category-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px 15px; background: #0b2e1b; scrollbar-width: none; }
-        .category-scroll::-webkit-scrollbar { display: none; }
-        .btn-filter { padding: 8px 18px; border-radius: 20px; border: 1.2px solid var(--dorado); background: transparent; color: white; white-space: nowrap; cursor: pointer; font-size: 13px; transition: 0.3s; }
-        .btn-filter.active { background: var(--dorado); color: var(--verde-pro); font-weight: 800; }
-
-        /* CATÁLOGO */
+        /* SECCIONES */
         .container { max-width: 1100px; margin: auto; padding: 20px; }
-        .cat-label { color: var(--verde-pro); border-left: 5px solid var(--dorado); padding-left: 12px; margin: 30px 0 15px; font-weight: 800; text-transform: uppercase; }
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-        
-        .book-card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; position: relative; }
-        .book-card:hover { transform: translateY(-7px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .book-card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-info { padding: 12px; text-align: center; }
-        .card-price { color: var(--verde-pro); font-weight: 800; font-size: 18px; margin: 8px 0; }
-        .btn-add { background: var(--verde-pro); color: white; border: none; width: 100%; padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 600; }
+        .section-title { font-size: 22px; font-weight: 800; color: var(--verde-pro); margin: 40px 0 20px; border-left: 5px solid var(--dorado); padding-left: 15px; }
 
-        /* CARRITO FLOTANTE */
-        .cart-fab { position: fixed; bottom: 25px; right: 25px; background: var(--dorado); color: var(--verde-pro); width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,0.2); z-index: 3000; }
-        .badge { position: absolute; top: 2px; right: 2px; background: var(--verde-pro); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .badge-oferta { position: absolute; top: 10px; left: 10px; background: var(--rojo-oferta); color: white; padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; z-index: 10; }
+        .card img { width: 100%; height: 190px; object-fit: cover; }
+        .card-body { padding: 12px; }
+        .old-price { text-decoration: line-through; color: #999; font-size: 12px; }
+        .price { color: var(--verde-pro); font-weight: 800; font-size: 17px; }
 
-        /* PANEL LATERAL */
-        .panel { position: fixed; right: -100%; top: 0; width: 330px; height: 100%; background: white; z-index: 4000; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: 0.4s; padding: 25px; box-sizing: border-box; }
-        .panel.active { right: 0; }
+        /* MODAL CON CRONÓMETRO */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
+        .modal-content { background: white; width: 90%; max-width: 400px; border-radius: 25px; padding: 25px; position: relative; text-align: center; }
+        .timer-box { background: #fff3f2; border: 1px dashed var(--rojo-oferta); padding: 10px; border-radius: 12px; color: var(--rojo-oferta); font-weight: 800; font-size: 14px; margin-bottom: 15px; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; color: #999; }
+        .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
+        .btn-buy { background: var(--verde-pro); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; }
 
-        /* RESEÑAS */
-        .review-box { background: white; padding: 25px; border-radius: 20px; margin: 40px 0; border-top: 4px solid var(--dorado); }
-        .rev-item { padding: 15px 0; border-bottom: 1px solid #eee; }
-
-        .footer { background: var(--verde-pro); color: white; padding: 60px 20px; text-align: center; border-radius: 40px 40px 0 0; }
+        .footer { background: var(--verde-pro); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
-<div class="header-brand">
-    <div class="s-logo-circle">S</div>
-    <h2 style="margin: 15px 0 0; letter-spacing: 3px; color: var(--verde-pro);">TU CASA DIGITAL</h2>
+<div class="brand-header">
+    <div class="s-logo">S</div>
+    <h2 style="margin-top:10px; color:var(--verde-pro); letter-spacing: 2px;">TU CASA DIGITAL</h2>
 </div>
 
 <div class="sticky-nav">
-    <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ¿Qué quieres aprender hoy?" onkeyup="app.render()">
-    </div>
-    <div class="category-scroll">
-        <button class="btn-filter active" onclick="app.setF('cat', 'Todos', this)">Todo</button>
-        <button class="btn-filter" onclick="app.setF('age', 'menores', this)">👦 Menores</button>
-        <button class="btn-filter" onclick="app.setF('age', 'mayores', this)">👤 Mayores</button>
-        <button class="btn-filter" onclick="app.setF('cat', 'Gastronomía', this)">Gastronomía</button>
-        <button class="btn-filter" onclick="app.setF('cat', 'Mecánica', this)">Mecánica</button>
-        <button class="btn-filter" onclick="app.setF('cat', 'Bienestar', this)">Bienestar</button>
-    </div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar temas..." onkeyup="app.render()">
 </div>
 
-<div class="container" id="catalog"></div>
+<div class="container" id="mainCatalog"></div>
 
-<div class="container">
-    <div class="review-box">
-        <h3>💬 Opiniones de la Comunidad S</h3>
-        <div id="publicReviews">
-            <div class="rev-item"><strong>Mateo V.</strong>: "La guía de electricidad es brutal, muy recomendada." ⭐⭐⭐⭐⭐</div>
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="app.closeM()">&times;</span>
+        <div class="timer-box">⏱ ¡La oferta termina en: <span id="timer">09:59</span>!</div>
+        <img id="mImg" class="modal-img">
+        <h2 id="mTitle" style="margin: 5px 0;"></h2>
+        <p id="mDesc" style="color: #666; font-size: 14px; margin-bottom: 20px;"></p>
+        <div style="margin-bottom: 20px;">
+            <span id="mOldPrice" class="old-price" style="font-size: 18px;"></span>
+            <div id="mPrice" style="font-size: 28px; font-weight: 800; color: var(--verde-pro);"></div>
         </div>
-        <div style="margin-top:20px; display:flex; flex-direction:column; gap:10px;">
-            <input type="text" id="nameIn" placeholder="Tu nombre" style="padding:12px; border-radius:8px; border:1px solid #ddd;">
-            <textarea id="textIn" placeholder="Deja tu reseña pública..." style="padding:12px; border-radius:8px; border:1px solid #ddd; height:80px;"></textarea>
-            <button class="btn-add" onclick="app.postReview()">Publicar Reseña</button>
-        </div>
+        <button class="btn-buy" onclick="app.buy()">¡APROVECHAR OFERTA POR WHATSAPP! 💬</button>
     </div>
-</div>
-
-<div class="cart-fab" onclick="app.toggleCart()">
-    🛒 <div class="badge" id="cartCount">0</div>
-</div>
-
-<div id="cartPanel" class="panel">
-    <h2 onclick="app.toggleCart()" style="cursor:pointer;">✖ Mi Carrito</h2>
-    <div id="cartList" style="margin: 20px 0;"></div>
-    <hr>
-    <div style="font-size:20px; font-weight:800; display:flex; justify-content:space-between; margin: 20px 0;">
-        <span>Total:</span> <span id="cartTotal">$0</span>
-    </div>
-    <a id="waLink" href="#" target="_blank" class="btn-add" style="display:block; text-align:center; text-decoration:none; background:#25d366; padding:18px; font-size:16px;">PEDIR POR WHATSAPP 💬</a>
 </div>
 
 <div class="footer">
-    <div class="s-logo-circle" style="background:none; border-color:white; color:white; margin-bottom:20px;">S</div>
-    <h2>Emprender es el Futuro</h2>
-    <p style="max-width:650px; margin:auto; opacity:0.8; font-style:italic; line-height:1.7;">
-        "Tengo 16 años y he creado esta plataforma bajo la filosofía de la Superación (S). Cada guía aquí presente ha sido seleccionada para que logres tus objetivos de manera práctica."
-    </p>
+    <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
+    <p>"Superación constante. Emprendimiento digital a los 16 años."</p>
 </div>
 
 <script>
     const app = {
-        tel: "573223693926", // TU NÚMERO ACTUALIZADO
-        cat: 'Todos',
-        age: 'Todos',
-        cart: [],
+        tel: "573223693926", // Número corregido y verificado
+        selectedId: null,
+        timerInt: null,
         
         books: [
-            { id: 1, c: "Gastronomía", a: "mayores", t: "Guía Diabéticos Pro", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" },
-            { id: 2, c: "Mecánica", a: "mayores", t: "Electricidad Automotriz", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500" },
-            { id: 3, c: "Bienestar", a: "mayores", t: "Mente Sana en Casa", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500" },
-            { id: 4, c: "Bienestar", a: "menores", t: "Yoga Juvenil", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500" },
-            { id: 5, c: "Mecánica", a: "mayores", t: "Inyección Electrónica", p: 30000, img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=500" },
-            { id: 6, c: "Gastronomía", a: "menores", t: "Postres Saludables", p: 20000, img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500" }
+            { id: 1, tipo: "Guía", t: "Electricidad Auto", p: 27000, oldP: 45000, stars: 5, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Domina el sistema eléctrico automotriz con esta guía técnica profesional." },
+            { id: 2, tipo: "Guía", t: "Nutrición Saludable", p: 25000, oldP: 35000, stars: 5, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "Recetas y planes alimenticios para mejorar tu salud radicalmente." },
+            { id: 4, tipo: "Libro", t: "Mente Sana", p: 18000, oldP: 28000, stars: 5, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Estrategias mentales para la paz interior y el alto rendimiento." },
+            { id: 5, tipo: "Libro", t: "Hábitos Atómicos", p: 24000, oldP: 38000, stars: 5, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "El método comprobado para construir hábitos que cambian tu vida." }
         ],
 
-        init() {
-            this.render();
-            this.loadReviews();
-        },
-
         render() {
-            const catalog = document.getElementById('catalog');
+            const catalog = document.getElementById('mainCatalog');
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            const activeCats = [...new Set(this.books.map(b => b.c))];
-            
-            activeCats.forEach(catName => {
-                const filtered = this.books.filter(b => {
-                    const mCat = (this.cat === 'Todos' || b.c === this.cat);
-                    const mAge = (this.age === 'Todos' || b.a === this.age);
-                    const mSearch = b.t.toLowerCase().includes(search);
-                    return mCat && mAge && mSearch && b.c === catName;
-                });
-
-                if (filtered.length > 0) {
-                    let html = `<div class="cat-label">${catName}</div><div class="book-grid">`;
-                    filtered.forEach(b => {
+            ["Guía", "Libro"].forEach(tipo => {
+                const filtrados = this.books.filter(b => b.tipo === tipo && b.t.toLowerCase().includes(search));
+                if (filtrados.length > 0) {
+                    let html = `<div class="section-title">Nuestras ${tipo}s</div><div class="grid">`;
+                    filtrados.forEach(b => {
                         html += `
-                            <div class="book-card">
+                            <div class="card" onclick="app.openM(${b.id})">
+                                <div class="badge-oferta">OFERTA</div>
                                 <img src="${b.img}">
-                                <div class="card-info">
-                                    <div style="font-weight:600; font-size:14px; height:38px; overflow:hidden;">${b.t}</div>
-                                    <div class="card-price">$${b.p.toLocaleString()}</div>
-                                    <button class="btn-add" onclick="app.add(${b.id})">Añadir al Carrito</button>
+                                <div class="card-body">
+                                    <div style="font-weight:600; font-size:14px;">${b.t}</div>
+                                    <div class="old-price">$${b.oldP.toLocaleString()}</div>
+                                    <div class="price">$${b.p.toLocaleString()}</div>
                                 </div>
                             </div>`;
                     });
@@ -175,66 +126,40 @@
             });
         },
 
-        setF(type, val, btn) {
-            if(type === 'cat') this.cat = val;
-            if(type === 'age') this.age = val;
-            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            this.render();
+        startTimer() {
+            let time = 599; 
+            clearInterval(this.timerInt);
+            this.timerInt = setInterval(() => {
+                let min = Math.floor(time / 60);
+                let sec = time % 60;
+                document.getElementById('timer').innerText = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+                if (time <= 0) clearInterval(this.timerInt);
+                time--;
+            }, 1000);
         },
 
-        add(id) {
+        openM(id) {
             const item = this.books.find(x => x.id === id);
-            this.cart.push(item);
-            this.updateUI();
+            this.selectedId = id;
+            document.getElementById('mTitle').innerText = item.t;
+            document.getElementById('mDesc').innerText = item.desc;
+            document.getElementById('mPrice').innerText = `$${item.p.toLocaleString()}`;
+            document.getElementById('mOldPrice').innerText = `$${item.oldP.toLocaleString()}`;
+            document.getElementById('mImg').src = item.img;
+            document.getElementById('infoModal').style.display = 'flex';
+            this.startTimer();
         },
 
-        updateUI() {
-            document.getElementById('cartCount').innerText = this.cart.length;
-            const list = document.getElementById('cartList');
-            let total = 0;
-            list.innerHTML = '';
-            
-            this.cart.forEach((it, idx) => {
-                total += it.p;
-                list.innerHTML += `<div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #eee;">
-                    <span style="font-size:13px;">${it.t}</span>
-                    <b style="color:var(--verde-pro);">$${it.p.toLocaleString()}</b>
-                </div>`;
-            });
-            
-            document.getElementById('cartTotal').innerText = `$${total.toLocaleString()}`;
-            const msg = encodeURIComponent(`¡Hola! Vengo de S-Tu Casa Digital. Quiero comprar:\n${this.cart.map(c => `- ${c.t}`).join('\n')}\n\nTotal: $${total.toLocaleString()}`);
-            document.getElementById('waLink').href = `https://wa.me/${this.tel}?text=${msg}`;
-        },
+        closeM() { document.getElementById('infoModal').style.display = 'none'; clearInterval(this.timerInt); },
 
-        toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); },
-
-        postReview() {
-            const n = document.getElementById('nameIn').value;
-            const t = document.getElementById('textIn').value;
-            if(n && t) {
-                let revs = JSON.parse(localStorage.getItem('s_reviews') || "[]");
-                revs.push({n, t});
-                localStorage.setItem('s_reviews', JSON.stringify(revs));
-                this.loadReviews();
-                document.getElementById('nameIn').value = '';
-                document.getElementById('textIn').value = '';
-            }
-        },
-
-        loadReviews() {
-            const box = document.getElementById('publicReviews');
-            let revs = JSON.parse(localStorage.getItem('s_reviews') || "[]");
-            let html = '<div class="rev-item"><strong>Mateo V.</strong>: "La guía de electricidad es brutal, muy recomendada." ⭐⭐⭐⭐⭐</div>';
-            revs.forEach(r => {
-                html += `<div class="rev-item"><strong>${r.n}</strong>: "${r.t}" ⭐⭐⭐⭐⭐</div>`;
-            });
-            box.innerHTML = html;
+        buy() {
+            const item = this.books.find(x => x.id === this.selectedId);
+            const msg = encodeURIComponent(`¡Hola! 👋 ¡Aprovecho la oferta de tiempo limitado!\n- ${item.t}\nPrecio especial: $${item.p.toLocaleString()}`);
+            window.open(`https://wa.me/${this.tel}?text=${msg}`, '_blank');
         }
     };
 
-    app.init();
+    app.render();
 </script>
 </body>
 </html>
