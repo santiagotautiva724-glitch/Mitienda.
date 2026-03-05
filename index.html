@@ -7,82 +7,70 @@
     <style>
         :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
-        header { background: var(--primary); color: white; padding: 25px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        header { background: var(--primary); color: white; padding: 25px; text-align: center; }
         .container { padding: 15px; max-width: 1000px; margin: 0 auto; }
-        h2 { color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 35px; font-size: 1.4rem; padding-bottom: 5px; }
-        
+        h2 { color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; font-size: 1.4rem; padding-bottom: 5px; }
         .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: none; }
-        .book-row::-webkit-scrollbar { display: none; }
-        
-        .book-card { background: white; min-width: 170px; max-width: 170px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; cursor: pointer; }
-        .book-card img { width: 100%; height: 230px; object-fit: cover; border-radius: 10px; }
-        .book-title { font-weight: bold; margin-top: 10px; font-size: 0.9rem; color: #333; height: 35px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .book-card { background: white; min-width: 160px; max-width: 160px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; cursor: pointer; }
+        .book-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 10px; }
         .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
-
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); }
-        .modal-contenido { background: white; margin: 10% auto; padding: 25px; width: 85%; max-width: 400px; border-radius: 25px; text-align: center; position: relative; animation: aparecer 0.3s; }
-        @keyframes aparecer { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        .modal-contenido { background: white; margin: 10% auto; padding: 25px; width: 80%; max-width: 400px; border-radius: 25px; text-align: center; position: relative; }
         .cerrar { position: absolute; right: 20px; top: 15px; font-size: 35px; cursor: pointer; color: #999; }
-        
-        #modal-img { width:100%; border-radius:12px; height: 250px; object-fit: cover; margin-bottom: 15px; }
-        #modal-desc { color: #555; font-size: 0.95rem; line-height: 1.5; margin: 20px 0; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent); }
-        .buy-btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; }
+        #modal-desc { color: #555; font-size: 0.95rem; line-height: 1.5; margin: 15px 0; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; }
+        .buy-btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>
-    <div style="font-size: 1.8rem; font-weight: 900; letter-spacing: 1px;">TU CASA DIGITAL</div>
-</header>
+<header><div style="font-size: 1.8rem; font-weight: 900;">TU CASA DIGITAL</div></header>
 
 <div class="container">
-    
     <h2>👨‍🍳 Gastronomía & Salud</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Cocina para Diabéticos', '25.000', 'Guía con más de 50 recetas de bajo índice glucémico. Aprende a disfrutar de la comida manteniendo tus niveles de azúcar bajo control.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
+        <div class="book-card" onclick="abrirModal('Cocina para Diabéticos', '25.000', 'Recetas deliciosas de bajo índice glucémico para cuidar tu salud.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
             <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400">
-            <div class="book-title">Comida para Diabéticos</div>
+            <div style="font-weight:bold; margin-top:10px; font-size:0.9rem;">Para Diabéticos</div>
             <div class="price">$25.000</div>
         </div>
-        <div class="book-card" onclick="abrirModal('Postres Sin Culpa', '20.000', 'Recetas de repostería saludable sin azúcares refinados. El libro ideal para los amantes del dulce que cuidan su figura.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
+        <div class="book-card" onclick="abrirModal('Postres Sin Culpa', '20.000', 'Repostería saludable sin azúcar refinada.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
             <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400">
-            <div class="book-title">Postres Saludables</div>
+            <div style="font-weight:bold; margin-top:10px; font-size:0.9rem;">Postres Saludables</div>
             <div class="price">$20.000</div>
         </div>
-        <div class="book-card" onclick="abrirModal('Comida Internacional', '35.000', 'Un viaje culinario por los mejores platos del mundo. Recetas de Italia, México, Japón y más, explicadas paso a paso.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
+        <div class="book-card" onclick="abrirModal('Comida Internacional', '35.000', 'Los mejores platos del mundo explicados paso a paso.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
             <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400">
-            <div class="book-title">Comida Internacional</div>
+            <div style="font-weight:bold; margin-top:10px; font-size:0.9rem;">Internacional</div>
             <div class="price">$35.000</div>
         </div>
     </div>
 
     <h2>🌸 Bienestar</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Cuidado Propio', '15.000', 'Mejora tu salud física y mental con técnicas de respiración y hábitos diarios.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
+        <div class="book-card" onclick="abrirModal('Cuidado Propio', '15.000', 'Guía completa de salud física y mental.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
             <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400">
-            <div class="book-title">Cuidado Propio</div>
+            <div style="font-weight:bold; margin-top:10px; font-size:0.9rem;">Cuidado Propio</div>
             <div class="price">$15.000</div>
         </div>
     </div>
 
     <h2>🛠️ Mecánica</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Diagnosis Electrónica', '29.000', 'Todo sobre escáneres OBD-II y sensores de motores modernos.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
+        <div class="book-card" onclick="abrirModal('Diagnosis Electrónica', '29.000', 'Escáneres OBD-II y sensores modernos.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
             <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400">
-            <div class="book-title">Diagnosis</div>
+            <div style="font-weight:bold; margin-top:10px; font-size:0.9rem;">Diagnosis</div>
             <div class="price">$29.000</div>
         </div>
     </div>
-
 </div>
 
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img id="modal-img" src="">
-        <h2 id="modal-titulo" style="margin: 0; border:none; font-size: 1.5rem;"></h2>
+        <img id="modal-img" src="" style="width:100%; border-radius:12px; height:200px; object-fit:cover;">
+        <h2 id="modal-titulo" style="margin-top:10px;"></h2>
         <div id="modal-desc"></div>
-        <a id="modal-link" href="" class="buy-btn">🛒 Comprar por WhatsApp</a>
+        <a id="modal-link" href="" class="buy-btn">Comprar por WhatsApp</a>
     </div>
 </div>
 
@@ -91,11 +79,10 @@
         document.getElementById("modal-titulo").innerText = titulo;
         document.getElementById("modal-desc").innerText = desc;
         document.getElementById("modal-img").src = img;
-        document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Hola!%20Quiero%20el%20ebook%3A%20" + encodeURIComponent(titulo);
+        document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Quiero%20el%20ebook%3A%20" + encodeURIComponent(titulo);
         document.getElementById("miModal").style.display = "block";
     }
     function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
-    window.onclick = function(e) { if(e.target == document.getElementById("miModal")) cerrarModal(); }
 </script>
 
 </body>
