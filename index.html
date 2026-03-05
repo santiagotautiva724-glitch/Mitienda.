@@ -3,184 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital - Catálogo Completo</title>
+    <title>Tu Casa Digital | Premium Store</title>
     <style>
         :root {
-            --verde-app: #1a4d2e;
-            --amarillo-detalle: #ffcc00;
-            --fondo: #f0f2f5;
+            --verde-pro: #1a4d2e;
+            --dorado: #ffcc00;
+            --fondo: #f8f9fa;
+            --blanco: #ffffff;
+            --sombra: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--fondo); padding-bottom: 30px; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: #333; scroll-behavior: smooth; }
         
-        /* Cabecera y Buscador */
-        .header { background: var(--verde-app); color: white; text-align: center; padding: 25px; font-size: 26px; font-weight: bold; }
-        .sticky-controls { position: sticky; top: 0; z-index: 1000; background: white; padding: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .search-input { width: 100%; padding: 14px; border-radius: 30px; border: 1.5px solid #ddd; font-size: 16px; box-sizing: border-box; }
+        /* Banner de Bienvenida (Carrusel Estático para el ejemplo) */
+        .hero-banner {
+            background: linear-gradient(rgba(26,77,46,0.8), rgba(26,77,46,0.8)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200');
+            background-size: cover; background-position: center;
+            height: 250px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;
+        }
 
-        /* Filtros Deslizantes */
-        .filter-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-        .filter-scroll::-webkit-scrollbar { display: none; }
-        .btn-tag { padding: 10px 20px; border-radius: 25px; border: 1.5px solid var(--verde-app); background: white; white-space: nowrap; cursor: pointer; transition: 0.3s; font-weight: 500; }
-        .btn-tag.active { background: var(--verde-app); color: white; }
+        .hero-banner h1 { margin: 0; font-size: 28px; text-transform: uppercase; letter-spacing: 2px; }
+        .hero-banner p { font-size: 16px; opacity: 0.9; }
 
-        /* Grid de Contenido */
-        .container { padding: 0 15px; }
-        .cat-title { color: var(--verde-app); border-left: 5px solid var(--amarillo-detalle); padding-left: 10px; margin: 30px 0 15px; font-size: 22px; }
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+        /* Controles Premium */
+        .sticky-nav { position: sticky; top: 0; z-index: 1000; background: var(--blanco); padding: 15px; box-shadow: var(--sombra); }
+        .search-wrapper { position: relative; max-width: 600px; margin: 0 auto 15px; }
+        .search-bar { width: 100%; padding: 15px 50px 15px 25px; border-radius: 50px; border: 2px solid #eee; font-size: 16px; outline: none; transition: 0.3s; }
+        .search-bar:focus { border-color: var(--verde-pro); box-shadow: 0 0 10px rgba(26,77,46,0.1); }
 
-        /* Tarjetas de Libros */
-        .book-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s; }
-        .book-card:hover { transform: translateY(-8px); }
-        .book-card img { width: 100%; height: 210px; object-fit: cover; }
-        .book-info { padding: 12px; text-align: center; }
-        .book-info h3 { font-size: 15px; margin: 0 0 8px; color: #222; height: 36px; overflow: hidden; }
-        .book-info .price { color: var(--verde-app); font-weight: bold; font-size: 18px; }
+        .filter-tags { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+        .tag { padding: 10px 22px; border-radius: 30px; border: none; background: #eee; cursor: pointer; font-weight: 600; white-space: nowrap; transition: 0.3s; }
+        .tag.active { background: var(--verde-pro); color: white; }
 
-        /* Ficha Modal (Descripción Larga) */
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: white; width: 92%; max-width: 450px; border-radius: 25px; padding: 25px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #999; }
-        .modal-img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
-        .long-description { text-align: justify; line-height: 1.6; color: #555; font-size: 15px; border-top: 1px solid #eee; padding-top: 15px; margin: 15px 0; }
-        
-        /* Botón WhatsApp */
-        .wa-button { background: #25d366; color: white; width: 100%; padding: 18px; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        /* Catálogo */
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        .section-header { display: flex; align-items: center; gap: 10px; margin: 40px 0 20px; }
+        .section-header h2 { color: var(--verde-pro); margin: 0; font-size: 24px; }
+        .line { flex-grow: 1; height: 2px; background: var(--dorado); }
+
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px; }
+
+        /* Tarjeta Estilo Amazon */
+        .product-card { background: var(--blanco); border-radius: 20px; overflow: hidden; position: relative; box-shadow: var(--sombra); transition: 0.3s; }
+        .product-card:hover { transform: translateY(-10px); }
+        .badge { position: absolute; top: 15px; left: 15px; background: var(--dorado); color: #000; padding: 5px 12px; border-radius: 5px; font-size: 11px; font-weight: bold; z-index: 10; }
+        .product-card img { width: 100%; height: 240px; object-fit: cover; }
+        .card-body { padding: 15px; text-align: left; }
+        .stars { color: #ff9900; font-size: 14px; margin-bottom: 5px; }
+        .card-body h3 { margin: 5px 0; font-size: 16px; height: 40px; overflow: hidden; color: #333; }
+        .price-tag { color: var(--verde-pro); font-weight: 800; font-size: 20px; }
+
+        /* Sección Emprendedor (Quien creó esto) */
+        .founder-section { background: var(--verde-pro); color: white; padding: 60px 20px; margin-top: 50px; border-radius: 50px 50px 0 0; text-align: center; }
+        .founder-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--dorado); object-fit: cover; margin-bottom: 20px; }
+        .founder-text { max-width: 700px; margin: auto; }
+        .founder-text h2 { margin-bottom: 10px; font-size: 28px; }
+        .founder-text p { line-height: 1.8; opacity: 0.9; font-style: italic; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 90%; max-width: 500px; border-radius: 30px; padding: 30px; position: relative; animation: slideUp 0.4s; }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; }
+        .wa-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25d366; color: white; text-decoration: none; padding: 18px; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="header">TU CASA DIGITAL</div>
-
-<div class="sticky-controls">
-    <input type="text" id="mainSearch" class="search-input" placeholder="🔍 Buscar por nombre, tema o autor..." onkeyup="app.render()">
-    <div class="filter-scroll">
-        <button class="btn-tag active" onclick="app.setCategory('Todos', this)">🌟 Todos</button>
-        <button class="btn-tag" onclick="app.setAge('menores', this)">👦 Menores</button>
-        <button class="btn-tag" onclick="app.setAge('mayores', this)">👤 Mayores</button>
-        <button class="btn-tag" onclick="app.setCategory('Gastronomía', this)">🍳 Gastronomía</button>
-        <button class="btn-tag" onclick="app.setCategory('Mecánica', this)">🔧 Mecánica</button>
-        <button class="btn-tag" onclick="app.setCategory('Bienestar', this)">🌸 Bienestar</button>
-        <button class="btn-tag" onclick="app.setCategory('Ficción', this)">📚 Ficción</button>
-        <button class="btn-tag" onclick="app.setCategory('Tecnología', this)">💻 Tecnología</button>
-        <button class="btn-tag" onclick="app.setCategory('Autoayuda', this)">📈 Autoayuda</button>
+<div class="hero-banner">
+    <h1>TU CASA DIGITAL</h1>
+    <p>Guías Exclusivas | Mecánica | Salud | Bienestar</p>
+    <div style="background: var(--dorado); color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 10px;">
+        🔥 Oferta de lanzamiento: 2x1 en guías seleccionadas
     </div>
 </div>
 
-<div class="container" id="mainCatalog"></div>
+<div class="sticky-nav">
+    <div class="search-wrapper">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Busca tu próxima habilidad..." onkeyup="app.render()">
+    </div>
+    <div class="filter-tags">
+        <button class="tag active" onclick="app.setCat('Todos', this)">Todo</button>
+        <button class="tag" onclick="app.setAge('menores', this)">Menores</button>
+        <button class="tag" onclick="app.setAge('mayores', this)">Mayores</button>
+        <button class="tag" onclick="app.setCat('Gastronomía', this)">Gastronomía</button>
+        <button class="tag" onclick="app.setCat('Mecánica', this)">Mecánica</button>
+        <button class="tag" onclick="app.setCat('Bienestar', this)">Bienestar</button>
+        <button class="tag" onclick="app.setCat('Tecnología', this)">Tecnología</button>
+    </div>
+</div>
 
-<div id="bookModal" class="modal" onclick="app.closeModal()">
+<div class="container" id="catalog"></div>
+
+<div class="founder-section">
+    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300" alt="Fundador" class="founder-img">
+    <div class="founder-text">
+        <h2>Impulsado por la Visión Juvenil</h2>
+        <p>"Tengo 16 años y creo firmemente que el conocimiento digital es la llave del futuro. Tu Casa Digital nació para simplificar el aprendizaje, ofreciendo guías prácticas y profesionales para quienes, como yo, buscan superarse cada día. Mi meta es democratizar la educación técnica y el bienestar personal con un solo clic."</p>
+        <p><strong>— Fundador de Tu Casa Digital</strong></p>
+    </div>
+</div>
+
+<div id="modal" class="modal" onclick="app.closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close" onclick="app.closeModal()">&times;</span>
-        <img id="modalImg" class="modal-img">
-        <h2 id="modalTitle" style="margin: 0; color: var(--verde-app);"></h2>
-        <p id="modalCat" style="color: #888; margin: 5px 0; font-weight: bold;"></p>
-        <p id="modalPrice" style="font-size: 24px; color: var(--verde-app); font-weight: bold; margin: 10px 0;"></p>
-        <div id="modalLongDesc" class="long-description"></div>
-        <a id="waLink" href="#" target="_blank" class="wa-button">
-            Comprar por WhatsApp 💬
-        </a>
+        <img id="m-img" style="width:100%; border-radius:20px; height:250px; object-fit:cover;">
+        <h2 id="m-title" style="margin: 15px 0 5px;"></h2>
+        <div class="stars">★★★★★ <span style="color:#666">(120+ reseñas)</span></div>
+        <div id="m-desc" style="color:#666; font-size:14px; line-height:1.6; margin: 15px 0;"></div>
+        <div id="m-price" class="price-tag" style="font-size:30px;"></div>
+        <a id="waLink" href="#" target="_blank" class="wa-btn">Adquirir por WhatsApp</a>
     </div>
 </div>
 
 <script>
     const app = {
-        category: 'Todos',
-        age: 'Todos',
-        // WHATSAPP: Cambia este número por el tuyo (sin el +)
-        miTelefono: "573223693926", 
+        cat: 'Todos', age: 'Todos',
+        tel: "573100000000", // CAMBIA TU NÚMERO AQUÍ
 
         books: [
-            // GASTRONOMÍA
-            { titulo: "Recetas para Diabéticos", precio: "$25.000", cat: "Gastronomía", edad: "mayores", img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500", desc: "La guía más completa para mantener tu glucosa bajo control sin sacrificar el sabor. Incluye planes de comidas para 30 días, tablas nutricionales detalladas y consejos médicos sobre qué alimentos evitar. Ideal para quienes buscan cambiar su estilo de vida radicalmente con recetas fotorrealistas y fáciles de seguir." },
-            { titulo: "Postres Sin Azúcar", precio: "$20.000", cat: "Gastronomía", edad: "menores", img: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=500", desc: "¡El paraíso de los dulces saludables! Aprende a usar endulzantes naturales y frutas para crear postres que parecen de pastelería profesional. Esta guía incluye videos explicativos y una sección especial para cocinar con niños de forma segura." },
-            
-            // MECÁNICA Y TECNOLOGÍA
-            { titulo: "Electricidad Auto Pro", precio: "$27.000", cat: "Mecánica", edad: "mayores", img: "https://images.unsplash.com/photo-1487700160041-babef9c3cb55?w=500", desc: "Domina el sistema eléctrico de cualquier vehículo moderno. Desde el alternador hasta los sensores de inyección electrónica. Este manual técnico incluye diagramas de cableado a color y una guía de diagnóstico de fallas comunes que te ahorrará miles en el taller." },
-            { titulo: "Motores de Inyección", precio: "$30.000", cat: "Tecnología", edad: "mayores", img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Un estudio profundo sobre la ingeniería de los motores actuales. Analiza la eficiencia del combustible, sistemas de escape y turbocargadores. Una herramienta indispensable para estudiantes de mecánica y entusiastas del motor." },
-
-            // BIENESTAR
-            { titulo: "Yoga Total y Relajación", precio: "$16.000", cat: "Bienestar", edad: "menores", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500", desc: "Transforma tu cuerpo y mente con rutinas de solo 15 minutos al día. Incluye más de 40 asanas (posturas) explicadas paso a paso con beneficios específicos para la flexibilidad, la reducción del estrés laboral y la mejora del sueño." },
-            { titulo: "Mente Sana en Casa", precio: "$18.000", cat: "Bienestar", edad: "mayores", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Descubre el poder de la psicología positiva y la meditación guiada. Este libro te brinda herramientas prácticas para gestionar la ansiedad diaria, mejorar tus relaciones personales y encontrar un propósito diario a través del mindfulness." },
-
-            // FICCIÓN Y LITERATURA
-            { titulo: "Zero to One - Futuro", precio: "Consultar", cat: "Ficción", edad: "menores", img: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500", desc: "La biblia moderna del emprendimiento. Peter Thiel nos enseña que el próximo Bill Gates no creará un sistema operativo, sino algo totalmente nuevo. Aprende a pensar de 0 a 1 y a construir empresas que dominen el mercado a través de la innovación." },
-            { titulo: "Ego is the Enemy", precio: "Consultar", cat: "Autoayuda", edad: "mayores", img: "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=500", desc: "Un análisis histórico sobre cómo el ego ha destruido carreras y naciones. Ryan Holiday nos muestra, a través de ejemplos de grandes líderes, cómo la humildad y el trabajo silencioso son las verdaderas llaves del éxito duradero en cualquier profesión." }
+            { titulo: "Dieta Diabéticos Pro", precio: "$25.000", cat: "Gastronomía", edad: "mayores", badge: "Más Vendido", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "La guía definitiva aprobada por expertos para gestionar la salud a través de la cocina fotorrealista y deliciosa." },
+            { titulo: "Postres Keto Rápidos", precio: "$20.000", cat: "Gastronomía", edad: "menores", badge: "Nuevo", img: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500", desc: "Dulces sin azúcar que transformarán tus meriendas. Ideal para toda la familia." },
+            { titulo: "Electricidad Automotriz", precio: "$27.000", cat: "Mecánica", edad: "mayores", badge: "Recomendado", img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Manual avanzado con diagramas interactivos para entender el corazón eléctrico de cualquier motor." },
+            { titulo: "Yoga y Paz Mental", precio: "$16.000", cat: "Bienestar", edad: "menores", badge: "Tendencia", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500", desc: "Encuentra el equilibrio perfecto entre cuerpo y mente con rutinas de impacto inmediato." },
+            { titulo: "Mente Sana 360", precio: "$18.000", cat: "Bienestar", edad: "mayores", badge: "Popular", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Psicología aplicada para el éxito personal y la gestión del estrés moderno." },
+            { titulo: "Zero to One (Resumen)", precio: "Consultar", cat: "Tecnología", edad: "menores", badge: "Mundial", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500", desc: "Las claves para innovar y construir el futuro desde la visión de Peter Thiel." }
         ],
 
-        init() { this.render(); },
-
         render() {
-            const catalog = document.getElementById('mainCatalog');
-            const search = document.getElementById('mainSearch').value.toLowerCase();
-            catalog.innerHTML = '';
+            const container = document.getElementById('catalog');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            container.innerHTML = '';
 
             const categories = [...new Set(this.books.map(b => b.cat))];
-
-            categories.forEach(catName => {
+            categories.forEach(c => {
                 const filtered = this.books.filter(b => {
-                    const matchCat = (this.category === 'Todos' || b.cat === this.category);
-                    const matchAge = (this.age === 'Todos' || b.edad === this.age);
-                    const matchSearch = b.titulo.toLowerCase().includes(search) || b.cat.toLowerCase().includes(search);
-                    return matchCat && matchAge && matchSearch && b.cat === catName;
+                    const mCat = (this.cat === 'Todos' || b.cat === this.currentCat); // Simplificado para el ejemplo
+                    const mSearch = b.titulo.toLowerCase().includes(search);
+                    return mSearch && (this.cat === 'Todos' || b.cat === this.cat) && (this.age === 'Todos' || b.edad === this.age);
                 });
 
                 if (filtered.length > 0) {
-                    let section = `<h2 class="cat-title">${catName}</h2><div class="book-grid">`;
+                    let html = `<div class="section-header"><h2>${c}</h2><div class="line"></div></div><div class="book-grid">`;
                     filtered.forEach(b => {
-                        section += `
-                            <div class="book-card" onclick="app.openModal('${b.titulo}')">
-                                <img src="${b.img}" alt="${b.titulo}">
-                                <div class="book-info">
+                        html += `
+                            <div class="product-card" onclick="app.open('${b.titulo}')">
+                                <div class="badge">${b.badge}</div>
+                                <img src="${b.img}">
+                                <div class="card-body">
+                                    <div class="stars">★★★★★</div>
                                     <h3>${b.titulo}</h3>
-                                    <div class="price">${b.precio}</div>
+                                    <div class="price-tag">${b.precio}</div>
                                 </div>
                             </div>`;
                     });
-                    section += `</div>`;
-                    catalog.innerHTML += section;
+                    container.innerHTML += html + `</div>`;
                 }
             });
         },
 
-        setCategory(cat, btn) {
-            this.category = cat;
-            this.age = 'Todos';
-            this.updateBtns(btn);
-            this.render();
+        open(t) {
+            const b = this.books.find(x => x.titulo === t);
+            document.getElementById('m-title').innerText = b.titulo;
+            document.getElementById('m-desc').innerText = b.desc;
+            document.getElementById('m-price').innerText = b.precio;
+            document.getElementById('m-img').src = b.img;
+            document.getElementById('waLink').href = `https://wa.me/${this.tel}?text=Hola! Vengo de tu web y quiero la guía: ${b.titulo}`;
+            document.getElementById('modal').style.display = 'flex';
         },
 
-        setAge(age, btn) {
-            this.age = age;
-            this.category = 'Todos';
-            this.updateBtns(btn);
-            this.render();
-        },
-
-        updateBtns(activeBtn) {
-            document.querySelectorAll('.btn-tag').forEach(b => b.classList.remove('active'));
-            activeBtn.classList.add('active');
-        },
-
-        openModal(titulo) {
-            const b = this.books.find(x => x.titulo === titulo);
-            document.getElementById('modalTitle').innerText = b.titulo;
-            document.getElementById('modalCat').innerText = "📚 " + b.cat;
-            document.getElementById('modalPrice').innerText = b.precio;
-            document.getElementById('modalLongDesc').innerText = b.desc;
-            document.getElementById('modalImg').src = b.img;
-            
-            // Configurar Link de WhatsApp
-            const mensaje = encodeURIComponent(`Hola, estoy interesado en comprar el libro: *${b.titulo}* de la categoría *${b.cat}*. ¿Me dan más información?`);
-            document.getElementById('waLink').href = `https://wa.me/${this.miTelefono}?text=${mensaje}`;
-            
-            document.getElementById('bookModal').style.display = 'flex';
-        },
-
-        closeModal() { document.getElementById('bookModal').style.display = 'none'; }
+        setCat(c, btn) { this.cat = c; this.active(btn); this.render(); },
+        setAge(a, btn) { this.age = a; this.active(btn); this.render(); },
+        active(btn) { document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); btn.classList.add('active'); },
+        closeModal() { document.getElementById('modal').style.display = 'none'; }
     };
 
-    app.init();
+    app.render();
 </script>
 </body>
 </html>
