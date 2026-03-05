@@ -3,183 +3,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital | Premium Store</title>
+    <title>Tu Casa Digital | S-Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --verde-pro: #1a4d2e;
-            --dorado: #ffcc00;
-            --fondo: #f8f9fa;
+            --verde-metal: #0f3d24;
+            --dorado-brillante: #ffcc00;
             --blanco: #ffffff;
-            --sombra: 0 10px 30px rgba(0,0,0,0.1);
+            --gris-claro: #f0f2f5;
         }
 
-        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--fondo); color: #333; scroll-behavior: smooth; }
-        
-        /* Banner de Bienvenida (Carrusel Estático para el ejemplo) */
-        .hero-banner {
-            background: linear-gradient(rgba(26,77,46,0.8), rgba(26,77,46,0.8)), url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1200');
-            background-size: cover; background-position: center;
-            height: 250px; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-claro); color: #333; }
+
+        /* LOGO "S" PROFESIONAL */
+        .brand-header { text-align: center; padding: 30px 10px; background: var(--blanco); }
+        .s-logo-main { 
+            width: 90px; height: 90px; background: linear-gradient(145deg, var(--verde-metal), #1a6d3d); 
+            display: inline-flex; align-items: center; justify-content: center; 
+            border-radius: 22px; color: var(--dorado-brillante); font-size: 55px; 
+            font-weight: 800; border: 3px solid var(--dorado-brillante);
+            box-shadow: 0 15px 35px rgba(15,61,36,0.4);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .hero-banner h1 { margin: 0; font-size: 28px; text-transform: uppercase; letter-spacing: 2px; }
-        .hero-banner p { font-size: 16px; opacity: 0.9; }
+        /* BARRA DE NAVEGACIÓN STICKY */
+        .nav-bar { background: var(--verde-metal); color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 2000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .cart-icon { position: relative; cursor: pointer; font-size: 26px; }
+        .cart-count { position: absolute; top: -5px; right: -8px; background: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 11px; font-weight: bold; border: 2px solid var(--verde-metal); }
 
-        /* Controles Premium */
-        .sticky-nav { position: sticky; top: 0; z-index: 1000; background: var(--blanco); padding: 15px; box-shadow: var(--sombra); }
-        .search-wrapper { position: relative; max-width: 600px; margin: 0 auto 15px; }
-        .search-bar { width: 100%; padding: 15px 50px 15px 25px; border-radius: 50px; border: 2px solid #eee; font-size: 16px; outline: none; transition: 0.3s; }
-        .search-bar:focus { border-color: var(--verde-pro); box-shadow: 0 0 10px rgba(26,77,46,0.1); }
-
-        .filter-tags { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
-        .tag { padding: 10px 22px; border-radius: 30px; border: none; background: #eee; cursor: pointer; font-weight: 600; white-space: nowrap; transition: 0.3s; }
-        .tag.active { background: var(--verde-pro); color: white; }
-
-        /* Catálogo */
+        /* GRILLA DE PRODUCTOS */
         .container { max-width: 1200px; margin: auto; padding: 20px; }
-        .section-header { display: flex; align-items: center; gap: 10px; margin: 40px 0 20px; }
-        .section-header h2 { color: var(--verde-pro); margin: 0; font-size: 24px; }
-        .line { flex-grow: 1; height: 2px; background: var(--dorado); }
+        .category-title { color: var(--verde-metal); border-left: 6px solid var(--dorado-brillante); padding-left: 15px; margin: 40px 0 20px; font-weight: 800; font-size: 24px; }
+        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 25px; }
+        
+        /* TARJETAS DE PRODUCTO */
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.06); transition: 0.4s; position: relative; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card-body { padding: 15px; }
+        .card-title { font-size: 14px; font-weight: 600; color: #444; height: 40px; overflow: hidden; }
+        .card-price { color: var(--verde-metal); font-weight: 800; font-size: 18px; margin: 10px 0; }
+        .btn-add { background: var(--verde-metal); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        .btn-add:hover { background: #1a6d3d; }
 
-        .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 25px; }
+        /* PANEL LATERAL DEL CARRITO */
+        .side-panel { position: fixed; right: -100%; top: 0; width: 340px; height: 100%; background: white; z-index: 3000; box-shadow: -10px 0 40px rgba(0,0,0,0.2); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); padding: 25px; box-sizing: border-box; }
+        .side-panel.active { right: 0; }
+        .close-cart { font-size: 30px; cursor: pointer; color: #ccc; margin-bottom: 20px; display: block; }
+        .cart-item { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; }
 
-        /* Tarjeta Estilo Amazon */
-        .product-card { background: var(--blanco); border-radius: 20px; overflow: hidden; position: relative; box-shadow: var(--sombra); transition: 0.3s; }
-        .product-card:hover { transform: translateY(-10px); }
-        .badge { position: absolute; top: 15px; left: 15px; background: var(--dorado); color: #000; padding: 5px 12px; border-radius: 5px; font-size: 11px; font-weight: bold; z-index: 10; }
-        .product-card img { width: 100%; height: 240px; object-fit: cover; }
-        .card-body { padding: 15px; text-align: left; }
-        .stars { color: #ff9900; font-size: 14px; margin-bottom: 5px; }
-        .card-body h3 { margin: 5px 0; font-size: 16px; height: 40px; overflow: hidden; color: #333; }
-        .price-tag { color: var(--verde-pro); font-weight: 800; font-size: 20px; }
+        /* RESEÑAS Y FEEDBACK */
+        .review-section { background: white; padding: 30px; border-radius: 25px; margin: 50px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .review-card { background: #f9fbf9; padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--dorado-brillante); }
 
-        /* Sección Emprendedor (Quien creó esto) */
-        .founder-section { background: var(--verde-pro); color: white; padding: 60px 20px; margin-top: 50px; border-radius: 50px 50px 0 0; text-align: center; }
-        .founder-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid var(--dorado); object-fit: cover; margin-bottom: 20px; }
-        .founder-text { max-width: 700px; margin: auto; }
-        .founder-text h2 { margin-bottom: 10px; font-size: 28px; }
-        .founder-text p { line-height: 1.8; opacity: 0.9; font-style: italic; }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; }
-        .modal-content { background: white; width: 90%; max-width: 500px; border-radius: 30px; padding: 30px; position: relative; animation: slideUp 0.4s; }
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .close { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; }
-        .wa-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #25d366; color: white; text-decoration: none; padding: 18px; border-radius: 15px; font-weight: bold; font-size: 18px; margin-top: 20px; }
+        /* FOOTER VISIÓN */
+        .footer { background: var(--verde-metal); color: white; padding: 80px 20px; text-align: center; border-radius: 50px 50px 0 0; }
+        .wa-final { background: #25d366; color: white; text-decoration: none; padding: 18px; border-radius: 15px; display: block; text-align: center; font-weight: 800; font-size: 18px; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-<div class="hero-banner">
-    <h1>TU CASA DIGITAL</h1>
-    <p>Guías Exclusivas | Mecánica | Salud | Bienestar</p>
-    <div style="background: var(--dorado); color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; margin-top: 10px;">
-        🔥 Oferta de lanzamiento: 2x1 en guías seleccionadas
+<div class="brand-header">
+    <div class="s-logo-main">S</div>
+    <h1 style="margin: 15px 0 0; letter-spacing: 4px; color: var(--verde-metal); font-size: 28px;">TU CASA DIGITAL</h1>
+</div>
+
+<div class="nav-bar">
+    <div style="font-weight: 800; font-size: 14px;">S-EXPERIENCE</div>
+    <div class="cart-icon" onclick="toggleCart()">
+        🛒 <span class="cart-count" id="cartCount">0</span>
     </div>
 </div>
 
-<div class="sticky-nav">
-    <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-bar" placeholder="Busca tu próxima habilidad..." onkeyup="app.render()">
-    </div>
-    <div class="filter-tags">
-        <button class="tag active" onclick="app.setCat('Todos', this)">Todo</button>
-        <button class="tag" onclick="app.setAge('menores', this)">Menores</button>
-        <button class="tag" onclick="app.setAge('mayores', this)">Mayores</button>
-        <button class="tag" onclick="app.setCat('Gastronomía', this)">Gastronomía</button>
-        <button class="tag" onclick="app.setCat('Mecánica', this)">Mecánica</button>
-        <button class="tag" onclick="app.setCat('Bienestar', this)">Bienestar</button>
-        <button class="tag" onclick="app.setCat('Tecnología', this)">Tecnología</button>
+<div class="container">
+    <div id="dynamicCatalog"></div>
+
+    <div class="review-section">
+        <h3>🌟 Comunidad S-Line (Reseñas)</h3>
+        <div id="reviewsContainer">
+            <div class="review-card">
+                <strong>Andrés Felipe</strong> - ⭐⭐⭐⭐⭐<br>
+                "Compré la de Electricidad Automotriz y me sirvió para arreglar mi propio carro. ¡Recomendado!"
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+            <input type="text" id="revName" placeholder="Tu Nombre" style="padding: 12px; border-radius: 10px; border: 1px solid #ddd;">
+            <textarea id="revText" placeholder="Cuéntanos tu experiencia..." style="padding: 12px; border-radius: 10px; border: 1px solid #ddd; height: 80px;"></textarea>
+            <button class="btn-add" onclick="postReview()">Enviar Reseña</button>
+        </div>
     </div>
 </div>
 
-<div class="container" id="catalog"></div>
-
-<div class="founder-section">
-    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300" alt="Fundador" class="founder-img">
-    <div class="founder-text">
-        <h2>Impulsado por la Visión Juvenil</h2>
-        <p>"Tengo 16 años y creo firmemente que el conocimiento digital es la llave del futuro. Tu Casa Digital nació para simplificar el aprendizaje, ofreciendo guías prácticas y profesionales para quienes, como yo, buscan superarse cada día. Mi meta es democratizar la educación técnica y el bienestar personal con un solo clic."</p>
-        <p><strong>— Fundador de Tu Casa Digital</strong></p>
+<div id="cartPanel" class="side-panel">
+    <span class="close-cart" onclick="toggleCart()">&times; Volver</span>
+    <h2 style="color: var(--verde-metal);">Mis Compras</h2>
+    <div id="cartItemsList"></div>
+    <div style="margin-top: 30px;">
+        <div style="display: flex; justify-content: space-between; font-size: 20px; font-weight: 800;">
+            <span>TOTAL:</span>
+            <span id="cartTotalPrice">$0</span>
+        </div>
+        <a id="waLink" href="#" target="_blank" class="wa-final">FINALIZAR PEDIDO (WHATSAPP)</a>
     </div>
+
+    <h3 style="margin-top: 50px; font-size: 16px; color: #888;">📦 Historial Reciente</h3>
+    <div id="orderHistory" style="font-size: 13px; color: #999;">Aún no hay compras procesadas.</div>
 </div>
 
-<div id="modal" class="modal" onclick="app.closeModal()">
-    <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close" onclick="app.closeModal()">&times;</span>
-        <img id="m-img" style="width:100%; border-radius:20px; height:250px; object-fit:cover;">
-        <h2 id="m-title" style="margin: 15px 0 5px;"></h2>
-        <div class="stars">★★★★★ <span style="color:#666">(120+ reseñas)</span></div>
-        <div id="m-desc" style="color:#666; font-size:14px; line-height:1.6; margin: 15px 0;"></div>
-        <div id="m-price" class="price-tag" style="font-size:30px;"></div>
-        <a id="waLink" href="#" target="_blank" class="wa-btn">Adquirir por WhatsApp</a>
-    </div>
+<div class="footer">
+    <div class="s-logo-main" style="background: transparent; border-color: white; color: white; margin-bottom: 20px;">S</div>
+    <h2 style="font-size: 30px;">Nuestra Visión</h2>
+    <p style="max-width: 700px; margin: auto; font-style: italic; opacity: 0.8; line-height: 1.8;">
+        "Soy un joven emprendedor de 16 años convencido de que la educación digital es el motor del cambio. 
+        Con 'S' de Superación, esta plataforma es mi compromiso para entregarte las mejores guías del mercado."
+    </p>
 </div>
 
 <script>
-    const app = {
-        cat: 'Todos', age: 'Todos',
-        tel: "573100000000", // CAMBIA TU NÚMERO AQUÍ
-
-        books: [
-            { titulo: "Dieta Diabéticos Pro", precio: "$25.000", cat: "Gastronomía", edad: "mayores", badge: "Más Vendido", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "La guía definitiva aprobada por expertos para gestionar la salud a través de la cocina fotorrealista y deliciosa." },
-            { titulo: "Postres Keto Rápidos", precio: "$20.000", cat: "Gastronomía", edad: "menores", badge: "Nuevo", img: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500", desc: "Dulces sin azúcar que transformarán tus meriendas. Ideal para toda la familia." },
-            { titulo: "Electricidad Automotriz", precio: "$27.000", cat: "Mecánica", edad: "mayores", badge: "Recomendado", img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Manual avanzado con diagramas interactivos para entender el corazón eléctrico de cualquier motor." },
-            { titulo: "Yoga y Paz Mental", precio: "$16.000", cat: "Bienestar", edad: "menores", badge: "Tendencia", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500", desc: "Encuentra el equilibrio perfecto entre cuerpo y mente con rutinas de impacto inmediato." },
-            { titulo: "Mente Sana 360", precio: "$18.000", cat: "Bienestar", edad: "mayores", badge: "Popular", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Psicología aplicada para el éxito personal y la gestión del estrés moderno." },
-            { titulo: "Zero to One (Resumen)", precio: "Consultar", cat: "Tecnología", edad: "menores", badge: "Mundial", img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500", desc: "Las claves para innovar y construir el futuro desde la visión de Peter Thiel." }
+    const data = {
+        whatsapp: "3223693926", // TU NÚMERO CORREGIDO
+        cart: [],
+        products: [
+            { id: 101, cat: "Gastronomía", t: "Plan Diabéticos Saludable", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500" },
+            { id: 102, cat: "Mecánica", t: "Electricidad Automotriz Pro", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500" },
+            { id: 103, cat: "Bienestar", t: "Mente Sana y Resiliencia", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500" },
+            { id: 104, cat: "Bienestar", t: "Yoga Total: Guía Práctica", p: 16000, img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=500" },
+            { id: 105, cat: "Tecnología", t: "Innovación: De Cero a Uno", p: 22000, img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500" }
         ],
 
-        render() {
-            const container = document.getElementById('catalog');
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            container.innerHTML = '';
-
-            const categories = [...new Set(this.books.map(b => b.cat))];
-            categories.forEach(c => {
-                const filtered = this.books.filter(b => {
-                    const mCat = (this.cat === 'Todos' || b.cat === this.currentCat); // Simplificado para el ejemplo
-                    const mSearch = b.titulo.toLowerCase().includes(search);
-                    return mSearch && (this.cat === 'Todos' || b.cat === this.cat) && (this.age === 'Todos' || b.edad === this.age);
+        init() {
+            const catalog = document.getElementById('dynamicCatalog');
+            const cats = [...new Set(this.products.map(p => p.cat))];
+            
+            cats.forEach(c => {
+                let section = `<div class="category-title">${c}</div><div class="book-grid">`;
+                this.products.filter(p => p.cat === c).forEach(p => {
+                    section += `
+                        <div class="card">
+                            <img src="${p.img}">
+                            <div class="card-body">
+                                <div class="card-title">${p.t}</div>
+                                <div class="card-price">$${p.p.toLocaleString()}</div>
+                                <button class="btn-add" onclick="data.add(${p.id})">Añadir al Carrito</button>
+                            </div>
+                        </div>`;
                 });
-
-                if (filtered.length > 0) {
-                    let html = `<div class="section-header"><h2>${c}</h2><div class="line"></div></div><div class="book-grid">`;
-                    filtered.forEach(b => {
-                        html += `
-                            <div class="product-card" onclick="app.open('${b.titulo}')">
-                                <div class="badge">${b.badge}</div>
-                                <img src="${b.img}">
-                                <div class="card-body">
-                                    <div class="stars">★★★★★</div>
-                                    <h3>${b.titulo}</h3>
-                                    <div class="price-tag">${b.precio}</div>
-                                </div>
-                            </div>`;
-                    });
-                    container.innerHTML += html + `</div>`;
-                }
+                catalog.innerHTML += section + '</div>';
             });
         },
 
-        open(t) {
-            const b = this.books.find(x => x.titulo === t);
-            document.getElementById('m-title').innerText = b.titulo;
-            document.getElementById('m-desc').innerText = b.desc;
-            document.getElementById('m-price').innerText = b.precio;
-            document.getElementById('m-img').src = b.img;
-            document.getElementById('waLink').href = `https://wa.me/${this.tel}?text=Hola! Vengo de tu web y quiero la guía: ${b.titulo}`;
-            document.getElementById('modal').style.display = 'flex';
+        add(id) {
+            const item = this.products.find(x => x.id === id);
+            this.cart.push(item);
+            this.update();
         },
 
-        setCat(c, btn) { this.cat = c; this.active(btn); this.render(); },
-        setAge(a, btn) { this.age = a; this.active(btn); this.render(); },
-        active(btn) { document.querySelectorAll('.tag').forEach(t => t.classList.remove('active')); btn.classList.add('active'); },
-        closeModal() { document.getElementById('modal').style.display = 'none'; }
+        update() {
+            document.getElementById('cartCount').innerText = this.cart.length;
+            const list = document.getElementById('cartItemsList');
+            let total = 0;
+            list.innerHTML = '';
+            
+            this.cart.forEach((it, idx) => {
+                total += it.p;
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${it.img}" width="50" height="50" style="border-radius:10px;">
+                        <div style="flex-grow:1;">
+                            <div style="font-size:13px; font-weight:600;">${it.t}</div>
+                            <div style="color:var(--verde-metal); font-size:13px; font-weight:bold;">$${it.p.toLocaleString()}</div>
+                        </div>
+                        <span onclick="data.remove(${idx})" style="cursor:pointer;">🗑️</span>
+                    </div>`;
+            });
+            
+            const totalStr = `$${total.toLocaleString()}`;
+            document.getElementById('cartTotalPrice').innerText = totalStr;
+            
+            const msg = encodeURIComponent(`¡Hola! 👋 Soy un cliente de Tu Casa Digital. Quiero comprar:\n${this.cart.map(c => `- ${c.t}`).join('\n')}\n\nTotal: ${totalStr}`);
+            document.getElementById('waLink').href = `https://wa.me/${this.whatsapp}?text=${msg}`;
+        },
+
+        remove(idx) {
+            this.cart.splice(idx, 1);
+            this.update();
+        }
     };
 
-    app.render();
+    function toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); }
+    
+    function postReview() {
+        const n = document.getElementById('revName').value;
+        const t = document.getElementById('revText').value;
+        if(n && t) {
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = `<div class="review-card"><strong>${n}</strong> - ⭐⭐⭐⭐⭐<br>"${t}"</div>` + container.innerHTML;
+            document.getElementById('revName').value = '';
+            document.getElementById('revText').value = '';
+        }
+    }
+
+    data.init();
 </script>
 </body>
 </html>
