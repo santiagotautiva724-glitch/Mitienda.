@@ -63,34 +63,8 @@
 <div class="container">
 
     <h2 class="section-title">🌸 Bienestar Integral</h2>
-    <div class="book-row">
-        <div class="book-card">
-            <img src="portada1.png" alt="Portada El Arte del Cuidado Propio" class="book-cover" style="width: 100%; height: 250px; object-fit: contain; background: #f9f9f9; border-radius: 8px;">
-            
-            <div class="book-title">El Arte del Cuidado Propio</div>
-            <p class="book-description">Una guía esencial para reconectar contigo misma. Aprende rutinas de meditación, nutrición consciente y amor propio.</p>
-            <div class="price-container">
-                <div class="price">$15.000</div>
-                <a href="https://wa.me/573223693926?text=Hola,%20quiero%20comprar%20el%20libro%20Bienestar%20Integral%20por%20$15.000" class="buy-btn">COMPRAR AHORA</a>
-
-            </div>
-        </div>
-        <div class="book-card">
-                
-           <img src="portada1.png." alt="Portada El Arte del Cuidado Propio" class="book-cover" style="width: 100%; height: 250px; object-fit: contain; background: #f9f9f9; border-radius: 8px;">
-
-<p class="book-description">Descubre los secretos para una piel perfecta. Incluye recetas de mascarillas naturales y análisis de ingredientes.</p>
-
-            <div class="price-container">
-                <div class="price">$18.000</div>
-                <a href="https://wa.me/573223693926text?=Hola,%20quiero%20comprar%20el%20libro%20El%20Arte%20del%20Cuidado%20Propio%20por%20$18.000" class="buy-btn">COMPRAR AHORA</a>
-
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover">Portada 3</div>
-            <div class="book-title">Mente Sana en Cuerpo Sano</div>
-            <p class="book-description">Ejercicios sencillos de yoga y técnicas de respiración para reducir el estrés y encontrar tu equilibrio interior.</p>
+          
+lass="book-description">Ejercicios sencillos de yoga y técnicas de respiración para reducir el estrés y encontrar tu equilibrio interior.</p>
             <div class="price-container">
                 <div class="price">$14.000</div>
                 <a href="TU_LINK_NEQUI_BIENESTAR_3" class="buy-btn">COMPRAR AHORA</a>
@@ -105,7 +79,26 @@
             <div class="book-title">Mecánica Básica: Hazlo Tú Mismo</div>
             <p class="book-description">No dependas del taller. Aprende a cambiar aceite, filtros y pastillas de freno con instrucciones paso a paso.</p>
             <div class="price-container">
-                <div class="price">$25.000</div>
+                      <div class="book-row">
+        <div class="book-card">
+          <img src="portada1.png" alt="Portada" onclick="abrirModal()" style="cursor:pointer; width:100%; border-radius:10px;">
+          <div class="book-info">
+            <div class="book-title" onclick="abrirModal()" style="cursor:pointer;">El Arte del Cuidado Propio</div>
+            <div class="book-author">Santiago Tautiva</div>
+            <div class="book-price">$15.000</div>
+          </div>
+        </div>
+
+        <div class="book-card">
+          <div class="book-cover">Portada 2</div>
+          <div class="book-info">
+            <div class="book-title">Mente Sana en Cuerpo Sano</div>
+            <div class="book-author">Santiago Tautiva</div>
+            <div class="book-price">$18.000</div>
+          </div>
+        </div>
+      </div>
+<div class="price">$25.000</div>
                 <a href="TU_LINK_NEQUI_MOTORES_1" class="buy-btn">COMPRAR AHORA</a>
             </div>
         </div>
@@ -135,6 +128,43 @@
     <p>&copy; 2024 Tu Casa Digital. Todos los derechos reservados.</p>
     <p>Todos nuestros productos son libros digitales (eBooks) de descarga inmediata.</p>
 </footer>
+<div id="miModal" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        
+        <img src="vista-previa.png" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        
+        <h2>El Arte del Cuidado Propio</h2>
+        <p style="text-align:left; color:#555;">
+            <strong>Descripción:</strong> Guía completa para mejorar tu bienestar, gestionar el estrés y conectar contigo misma.
+        </p>
+        
+        <ul style="text-align:left; color:#555; font-size:14px;">
+            <li>✅ Rutinas de bienestar diarias.</li>
+            <li>✅ Técnicas de meditación.</li>
+        </ul>
 
+        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20libro%20del%20Cuidado%20Propio" 
+           style="display:block; background:#25d366; color:white; padding:15px; text-decoration:none; border-radius:10px; font-weight:bold; margin-top:20px; text-align:center;">
+           Comprar por WhatsApp - $15.000
+        </a>
+    </div>
+</div>
+
+<script>
+  function abrirModal() {
+    document.getElementById("miModal").style.display = "block";
+  }
+  function cerrarModal() {
+    document.getElementById("miModal").style.display = "none";
+  }
+  // Cerrar si hacen clic fuera de la ventana
+  window.onclick = function(event) {
+    if (event.target == document.getElementById("miModal")) {
+      cerrarModal();
+    }
+  }
+</script>
+    
 </body>
 </html>
