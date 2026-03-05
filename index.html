@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.E. Elite - Superarationebook</title>
+    <title>S.E. Elite - SuperationEbook</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -23,6 +23,7 @@
             padding-bottom: 50px; 
         }
 
+        /* HEADER */
         .brand-header { 
             text-align: center; padding: 30px 15px; 
             background: linear-gradient(to bottom, #000, transparent);
@@ -31,6 +32,7 @@
         .full-logo { font-size: 26px; font-weight: 800; color: var(--blanco); text-transform: uppercase; letter-spacing: 2px; }
         .full-logo span { color: var(--dorado); }
 
+        /* NAV STICKY */
         .sticky-nav { 
             position: sticky; top: 0; z-index: 2000; 
             background: rgba(10, 38, 23, 0.95); 
@@ -53,6 +55,7 @@
         }
         .btn-filter.active { background: var(--verde-neon); color: black; box-shadow: 0 0 15px var(--verde-neon); }
 
+        /* GRID */
         .container { max-width: 1200px; margin: auto; padding: 20px; }
         .section-title { font-size: 20px; font-weight: 800; color: var(--dorado); margin: 40px 0 20px; text-transform: uppercase; border-left: 4px solid var(--verde-neon); padding-left: 15px; }
 
@@ -66,14 +69,19 @@
         .card-body { padding: 15px; }
         .price { color: var(--verde-neon); font-weight: 800; font-size: 18px; }
 
-        /* BEST SELLERS */
         .best-seller-badge { position: absolute; top: 10px; left: 10px; background: var(--dorado); color: black; padding: 5px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; }
 
+        /* SECCIONES EXTRA */
         .vision-container { 
             background: var(--cristal); padding: 40px; border-radius: 30px; 
             border: 1px solid var(--dorado); margin: 60px 0; text-align: center;
         }
+        .faq-section { background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; margin-top: 40px; }
+        .faq-item { margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .faq-q { color: var(--verde-neon); font-weight: 600; font-size: 14px; }
+        .faq-a { font-size: 13px; opacity: 0.7; margin-top: 5px; }
 
+        /* MODAL */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
         .modal-content { 
             background: #0a0a0a; width: 90%; max-width: 450px; border-radius: 30px; 
@@ -85,7 +93,7 @@
 <body>
 
 <div class="brand-header">
-    <div class="full-logo">Superaration<span>ebook</span></div>
+    <div class="full-logo">Superation<span>Ebook</span></div>
 </div>
 
 <div class="sticky-nav">
@@ -114,8 +122,23 @@
     <div class="vision-container">
         <h2 style="color:var(--dorado)">Misión Estratégica S.E.</h2>
         <p style="line-height:1.8; opacity:0.8; max-width: 800px; margin: auto;">
-            A mis 16 años, he diseñado **Superarationebook** como una plataforma de alto rendimiento para quienes buscan resultados reales. Bajo el sello **S.E. (Superación Estratégica)**, entregamos las herramientas técnicas y mentales que el sistema educativo ignora. No vendemos PDFs, vendemos el mapa para tu libertad financiera y profesional.
+            A mis 16 años, he diseñado **SuperationEbook** como una plataforma de alto rendimiento para quienes buscan resultados reales. Bajo el sello **S.E. (Superación Estratégica)**, entregamos las herramientas técnicas y mentales que el sistema educativo ignora. No vendemos PDFs, vendemos el mapa para tu libertad financiera y profesional.
         </p>
+    </div>
+
+    <div class="faq-section">
+        <h3 style="text-align:center; color:var(--dorado)">Preguntas Frecuentes</h3>
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo recibo mi acceso?</div>
+            <div class="faq-a">Tras el pago por WhatsApp, recibes un enlace de descarga inmediata con todo el material organizado por SuperationEbook.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">¿El pago es mensual?</div>
+            <div class="faq-a">No. Es un pago único de por vida. Tendrás acceso permanente a las actualizaciones del material.</div>
+        </div>
+        <div class="faq-item" style="text-align:center; margin-top:20px; border:none;">
+            <div style="color:var(--verde-neon); font-size:12px; font-weight:800;">🚀 +1,500 ALUMNOS ACTIVOS ESTE MES</div>
+        </div>
     </div>
 </div>
 
@@ -138,20 +161,11 @@
         timeLeft: 599,
 
         products: [
-            // BEST SELLERS
-            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "La biblia del técnico automotriz. Incluye manuales profundos de Inyección Electrónica, Electricidad avanzada y Mecánica de motores de alto rendimiento." },
-            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "Aprende el sistema real para importar desde China y USA sin intermediarios, optimizando costos de envío y aduanas." },
-            
-            // GUÍAS
-            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz", p: 35000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía técnica sobre reparación y optimización de motores de última generación." },
-            { id: 12, tipo: "Guias", edad: "Mayores", t: "Crypto & Trading", p: 55000, img: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=500", desc: "Estrategias de trading profesional. Análisis técnico, gestión de riesgo y cómo identificar gemas." },
-            { id: 15, tipo: "Guias", edad: "Mayores", t: "Ciberseguridad & Hacking Etico", p: 42000, img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500", desc: "Aprende a proteger sistemas y redes. Fundamentos de seguridad informática profesional." },
-            { id: 16, tipo: "Guias", edad: "Mayores", t: "Edición de Video Pro (Premiere)", p: 38000, img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500", desc: "Domina la edición cinematográfica y crea contenido de alto impacto para marcas." },
-            
-            // LIBROS
-            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven S.E.", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "El primer paso hacia tu libertad financiera. Aprende a gestionar tu dinero antes de los 18." },
-            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Disciplina y enfoque total en tus metas desde temprana edad." },
-            { id: 17, tipo: "Libros", edad: "Mayores", t: "Hábitos Atómicos", p: 22000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Descubre cómo pequeños cambios de 1% transforman tu vida y tus resultados financieros." }
+            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "La biblia del técnico automotriz. Material certificado por SuperationEbook." },
+            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "El mapa definitivo para importar desde China y USA sin errores." },
+            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz", p: 35000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Optimización de motores de última generación." },
+            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven S.E.", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Educación financiera real para jóvenes." },
+            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Disciplina y enfoque extremo." }
         ],
 
         init() { this.render(); this.startTimer(); },
@@ -168,11 +182,14 @@
         setAge(v) { 
             this.ageFilter = v; 
             document.querySelectorAll('.age-filters .btn-filter').forEach(b => b.classList.remove('active'));
+            document.getElementById('btnAge' + v).classList.add('active');
             this.render(); 
         },
 
         setCat(v) { 
             this.catFilter = v; 
+            document.querySelectorAll('.cat-filters .btn-filter').forEach(b => b.classList.remove('active'));
+            document.getElementById('btnCat' + v).classList.add('active');
             this.render(); 
         },
 
@@ -181,14 +198,13 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            // Mostrar Best Sellers primero si no hay búsqueda
             if(!search && this.catFilter === 'Todos') {
                 const bests = this.products.filter(p => p.best && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
                 if(bests.length > 0) {
                     let html = `<div class="section-title">⭐ Best Sellers S.E.</div><div class="grid">`;
                     bests.forEach(p => {
                         html += `<div class="card" onclick="app.openM(${p.id})">
-                            <div class="best-seller-badge">TOP VENTAS</div>
+                            <div class="best-seller-badge">ÉLITE</div>
                             <img src="${p.img}"><div class="card-body">
                             <div style="font-size:11px; height:32px; overflow:hidden; margin-bottom:10px; font-weight:800;">${p.t}</div>
                             <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
@@ -229,7 +245,7 @@
 
         buy() {
             const p = this.products.find(x => x.id === this.selectedId);
-            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero el material Best Seller: ${p.t}`);
+            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero el material de SuperationEbook: ${p.t}`);
         }
     };
 
