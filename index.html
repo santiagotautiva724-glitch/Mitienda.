@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -39,17 +39,17 @@
         }
         .global-timer { text-align: center; color: var(--verde-neon); font-weight: 800; font-size: 13px; margin-bottom: 10px; text-shadow: 0 0 10px var(--verde-neon); }
         
+        .search-container { position: relative; width: 90%; max-width: 450px; margin: auto; }
         .search-input { 
-            width: 90%; max-width: 450px; display: block; margin: auto;
-            padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
-            background: rgba(0,0,0,0.5); color: white; outline: none;
+            width: 100%; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
+            background: rgba(0,0,0,0.5); color: white; outline: none; box-sizing: border-box;
         }
 
         .filters-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 15px; }
-        .age-filters, .cat-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .btn-filter { 
             padding: 8px 16px; border-radius: 20px; border: 1px solid var(--verde-neon); 
             background: transparent; color: var(--verde-neon); cursor: pointer; font-size: 11px; font-weight: 700; transition: 0.3s;
+            text-transform: uppercase;
         }
         .btn-filter.active { background: var(--verde-neon); color: black; box-shadow: 0 0 15px var(--verde-neon); }
 
@@ -61,28 +61,25 @@
             background: var(--cristal); border-radius: 20px; overflow: hidden; 
             border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; position: relative;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--verde-neon); background: rgba(0, 255, 136, 0.05); }
-        
-        .card img { width: 100%; height: 180px; object-fit: cover; filter: brightness(0.8); }
+        .card:hover { transform: translateY(-10px); border-color: var(--verde-neon); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
         .card-body { padding: 15px; }
         .price { color: var(--verde-neon); font-weight: 800; font-size: 18px; }
+
+        /* BEST SELLERS */
+        .best-seller-badge { position: absolute; top: 10px; left: 10px; background: var(--dorado); color: black; padding: 5px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; }
+
+        .vision-container { 
+            background: var(--cristal); padding: 40px; border-radius: 30px; 
+            border: 1px solid var(--dorado); margin: 60px 0; text-align: center;
+        }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
         .modal-content { 
             background: #0a0a0a; width: 90%; max-width: 450px; border-radius: 30px; 
             padding: 25px; border: 1px solid var(--verde-neon); color: white; max-height: 85vh; overflow-y: auto;
         }
-        
-        .combo-item { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 15px; margin-bottom: 8px; }
-        .combo-item img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
-
-        .btn-buy { 
-            background: var(--verde-neon); color: black; border: none; padding: 18px; 
-            border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; font-size: 16px; margin-top: 15px;
-        }
-
-        .vision-container { background: var(--cristal); padding: 40px; border-radius: 30px; border: 1px solid var(--dorado); margin: 50px 0; }
-        .footer { text-align: center; padding: 40px; opacity: 0.5; font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .btn-buy { background: var(--verde-neon); color: black; border: none; padding: 18px; border-radius: 15px; font-weight: 800; width: 100%; cursor: pointer; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -92,15 +89,17 @@
 </div>
 
 <div class="sticky-nav">
-    <div class="global-timer">⚡ ACCESO ELITE TERMINA EN: <span class="timer-display">09:59</span></div>
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento S.E..." onkeyup="app.render()">
+    <div class="global-timer">⚡ OFERTAS ÉLITE EXPIRAN EN: <span class="timer-display">09:59</span></div>
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento S.E..." onkeyup="app.render()">
+    </div>
     <div class="filters-container">
-        <div class="age-filters">
+        <div style="display:flex; gap:10px; margin-bottom:10px;">
             <button id="btnAgeTodos" class="btn-filter active" onclick="app.setAge('Todos')">TODO</button>
-            <button id="btnAgeMenores" class="btn-filter" onclick="app.setAge('Menores')">JÓVENES</button>
-            <button id="btnAgeMayores" class="btn-filter" onclick="app.setAge('Mayores')">PRO S.E.</button>
+            <button id="btnAgeMenores" class="btn-filter" onclick="app.setAge('Menores')">MENORES</button>
+            <button id="btnAgeMayores" class="btn-filter" onclick="app.setAge('Mayores')">MAYORES</button>
         </div>
-        <div class="cat-filters">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
             <button id="btnCatTodos" class="btn-filter active" onclick="app.setCat('Todos')">VER TODO</button>
             <button id="btnCatPacks" class="btn-filter" onclick="app.setCat('Packs')">COMBOS</button>
             <button id="btnCatGuias" class="btn-filter" onclick="app.setCat('Guias')">GUÍAS</button>
@@ -111,26 +110,25 @@
 
 <div class="container" id="mainCatalog"></div>
 
+<div class="container">
+    <div class="vision-container">
+        <h2 style="color:var(--dorado)">Misión Estratégica S.E.</h2>
+        <p style="line-height:1.8; opacity:0.8; max-width: 800px; margin: auto;">
+            A mis 16 años, he diseñado **Superarationebook** como una plataforma de alto rendimiento para quienes buscan resultados reales. Bajo el sello **S.E. (Superación Estratégica)**, entregamos las herramientas técnicas y mentales que el sistema educativo ignora. No vendemos PDFs, vendemos el mapa para tu libertad financiera y profesional.
+        </p>
+    </div>
+</div>
+
 <div id="infoModal" class="modal">
     <div class="modal-content">
         <span onclick="app.closeM()" style="float:right; cursor:pointer; font-size:24px;">&times;</span>
         <img id="mImg" style="width:100%; border-radius:20px; margin: 15px 0;">
         <h2 id="mTitle" style="color:var(--verde-neon)"></h2>
         <p id="mDesc" style="font-size:14px; line-height:1.6; color:#ccc;"></p>
-        
-        <div id="mComboDetails" style="display:none; margin: 20px 0;">
-            <p style="font-weight:800; color:var(--dorado)">CONTENIDO DEL PACK:</p>
-            <div id="mComboItemsList"></div>
-        </div>
-
         <div id="mPrice" style="font-size:32px; font-weight:800; color:var(--verde-neon); text-align:center;"></div>
-        <button class="btn-buy" onclick="app.buy()">ADQUIRIR ACCESO INMEDIATO 💬</button>
+        <button class="btn-buy" onclick="app.buy()">SOLICITAR ACCESO POR WHATSAPP 💬</button>
     </div>
 </div>
-
-<footer class="footer">
-    <p>Superarationebook S.E. © 2024 | El conocimiento es la nueva moneda.</p>
-</footer>
 
 <script>
     const app = {
@@ -139,35 +137,21 @@
         catFilter: 'Todos',
         timeLeft: 599,
 
-        items: {
-            m1: { t: "Mecánica Automotriz Pro", p: 18000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=200" },
-            m2: { t: "Electricidad y Sensores", p: 15000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=200" },
-            m3: { t: "Inyección Electrónica", p: 15000, img: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=200" },
-            l1: { t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=200" },
-            l2: { t: "Ego is the Enemy", p: 12000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200" },
-            l3: { t: "Psicología del Éxito", p: 13000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=200" }
-        },
-
         products: [
-            // PACKS
-            { id: 101, tipo: "Packs", edad: "Mayores", t: "Master Combo Mecánico", p: 48000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "El ecosistema definitivo para el técnico automotriz. Incluye manuales de Inyección, Electricidad y Mecánica General Avanzada para diagnósticos precisos.", items: ['m1', 'm2', 'm3'] },
-            { id: 102, tipo: "Packs", edad: "Mayores", t: "Élite Mentalidad", p: 39000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Colección curada de los libros que han forjado a los millonarios actuales. Domina tu disciplina y destruye el ego que frena tu éxito.", items: ['l1', 'l2', 'l3'] },
+            // BEST SELLERS
+            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "La biblia del técnico automotriz. Incluye manuales profundos de Inyección Electrónica, Electricidad avanzada y Mecánica de motores de alto rendimiento." },
+            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "Aprende el sistema real para importar desde China y USA sin intermediarios, optimizando costos de envío y aduanas." },
             
-            // GUÍAS (MÁS GUÍAS)
-            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz Pro", p: 18000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía técnica detallada sobre motores de alto rendimiento, optimización de combustible y reparación de transmisiones modernas." },
-            { id: 2, tipo: "Guias", edad: "Mayores", t: "Importaciones Elite", p: 25000, img: "https://images.unsplash.com/photo-1553413077-190dd305871c?w=500", desc: "Aprende el proceso exacto para traer mercancía de China y USA, evitando estafas y maximizando el margen de ganancia por producto." },
-            { id: 4, tipo: "Guias", edad: "Mayores", t: "Mecánica de Motos", p: 16000, img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=500", desc: "Manual completo para motores 2T y 4T. Desde mantenimiento básico hasta reconstrucción total de motores de alta cilindrada." },
-            { id: 10, tipo: "Guias", edad: "Mayores", t: "Reparación de Celulares", p: 22000, img: "https://images.unsplash.com/photo-1512428559083-a40ea4458f4c?w=500", desc: "Domina el hardware móvil: cambio de pantallas, microsoldadura y diagnóstico de placas base de última generación." },
-            { id: 11, tipo: "Guias", edad: "Mayores", t: "E-Commerce con Shopify", p: 27000, img: "https://images.unsplash.com/photo-1556742049-02e48f49511a?w=500", desc: "Monta tu tienda online profesional. Estrategias de venta, pasarelas de pago y gestión de envíos sin stock." },
-            { id: 3, tipo: "Guias", edad: "Menores", t: "Creador Digital S.E", p: 12000, img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500", desc: "Estrategias de viralidad para jóvenes en TikTok e Instagram. Cómo monetizar tu imagen y crear una marca personal desde cero." },
+            // GUÍAS
+            { id: 1, tipo: "Guias", edad: "Mayores", t: "Mecánica Automotriz", p: 35000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía técnica sobre reparación y optimización de motores de última generación." },
+            { id: 12, tipo: "Guias", edad: "Mayores", t: "Crypto & Trading", p: 55000, img: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=500", desc: "Estrategias de trading profesional. Análisis técnico, gestión de riesgo y cómo identificar gemas." },
+            { id: 15, tipo: "Guias", edad: "Mayores", t: "Ciberseguridad & Hacking Etico", p: 42000, img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500", desc: "Aprende a proteger sistemas y redes. Fundamentos de seguridad informática profesional." },
+            { id: 16, tipo: "Guias", edad: "Mayores", t: "Edición de Video Pro (Premiere)", p: 38000, img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500", desc: "Domina la edición cinematográfica y crea contenido de alto impacto para marcas." },
             
-            // LIBROS (MÁS LIBROS)
-            { id: 5, tipo: "Libros", edad: "Mayores", t: "Hábitos Atómicos", p: 14000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Descubre cómo pequeños cambios de 1% pueden transformarse en resultados masivos. La biblia de la productividad moderna." },
-            { id: 7, tipo: "Libros", edad: "Mayores", t: "La Psicología del Dinero", p: 15000, img: "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=500", desc: "Entiende por qué tomamos decisiones financieras erróneas y cómo programar tu mente para la acumulación de riqueza a largo plazo." },
-            { id: 12, tipo: "Libros", edad: "Mayores", t: "Padre Rico Padre Pobre", p: 13000, img: "https://images.unsplash.com/photo-1592492159418-39f319320569?w=500", desc: "El clásico de Robert Kiyosaki que destruye los mitos sobre el dinero y enseña la diferencia real entre activos y pasivos." },
-            { id: 13, tipo: "Libros", edad: "Mayores", t: "El Hombre más Rico de Babilonia", p: 11000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Las leyes inmutables del éxito financiero reveladas a través de parábolas antiguas. Aprende a pagarle a tu yo del futuro primero." },
-            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven", p: 10000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Guía financiera para menores de 18 años. Aprende a ahorrar, gestionar tu primera cuenta y entender el interés compuesto." },
-            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 9000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Libro diseñado para adolescentes que quieren destacar en el deporte, el estudio y los negocios. Disciplina extrema." }
+            // LIBROS
+            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven S.E.", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "El primer paso hacia tu libertad financiera. Aprende a gestionar tu dinero antes de los 18." },
+            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Disciplina y enfoque total en tus metas desde temprana edad." },
+            { id: 17, tipo: "Libros", edad: "Mayores", t: "Hábitos Atómicos", p: 22000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "Descubre cómo pequeños cambios de 1% transforman tu vida y tus resultados financieros." }
         ],
 
         init() { this.render(); this.startTimer(); },
@@ -181,15 +165,15 @@
             }, 1000);
         },
 
-        setAge(v) { this.ageFilter = v; this.updateUI(); this.render(); },
-        setCat(v) { this.catFilter = v; this.updateUI(); this.render(); },
+        setAge(v) { 
+            this.ageFilter = v; 
+            document.querySelectorAll('.age-filters .btn-filter').forEach(b => b.classList.remove('active'));
+            this.render(); 
+        },
 
-        updateUI() {
-            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-            const ageBtn = document.getElementById('btnAge' + this.ageFilter.replace(/\s/g, ''));
-            const catBtn = document.getElementById('btnCat' + this.catFilter);
-            if(ageBtn) ageBtn.classList.add('active');
-            if(catBtn) catBtn.classList.add('active');
+        setCat(v) { 
+            this.catFilter = v; 
+            this.render(); 
         },
 
         render() {
@@ -197,15 +181,29 @@
             const search = document.getElementById('searchInput').value.toLowerCase();
             catalog.innerHTML = '';
 
-            const types = this.catFilter === 'Todos' ? ["Packs", "Guias", "Libros"] : [this.catFilter];
+            // Mostrar Best Sellers primero si no hay búsqueda
+            if(!search && this.catFilter === 'Todos') {
+                const bests = this.products.filter(p => p.best && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
+                if(bests.length > 0) {
+                    let html = `<div class="section-title">⭐ Best Sellers S.E.</div><div class="grid">`;
+                    bests.forEach(p => {
+                        html += `<div class="card" onclick="app.openM(${p.id})">
+                            <div class="best-seller-badge">TOP VENTAS</div>
+                            <img src="${p.img}"><div class="card-body">
+                            <div style="font-size:11px; height:32px; overflow:hidden; margin-bottom:10px; font-weight:800;">${p.t}</div>
+                            <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
+                    });
+                    catalog.innerHTML += html + '</div>';
+                }
+            }
 
+            const types = this.catFilter === 'Todos' ? ["Packs", "Guias", "Libros"] : [this.catFilter];
             types.forEach(tipo => {
                 const filtered = this.products.filter(p => 
                     p.tipo === tipo && p.t.toLowerCase().includes(search) && (this.ageFilter === 'Todos' || p.edad === this.ageFilter)
                 );
-
                 if (filtered.length > 0) {
-                    let html = `<div class="section-title">${tipo === 'Guias' ? 'Guías Técnicas S.E.' : (tipo === 'Libros' ? 'Biblioteca de Mentalidad' : 'Combos de Alto Valor')}</div><div class="grid">`;
+                    let html = `<div class="section-title">${tipo}</div><div class="grid">`;
                     filtered.forEach(p => {
                         html += `<div class="card" onclick="app.openM(${p.id})">
                             <img src="${p.img}"><div class="card-body">
@@ -224,17 +222,6 @@
             document.getElementById('mDesc').innerText = p.desc;
             document.getElementById('mPrice').innerText = `$${p.p.toLocaleString()}`;
             document.getElementById('mImg').src = p.img;
-
-            const comboDiv = document.getElementById('mComboDetails');
-            const list = document.getElementById('mComboItemsList');
-            if (p.items) {
-                comboDiv.style.display = 'block';
-                list.innerHTML = p.items.map(itemId => `
-                    <div class="combo-item">
-                        <img src="${this.items[itemId].img}">
-                        <div style="font-size:11px;">${this.items[itemId].t} <br><b>$${this.items[itemId].p.toLocaleString()}</b></div>
-                    </div>`).join('');
-            } else { comboDiv.style.display = 'none'; }
             document.getElementById('infoModal').style.display = 'flex';
         },
 
@@ -242,7 +229,7 @@
 
         buy() {
             const p = this.products.find(x => x.id === this.selectedId);
-            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero adquirir este material de Superarationebook: ${p.t}`);
+            window.open(`https://wa.me/${this.tel}?text=Hola! Quiero el material Best Seller: ${p.t}`);
         }
     };
 
