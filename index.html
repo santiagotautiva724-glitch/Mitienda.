@@ -3,60 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda Oficial</title>
+    <title>Tu Casa Digital - Ebooks</title>
     <style>
-        :root { --primary: #1a5631; --accent: #f59e0b; --bg: #ffffff; }
-        body { font-family: sans-serif; background: #f0f2f5; margin: 0; }
-        header { background: var(--primary); color: white; padding: 20px; text-align: center; font-weight: bold; }
-        .seccion-nueva { background: #fff3cd; padding: 15px 10px; border-bottom: 2px solid #ffeeba; }
-        h2 { color: var(--primary); font-size: 1.2rem; margin-left: 10px; }
-        .row { display: flex; overflow-x: auto; gap: 15px; padding: 10px; }
-        .card { background: white; min-width: 150px; border-radius: 10px; padding: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; }
-        .btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.8rem; }
+        :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
+        header { background: var(--primary); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { padding: 15px; max-width: 1000px; margin: 0 auto; }
+        
+        /* Títulos de secciones */
+        h2 { color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; font-size: 1.3rem; padding-bottom: 5px; }
+        
+        /* Filas de libros */
+        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; scrollbar-width: none; }
+        .book-row::-webkit-scrollbar { display: none; }
+        
+        /* Tarjeta de libro */
+        .book-card { background: white; min-width: 160px; max-width: 160px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; cursor: pointer; }
+        .book-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 10px; }
+        .book-title { font-weight: bold; margin-top: 8px; font-size: 0.9rem; color: #333; height: 35px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
+
+        /* Ventana Flotante (Modal) */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
+        .modal-content { background: white; margin: 15% auto; padding: 20px; width: 85%; max-width: 380px; border-radius: 20px; text-align: center; position: relative; }
+        .close { position: absolute; right: 15px; top: 10px; font-size: 28px; color: #999; cursor: pointer; }
+        #modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
+        #modal-desc { text-align: left; font-size: 0.9rem; color: #555; margin: 15px 0; background: #f9f9f9; padding: 10px; border-radius: 8px; line-height: 1.4; }
+        .btn-ws { display: block; background: #25d366; color: white; text-decoration: none; padding: 12px; border-radius: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>TU CASA DIGITAL</header>
-
-<div class="seccion-nueva">
-    <h2>👨‍🍳 Gastronomía y Salud (NUEVO)</h2>
-    <div class="row">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300">
-            <p><b>Diabéticos</b></p>
-            <a href="#" class="btn">Ver Recetas</a>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=300">
-            <p><b>Postres</b></p>
-            <a href="#" class="btn">Ver Postres</a>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300">
-            <p><b>Internacional</b></p>
-            <a href="#" class="btn">Ver Platos</a>
-        </div>
-    </div>
-</div>
+<header>
+    <div style="font-size: 1.5rem; font-weight: 900;">TU CASA DIGITAL</div>
+</header>
 
 <div class="container">
-    <h2>🌸 Bienestar</h2>
-    <div class="row">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=300">
-            <p><b>Cuidado Propio</b></p>
+
+    <h2>🥘 Gastronomía y Salud</h2>
+    <div class="book-row">
+        <div class="book-card" onclick="openModal('Cocina para Diabéticos', '25.000', 'Recetas deliciosas diseñadas específicamente para mantener niveles de glucosa estables sin perder el sabor.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400">
+            <div class="book-title">Menú Diabéticos</div>
+            <div class="price">$25.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Postres Saludables', '20.000', 'Aprende a preparar dulces y postres sin azúcar refinada. Ideal para cuidar tu peso y salud.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
+            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400">
+            <div class="book-title">Postres Sin Culpa</div>
+            <div class="price">$20.000</div>
+        </div>
+        <div class="book-card" onclick="openModal('Comida Internacional', '35.000', 'Explora los mejores sabores del mundo con recetas paso a paso de Italia, México y más.', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400')">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400">
+            <div class="book-title">Platos del Mundo</div>
+            <div class="price">$35.000</div>
         </div>
     </div>
-    <h2>🛠️ Mecánica</h2>
-    <div class="row">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=300">
-            <p><b>Diagnosis</b></p>
+
+    <h2>🌸 Bienestar</h2>
+    <div class="book-row">
+        <div class="book-card" onclick="openModal('Cuidado Propio', '15.000', 'Guía para mejorar tu salud mental y física con hábitos diarios efectivos.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400">
+            <div class="book-title">Cuidado Propio</div>
+            <div class="price">$15.000</div>
         </div>
+    </div>
+
+    <h2>🛠️ Mecánica</h2>
+    <div class="book-row">
+        <div class="book-card" onclick="openModal('Diagnosis Pro', '29.000', 'Manual de diagnosis electrónica, sensores y escaneo de fallas en motores modernos.', 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400')">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400">
+            <div class="book-title">Diagnosis</div>
+            <div class="price">$29.000</div>
+        </div>
+    </div>
+
+</div>
+
+<div id="bookModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" src="">
+        <h3 id="modal-title" style="margin-top:15px; color:#1a5631;"></h3>
+        <div id="modal-desc"></div>
+        <a id="modal-link" href="#" class="btn-ws">Comprar por WhatsApp</a>
     </div>
 </div>
+
+<script>
+    function openModal(title, price, desc, img) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('modal-img').src = img;
+        document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Hola!%20Me%20interesa%20el%20libro%3A%20" + encodeURIComponent(title);
+        document.getElementById('bookModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('bookModal').style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('bookModal')) closeModal();
+    }
+</script>
 
 </body>
 </html>
