@@ -14,78 +14,39 @@
             --text-muted: #6b7280;
         }
         
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; color: var(--text-main); }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; color: var(--text-main); }
         
         header { background-color: var(--primary); color: white; padding: 20px 15px; text-align: center; position: sticky; top: 0; z-index: 100; }
         .brand { font-size: 1.75rem; font-weight: 800; }
-        .tagline { font-size: 0.875rem; opacity: 0.9; }
         
         .container { padding: 10px 15px 40px; max-width: 1200px; margin: 0 auto; }
-        h2.section-title { font-size: 1.5rem; color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 5px; margin-top: 30px; }
+        h2.section-title { font-size: 1.5rem; color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; }
 
-        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; scrollbar-width: none; }
-        .book-row::-webkit-scrollbar { display: none; }
-
-        .book-card { background: var(--card-bg); min-width: 200px; max-width: 200px; border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; }
+        .book-card { background: var(--card-bg); min-width: 200px; border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
         
-        .modal { 
-            display: none; 
-            position: fixed; 
-            z-index: 1000; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(0,0,0,0.8); 
-        }
-        .modal-contenido { 
-            background-color: white; 
-            margin: 10% auto; 
-            padding: 20px; 
-            width: 85%; 
-            max-width: 400px; 
-            border-radius: 20px; 
-            position: relative; 
-            text-align: center; 
-        }
-        .cerrar { 
-            position: absolute; 
-            right: 20px; 
-            top: 10px; 
-            font-size: 30px; 
-            font-weight: bold;
-            cursor: pointer; 
-            color: #aaa;
-        }
-
-        .buy-btn { 
-            display: block; 
-            background-color: #25d366; 
-            color: white; 
-            text-decoration: none; 
-            padding: 15px; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            margin-top: 15px; 
-        }
+        /* Estilos de la ventana que flota */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
+        .modal-contenido { background: white; margin: 15% auto; padding: 20px; width: 85%; max-width: 400px; border-radius: 20px; position: relative; text-align: center; }
+        .cerrar { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
+        
+        .buy-btn { display: block; background-color: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="brand">Tu Casa Digital</div>
-    <div class="tagline">Ebooks de Expertos</div>
 </header>
 
 <div class="container">
     <h2 class="section-title">🌸 Bienestar Integral</h2>
     <div class="book-row">
         <div class="book-card">
-            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400" alt="Portada" onclick="abrirModal()" style="cursor:pointer; width:100%; height:250px; object-fit:cover; border-radius:10px;">
-            <div style="cursor:pointer;" onclick="abrirModal()">
+            <img src="https://picsum.photos/id/24/400/600" alt="Portada" onclick="abrirModal()" style="cursor:pointer; width:100%; border-radius:10px;">
+            <div onclick="abrirModal()" style="cursor:pointer;">
                 <div style="font-weight:bold; margin-top:10px;">El Arte del Cuidado Propio</div>
-                <div style="color:var(--text-muted); font-size:0.85rem;">Santiago Tautiva</div>
-                <div style="color:var(--primary); font-weight:bold; font-size:1.2rem; margin: 10px 0;">$15.000</div>
+                <div style="color:var(--primary); font-weight:bold;">$15.000</div>
             </div>
         </div>
     </div>
@@ -94,12 +55,10 @@
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
-        <h2 style="margin: 0; color: var(--primary);">El Arte del Cuidado Propio</h2>
-        <p style="text-align:left; color:#555; font-size: 0.9rem;">Guía completa para mejorar tu bienestar físico y emocional con rutinas prácticas diarias.</p>
-        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20libro%20de%20Cuidado%20Propio" class="buy-btn">
-           Comprar por WhatsApp - $15.000
-        </a>
+        <img src="https://picsum.photos/id/24/400/600" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
+        <h2>El Arte del Cuidado Propio</h2>
+        <p>Guía completa para tu bienestar.</p>
+        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20el%20libro" class="buy-btn">Comprar por WhatsApp</a>
     </div>
 </div>
 
