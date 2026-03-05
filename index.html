@@ -3,131 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital - Interactivo</title>
+    <title>Tu Casa Digital - Ebooks</title>
     <style>
-        :root { --verde: #1a4d2e; --gris: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--gris); margin: 0; padding-bottom: 50px; }
+        :root {
+            --verde-principal: #1a4d2e;
+            --gris-fondo: #f8f9fa;
+            --blanco: #ffffff;
+            --texto-gris: #666;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--gris-fondo);
+            color: #333;
+        }
+
+        /* Cabecera */
+        .header {
+            background-color: var(--verde-principal);
+            color: var(--blanco);
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Buscador y Filtros */
+        .controls {
+            padding: 15px;
+            background: var(--blanco);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .btn-filter {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-filter.active {
+            background: var(--verde-principal);
+            color: white;
+            border-color: var(--verde-principal);
+        }
+
+        /* Catálogo */
+        .container { padding: 15px; }
         
-        /* Header y Buscador */
-        .header { background: var(--verde); color: white; text-align: center; padding: 20px; font-size: 22px; font-weight: bold; }
-        .search-box { padding: 15px; background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .search-bar { width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ddd; box-sizing: border-box; outline: none; }
+        .section-title {
+            color: var(--verde-principal);
+            border-bottom: 2px solid #ffcc00;
+            display: inline-block;
+            margin: 20px 0 10px;
+            font-size: 20px;
+        }
 
-        /* Filtros */
-        .filter-group { padding: 10px; display: flex; gap: 10px; overflow-x: auto; background: white; }
-        .btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--verde); background: white; cursor: pointer; white-space: nowrap; transition: 0.3s; }
-        .btn:hover, .btn.active { background: var(--verde); color: white; }
-        .age-filters { display: flex; justify-content: space-around; padding: 10px; background: white; border-top: 1px solid #eee; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
 
-        /* Contenedor de Libros */
-        .catalog { padding: 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .book-card { background: white; padding: 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
-        .book-card:active { transform: scale(0.95); }
-        .book-img { width: 100%; height: 150px; background: #eee; border-radius: 8px; object-fit: cover; margin-bottom: 10px; }
-        .book-title { font-size: 14px; font-weight: bold; margin: 5px 0; height: 35px; overflow: hidden; }
-        .book-price { color: var(--verde); font-weight: bold; font-size: 16px; }
+        /* Tarjetas de Libros */
+        .card {
+            background: var(--blanco);
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-        /* Modal (Ficha del Libro) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: white; width: 85%; max-width: 400px; padding: 20px; border-radius: 15px; text-align: center; position: relative; }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
+        .card:hover { transform: translateY(-5px); }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 { font-size: 14px; margin: 5px 0; height: 35px; overflow: hidden; }
+        .card .price { color: var(--verde-principal); font-weight: bold; font-size: 16px; }
+
+        /* Modal / Ficha del Libro */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        .modal img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
+        .modal-desc { text-align: justify; color: var(--texto-gris); line-height: 1.5; margin: 15px 0; }
+        .buy-btn {
+            background: var(--verde-principal);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <div class="header">TU CASA DIGITAL</div>
 
-<div class="search-box">
-    <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar por nombre o tema..." onkeyup="filtrarTodo()">
+<div class="controls">
+    <input type="text" id="search" class="search-bar" placeholder="🔍 Buscar por nombre o tema..." onkeyup="app.filter()">
+    <div class="filter-row">
+        <button class="btn-filter active" onclick="app.setCategory('Todos', this)">Todos</button>
+        <button class="btn-filter" onclick="app.setAge('menores', this)">👦 Menores</button>
+        <button class="btn-filter" onclick="app.setAge('mayores', this)">👤 Mayores</button>
+    </div>
+    <div class="filter-row" style="margin-top: 10px;">
+        <button class="btn-filter" onclick="app.setCategory('Gastronomía', this)">Gastronomía</button>
+        <button class="btn-filter" onclick="app.setCategory('Mecánica', this)">Mecánica</button>
+        <button class="btn-filter" onclick="app.setCategory('Bienestar', this)">Bienestar</button>
+        <button class="btn-filter" onclick="app.setCategory('Ficción', this)">Ficción</button>
+    </div>
 </div>
 
-<div class="age-filters">
-    <button class="btn" onclick="filtrarEdad('menores')">👦 Menores</button>
-    <button class="btn" onclick="filtrarEdad('mayores')">👨‍🦳 Mayores</button>
-    <button class="btn" onclick="resetarFiltros()">Todos</button>
-</div>
-
-<div class="filter-group">
-    <button class="btn" onclick="filtrarCategoria('Salud')">Mente Sana / Yoga</button>
-    <button class="btn" onclick="filtrarCategoria('Tecnología')">Tecnología y Motores</button>
-    <button class="btn" onclick="filtrarCategoria('Ficción')">Ficción y Literatura</button>
-</div>
-
-<div id="catalog" class="catalog">
+<div class="container" id="catalog">
     </div>
 
-<div id="bookModal" class="modal" onclick="cerrarModal()">
+<div id="modal" class="modal" onclick="app.closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <span class="close-btn" onclick="cerrarModal()">&times;</span>
-        <img id="modalImg" class="book-img" style="height: 250px;">
-        <h2 id="modalTitle"></h2>
-        <p id="modalCategory" style="color: gray;"></p>
-        <p id="modalPrice" class="book-price" style="font-size: 24px;"></p>
-        <button class="btn" style="width: 100%; margin-top: 10px; background: var(--verde); color: white;">Comprar Ahora</button>
+        <span class="close-modal" onclick="app.closeModal()">&times;</span>
+        <img id="m-img" src="" alt="">
+        <h2 id="m-title"></h2>
+        <p id="m-cat" style="font-weight: bold; color: var(--verde-principal);"></p>
+        <div id="m-desc" class="modal-desc"></div>
+        <p id="m-price" style="font-size: 24px; font-weight: bold;"></p>
+        <button class="buy-btn">Comprar Ahora</button>
     </div>
 </div>
 
 <script>
-    // Base de datos de tus libros e imágenes
-    const libros = [
-        { id: 1, titulo: "Mente Sana", precio: "$18.000", cat: "Salud", edad: "mayores", img: "https://via.placeholder.com/150/e8f5e9/1a4d2e?text=Mente+Sana" },
-        { id: 2, titulo: "Yoga Total", precio: "$16.000", cat: "Salud", edad: "mayores", img: "https://via.placeholder.com/150/e8f5e9/1a4d2e?text=Yoga+Total" },
-        { id: 3, titulo: "Electricidad Auto", precio: "$27.000", cat: "Tecnología", edad: "mayores", img: "https://via.placeholder.com/150/f5f5f5/1a4d2e?text=Motores" },
-        { id: 4, titulo: "Zero to One", precio: "Consultar", cat: "Ficción", edad: "menores", img: "https://via.placeholder.com/150/fff3e0/1a4d2e?text=Zero+to+One" },
-        { id: 5, titulo: "Ego is the Enemy", precio: "Consultar", cat: "Ficción", edad: "menores", img: "https://via.placeholder.com/150/fff3e0/1a4d2e?text=Ego+Enemy" }
-    ];
+    const app = {
+        currentCategory: 'Todos',
+        currentAge: 'Todos',
+        // Base de datos basada en tus imágenes
+        books: [
+            { 
+                titulo: "Para Diabéticos", precio: "$25.000", cat: "Gastronomía", edad: "mayores", 
+                img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400",
+                desc: "Esta guía completa ofrece un plan de alimentación equilibrado diseñado específicamente para personas con diabetes. Incluye más de 50 recetas saludables, consejos nutricionales para el control de la glucosa y una lista de compras inteligente para facilitar tu día a día."
+            },
+            { 
+                titulo: "Postres Saludables", precio: "$20.000", cat: "Gastronomía", edad: "menores", 
+                img: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                desc: "¡Disfruta del dulce sin remordimientos! Esta guía te enseña a preparar postres deliciosos utilizando ingredientes naturales, sin azúcares refinados. Perfecta para niños y adultos que buscan una vida más sana sin sacrificar el sabor."
+            },
+            { 
+                titulo: "Electricidad Auto", precio: "$27.000", cat: "Mecánica", edad: "mayores", 
+                img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400",
+                desc: "Manual técnico profesional que cubre desde los conceptos básicos de electricidad automotriz hasta sistemas avanzados de inyección y sensores. Incluye diagramas detallados y guías paso a paso para reparaciones eléctricas en casa o taller."
+            },
+            { 
+                titulo: "Mente Sana", precio: "$18.000", cat: "Bienestar", edad: "mayores", 
+                img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400",
+                desc: "Un viaje hacia la paz interior. Este libro explora técnicas de meditación y psicología positiva para reducir el estrés y la ansiedad en el mundo moderno. Aprende a cultivar una mentalidad resiliente y equilibrada."
+            },
+            { 
+                titulo: "Yoga Total", precio: "$16.000", cat: "Bienestar", edad: "menores", 
+                img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
+                desc: "Guía práctica de Yoga para todos los niveles. Desde posturas básicas (asanas) hasta rutinas de respiración profunda. Ideal para mejorar la flexibilidad corporal y la concentración mental en el estudio o el trabajo."
+            },
+            { 
+                titulo: "Zero to One", precio: "Consultar", cat: "Ficción", edad: "menores", 
+                img: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400",
+                desc: "Un libro esencial sobre emprendimiento y cómo construir el futuro. Peter Thiel explora cómo crear empresas que generen cosas nuevas en lugar de copiar lo existente. Una lectura obligatoria para la nueva generación de innovadores."
+            }
+        ],
 
-    function mostrarLibros(lista) {
-        const contenedor = document.getElementById('catalog');
-        contenedor.innerHTML = '';
-        lista.forEach(libro => {
-            contenedor.innerHTML += `
-                <div class="book-card" onclick="abrirModal(${libro.id})">
-                    <img src="${libro.img}" class="book-img" alt="${libro.titulo}">
-                    <div class="book-title">${libro.titulo}</div>
-                    <div class="book-price">${libro.precio}</div>
-                </div>
-            `;
-        });
-    }
+        init() {
+            this.render();
+        },
 
-    function filtrarTodo() {
-        const busqueda = document.getElementById('searchInput').value.toLowerCase();
-        const filtrados = libros.filter(l => l.titulo.toLowerCase().includes(busqueda) || l.cat.toLowerCase().includes(busqueda));
-        mostrarLibros(filtrados);
-    }
+        render() {
+            const catalog = document.getElementById('catalog');
+            const searchVal = document.getElementById('search').value.toLowerCase();
+            
+            // Agrupar por categorías reales de la imagen
+            const categories = [...new Set(this.books.map(b => b.cat))];
+            catalog.innerHTML = '';
 
-    function filtrarEdad(rango) {
-        const filtrados = libros.filter(l => l.edad === rango);
-        mostrarLibros(filtrados);
-    }
+            categories.forEach(cat => {
+                const filtered = this.books.filter(b => {
+                    const matchCat = (this.currentCategory === 'Todos' || b.cat === this.currentCategory);
+                    const matchAge = (this.currentAge === 'Todos' || b.edad === this.currentAge);
+                    const matchSearch = b.titulo.toLowerCase().includes(searchVal);
+                    return matchCat && matchAge && matchSearch && b.cat === cat;
+                });
 
-    function filtrarCategoria(categoria) {
-        const filtrados = libros.filter(l => l.cat === categoria);
-        mostrarLibros(filtrados);
-    }
+                if (filtered.length > 0) {
+                    let section = `<h2 class="section-title">${cat}</h2><div class="grid">`;
+                    filtered.forEach(b => {
+                        section += `
+                            <div class="card" onclick="app.openModal('${b.titulo}')">
+                                <img src="${b.img}" alt="${b.titulo}">
+                                <h3>${b.titulo}</h3>
+                                <p class="price">${b.price || b.precio}</p>
+                            </div>`;
+                    });
+                    section += `</div>`;
+                    catalog.innerHTML += section;
+                }
+            });
+        },
 
-    function resetarFiltros() {
-        mostrarLibros(libros);
-    }
+        filter() { this.render(); },
 
-    function abrirModal(id) {
-        const libro = libros.find(l => l.id === id);
-        document.getElementById('modalTitle').innerText = libro.titulo;
-        document.getElementById('modalPrice').innerText = libro.precio;
-        document.getElementById('modalCategory').innerText = "Categoría: " + libro.cat;
-        document.getElementById('modalImg').src = libro.img;
-        document.getElementById('bookModal').style.display = 'flex';
-    }
+        setCategory(cat, el) {
+            this.currentCategory = cat;
+            this.updateActiveBtn(el);
+            this.render();
+        },
 
-    function cerrarModal() {
-        document.getElementById('bookModal').style.display = 'none';
-    }
+        setAge(age, el) {
+            this.currentAge = age;
+            this.updateActiveBtn(el);
+            this.render();
+        },
 
-    // Carga inicial
-    mostrarLibros(libros);
+        updateActiveBtn(el) {
+            el.parentElement.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+        },
+
+        openModal(titulo) {
+            const b = this.books.find(x => x.titulo === titulo);
+            document.getElementById('m-title').innerText = b.titulo;
+            document.getElementById('m-cat').innerText = "Categoría: " + b.cat;
+            document.getElementById('m-desc').innerText = b.desc;
+            document.getElementById('m-price').innerText = b.precio;
+            document.getElementById('m-img').src = b.img;
+            document.getElementById('modal').style.display = 'flex';
+        },
+
+        closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    };
+
+    app.init();
 </script>
 
 </body>
 </html>
-
