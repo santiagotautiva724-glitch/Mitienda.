@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S | Tu Casa Digital - Ofertas Relámpago</title>
+    <title>S | Tu Casa Digital - Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,19 +16,23 @@
 
         body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--gris-fondo); color: #333; }
 
-        /* HEADER */
+        /* HEADER Y LOGO */
         .brand-header { text-align: center; padding: 20px; background: var(--blanco); }
         .s-logo { 
-            width: 65px; height: 65px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
+            width: 70px; height: 70px; background: linear-gradient(145deg, var(--verde-pro), #1a6d3d); 
             display: inline-flex; align-items: center; justify-content: center; 
-            border-radius: 18px; color: var(--dorado); font-size: 40px; 
+            border-radius: 20px; color: var(--dorado); font-size: 45px; 
             font-weight: 800; border: 3px solid var(--dorado);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* BUSCADOR */
-        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); padding: 12px; }
-        .search-input { width: 90%; max-width: 500px; display: block; margin: auto; padding: 12px 25px; border-radius: 30px; border: none; outline: none; }
+        /* NAVEGACIÓN, BUSQUEDA Y FILTROS EDAD */
+        .sticky-nav { position: sticky; top: 0; z-index: 2000; background: var(--verde-pro); padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .search-input { width: 90%; max-width: 500px; display: block; margin: 5px auto 12px; padding: 10px 20px; border-radius: 25px; border: none; outline: none; }
+        
+        .age-filters { display: flex; justify-content: center; gap: 10px; padding-bottom: 5px; }
+        .btn-age { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--dorado); background: transparent; color: white; cursor: pointer; font-size: 13px; font-weight: 600; transition: 0.3s; }
+        .btn-age.active { background: var(--dorado); color: var(--verde-pro); }
 
         /* SECCIONES */
         .container { max-width: 1100px; margin: auto; padding: 20px; }
@@ -38,20 +42,23 @@
         .card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; cursor: pointer; position: relative; transition: 0.3s; }
         .card:hover { transform: translateY(-5px); }
         .badge-oferta { position: absolute; top: 10px; left: 10px; background: var(--rojo-oferta); color: white; padding: 4px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; z-index: 10; }
-        .card img { width: 100%; height: 190px; object-fit: cover; }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
         .card-body { padding: 12px; }
-        .old-price { text-decoration: line-through; color: #999; font-size: 12px; }
-        .price { color: var(--verde-pro); font-weight: 800; font-size: 17px; }
+        .price { color: var(--verde-pro); font-weight: 800; font-size: 16px; }
 
-        /* MODAL CON CRONÓMETRO */
+        /* MODAL */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
         .modal-content { background: white; width: 90%; max-width: 400px; border-radius: 25px; padding: 25px; position: relative; text-align: center; }
-        .timer-box { background: #fff3f2; border: 1px dashed var(--rojo-oferta); padding: 10px; border-radius: 12px; color: var(--rojo-oferta); font-weight: 800; font-size: 14px; margin-bottom: 15px; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; color: #999; }
+        .timer-box { background: #fff3f2; border: 1px dashed var(--rojo-oferta); padding: 8px; border-radius: 12px; color: var(--rojo-oferta); font-weight: 800; font-size: 13px; margin-bottom: 15px; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 25px; cursor: pointer; }
         .modal-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; }
         .btn-buy { background: var(--verde-pro); color: white; border: none; padding: 16px; border-radius: 12px; font-weight: bold; width: 100%; cursor: pointer; font-size: 16px; }
 
-        .footer { background: var(--verde-pro); color: white; padding: 50px 20px; text-align: center; margin-top: 50px; }
+        /* VISIÓN LARGA */
+        .vision-section { background: white; padding: 40px 20px; border-radius: 30px; margin: 40px 0; text-align: center; box-shadow: 0 5px 20px rgba(0,0,0,0.03); }
+        .vision-text { max-width: 800px; margin: auto; line-height: 1.8; color: #555; font-size: 15px; }
+
+        .footer { background: var(--verde-pro); color: white; padding: 40px 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -62,42 +69,60 @@
 </div>
 
 <div class="sticky-nav">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar temas..." onkeyup="app.render()">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar contenido..." onkeyup="app.render()">
+    <div class="age-filters">
+        <button id="btnAll" class="btn-age active" onclick="app.setAge('Todos')">🌟 Todos</button>
+        <button id="btnMen" class="btn-age" onclick="app.setAge('Menores')">👦 Menores</button>
+        <button id="btnMay" class="btn-age" onclick="app.setAge('Mayores')">👤 Mayores</button>
+    </div>
 </div>
 
 <div class="container" id="mainCatalog"></div>
 
+<div class="container">
+    <div class="vision-section">
+        <h3 style="color: var(--verde-pro); margin-bottom: 20px;">Nuestra Visión de Superación</h3>
+        <p class="vision-text">
+            "Como joven emprendedor de 16 años, fundé **S | Tu Casa Digital** con una misión clara: democratizar el acceso al conocimiento práctico y profesional. Creemos que la **Superación (S)** no es un destino, sino un hábito diario que se alimenta de curiosidad y herramientas de calidad. Nuestra visión a largo plazo es convertirnos en la biblioteca digital líder para emprendedores y mentes inquietas, ofreciendo guías y libros que no solo enseñan una habilidad, sino que transforman la mentalidad de quienes los leen. Cada material en este catálogo ha sido seleccionado para impulsar tu crecimiento personal, técnico y financiero, rompiendo las barreras de la educación tradicional."
+        </p>
+    </div>
+</div>
+
 <div id="infoModal" class="modal">
     <div class="modal-content">
         <span class="close-modal" onclick="app.closeM()">&times;</span>
-        <div class="timer-box">⏱ ¡La oferta termina en: <span id="timer">09:59</span>!</div>
+        <div class="timer-box">⏱ Oferta exclusiva termina en: <span id="timer">09:59</span></div>
         <img id="mImg" class="modal-img">
         <h2 id="mTitle" style="margin: 5px 0;"></h2>
-        <p id="mDesc" style="color: #666; font-size: 14px; margin-bottom: 20px;"></p>
-        <div style="margin-bottom: 20px;">
-            <span id="mOldPrice" class="old-price" style="font-size: 18px;"></span>
-            <div id="mPrice" style="font-size: 28px; font-weight: 800; color: var(--verde-pro);"></div>
-        </div>
-        <button class="btn-buy" onclick="app.buy()">¡APROVECHAR OFERTA POR WHATSAPP! 💬</button>
+        <p id="mDesc" style="color: #666; font-size: 13px; margin-bottom: 20px;"></p>
+        <div id="mPrice" style="font-size: 26px; font-weight: 800; color: var(--verde-pro); margin-bottom: 20px;"></div>
+        <button class="btn-buy" onclick="app.buy()">PEDIR AHORA POR WHATSAPP 💬</button>
     </div>
 </div>
 
 <div class="footer">
     <div class="s-logo" style="background:none; border-color:white; color:white; margin-bottom:15px;">S</div>
-    <p>"Superación constante. Emprendimiento digital a los 16 años."</p>
+    <p>&copy; 2024 S-Tu Casa Digital. Todos los derechos reservados.</p>
 </div>
 
 <script>
     const app = {
-        tel: "573223693926", // Número corregido y verificado
-        selectedId: null,
+        tel: "573223693926", // Número internacional corregido
+        ageFilter: 'Todos',
         timerInt: null,
         
         books: [
-            { id: 1, tipo: "Guía", t: "Electricidad Auto", p: 27000, oldP: 45000, stars: 5, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Domina el sistema eléctrico automotriz con esta guía técnica profesional." },
-            { id: 2, tipo: "Guía", t: "Nutrición Saludable", p: 25000, oldP: 35000, stars: 5, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "Recetas y planes alimenticios para mejorar tu salud radicalmente." },
-            { id: 4, tipo: "Libro", t: "Mente Sana", p: 18000, oldP: 28000, stars: 5, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Estrategias mentales para la paz interior y el alto rendimiento." },
-            { id: 5, tipo: "Libro", t: "Hábitos Atómicos", p: 24000, oldP: 38000, stars: 5, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "El método comprobado para construir hábitos que cambian tu vida." }
+            // GUÍAS
+            { id: 1, tipo: "Guía", edad: "Mayores", t: "Electricidad Auto", p: 27000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Manual técnico para diagnosticar y reparar sistemas eléctricos modernos." },
+            { id: 2, tipo: "Guía", edad: "Mayores", t: "Porsy 11", p: 32000, img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500", desc: "Guía avanzada de alto rendimiento automotriz y optimización de motores deportivos." },
+            { id: 3, tipo: "Guía", edad: "Mayores", t: "Nutrición Pro", p: 25000, img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500", desc: "Plan alimenticio especializado para salud metabólica y control de peso." },
+            { id: 4, tipo: "Guía", edad: "Menores", t: "Robótica Kids", p: 15000, img: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=500", desc: "Introducción divertida al mundo de los circuitos y la programación básica." },
+            
+            // LIBROS
+            { id: 5, tipo: "Libro", edad: "Mayores", t: "Mente Sana", p: 18000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "Psicología aplicada para vencer el estrés y mejorar el enfoque." },
+            { id: 6, tipo: "Libro", edad: "Mayores", t: "Hábitos Atómicos", p: 24000, img: "https://images.unsplash.com/photo-1589998059171-988d887df646?w=500", desc: "La metodología definitiva para crear rutinas de éxito." },
+            { id: 7, tipo: "Libro", edad: "Mayores", t: "Ego is the Enemy", p: 20000, img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=500", desc: "Cómo dominar tu ego para alcanzar tu máximo potencial." },
+            { id: 8, tipo: "Libro", edad: "Menores", t: "Lógica Divertida", p: 12000, img: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500", desc: "Acertijos y desafíos mentales para desarrollar el pensamiento crítico joven." }
         ],
 
         render() {
@@ -106,17 +131,21 @@
             catalog.innerHTML = '';
 
             ["Guía", "Libro"].forEach(tipo => {
-                const filtrados = this.books.filter(b => b.tipo === tipo && b.t.toLowerCase().includes(search));
+                const filtrados = this.books.filter(b => 
+                    b.tipo === tipo && 
+                    b.t.toLowerCase().includes(search) && 
+                    (this.ageFilter === 'Todos' || b.edad === this.ageFilter)
+                );
+                
                 if (filtrados.length > 0) {
-                    let html = `<div class="section-title">Nuestras ${tipo}s</div><div class="grid">`;
+                    let html = `<div class="section-title">${tipo}s Disponibles</div><div class="grid">`;
                     filtrados.forEach(b => {
                         html += `
                             <div class="card" onclick="app.openM(${b.id})">
                                 <div class="badge-oferta">OFERTA</div>
                                 <img src="${b.img}">
                                 <div class="card-body">
-                                    <div style="font-weight:600; font-size:14px;">${b.t}</div>
-                                    <div class="old-price">$${b.oldP.toLocaleString()}</div>
+                                    <div style="font-weight:600; font-size:13px; height:35px; overflow:hidden;">${b.t}</div>
                                     <div class="price">$${b.p.toLocaleString()}</div>
                                 </div>
                             </div>`;
@@ -124,6 +153,25 @@
                     catalog.innerHTML += html + '</div>';
                 }
             });
+        },
+
+        setAge(val) {
+            this.ageFilter = val;
+            document.querySelectorAll('.btn-age').forEach(b => b.classList.remove('active'));
+            if(val === 'Todos') document.getElementById('btnAll').classList.add('active');
+            if(val === 'Menores') document.getElementById('btnMen').classList.add('active');
+            if(val === 'Mayores') document.getElementById('btnMay').classList.add('active');
+            this.render();
+        },
+
+        openM(id) {
+            const item = this.books.find(x => x.id === id);
+            document.getElementById('mTitle').innerText = item.t;
+            document.getElementById('mDesc').innerText = item.desc;
+            document.getElementById('mPrice').innerText = `$${item.p.toLocaleString()}`;
+            document.getElementById('mImg').src = item.img;
+            document.getElementById('infoModal').style.display = 'flex';
+            this.startTimer();
         },
 
         startTimer() {
@@ -138,23 +186,12 @@
             }, 1000);
         },
 
-        openM(id) {
-            const item = this.books.find(x => x.id === id);
-            this.selectedId = id;
-            document.getElementById('mTitle').innerText = item.t;
-            document.getElementById('mDesc').innerText = item.desc;
-            document.getElementById('mPrice').innerText = `$${item.p.toLocaleString()}`;
-            document.getElementById('mOldPrice').innerText = `$${item.oldP.toLocaleString()}`;
-            document.getElementById('mImg').src = item.img;
-            document.getElementById('infoModal').style.display = 'flex';
-            this.startTimer();
-        },
-
         closeM() { document.getElementById('infoModal').style.display = 'none'; clearInterval(this.timerInt); },
 
         buy() {
-            const item = this.books.find(x => x.id === this.selectedId);
-            const msg = encodeURIComponent(`¡Hola! 👋 ¡Aprovecho la oferta de tiempo limitado!\n- ${item.t}\nPrecio especial: $${item.p.toLocaleString()}`);
+            const title = document.getElementById('mTitle').innerText;
+            const price = document.getElementById('mPrice').innerText;
+            const msg = encodeURIComponent(`¡Hola S-Tu Casa Digital! 👋 Quiero aprovechar la oferta:\n- ${title}\nPrecio: ${price}`);
             window.open(`https://wa.me/${this.tel}?text=${msg}`, '_blank');
         }
     };
