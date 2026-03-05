@@ -3,84 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital</title>
+    <title>Tu Casa Digital - Interactivo</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        :root { --verde: #1a4d2e; --gris: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--gris); margin: 0; padding-bottom: 50px; }
         
-        /* Encabezado */
-        .header { background-color: #1a4d2e; color: white; text-align: center; padding: 15px; font-weight: bold; font-size: 20px; }
-        
-        /* Buscador */
-        .search-container { padding: 10px; background: white; }
-        .search-bar { width: 90%; padding: 10px; border-radius: 20px; border: 1px solid #ccc; display: block; margin: auto; }
+        /* Header y Buscador */
+        .header { background: var(--verde); color: white; text-align: center; padding: 20px; font-size: 22px; font-weight: bold; }
+        .search-box { padding: 15px; background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .search-bar { width: 100%; padding: 12px; border-radius: 25px; border: 1px solid #ddd; box-sizing: border-box; outline: none; }
 
-        /* Categorías y Filtros */
-        .filters { display: flex; overflow-x: auto; padding: 10px; gap: 10px; background: #fff; border-bottom: 2px solid #e0e0e0; }
-        .filter-btn { background: #eee; border: none; padding: 8px 15px; border-radius: 15px; white-space: nowrap; cursor: pointer; }
-        .age-toggle { display: flex; justify-content: space-around; padding: 10px; background: #fff; }
-        .age-btn { flex: 1; margin: 0 5px; padding: 10px; border-radius: 5px; border: 1px solid #1a4d2e; background: white; cursor: pointer; }
-        .age-btn:hover { background: #1a4d2e; color: white; }
+        /* Filtros */
+        .filter-group { padding: 10px; display: flex; gap: 10px; overflow-x: auto; background: white; }
+        .btn { padding: 8px 18px; border-radius: 20px; border: 1px solid var(--verde); background: white; cursor: pointer; white-space: nowrap; transition: 0.3s; }
+        .btn:hover, .btn.active { background: var(--verde); color: white; }
+        .age-filters { display: flex; justify-content: space-around; padding: 10px; background: white; border-top: 1px solid #eee; }
 
-        /* Secciones */
-        .section-title { color: #1a4d2e; padding: 15px 10px 5px; font-size: 18px; display: flex; align-items: center; }
-        .card-container { display: flex; overflow-x: auto; padding: 10px; gap: 15px; }
-        .card { background: white; min-width: 140px; padding: 10px; border-radius: 10px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
-        .card img { width: 100%; border-radius: 5px; background: #eee; height: 100px; object-fit: cover; }
-        .price { color: #1a4d2e; font-weight: bold; margin-top: 5px; }
+        /* Contenedor de Libros */
+        .catalog { padding: 15px; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .book-card { background: white; padding: 10px; border-radius: 12px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: transform 0.2s; }
+        .book-card:active { transform: scale(0.95); }
+        .book-img { width: 100%; height: 150px; background: #eee; border-radius: 8px; object-fit: cover; margin-bottom: 10px; }
+        .book-title { font-size: 14px; font-weight: bold; margin: 5px 0; height: 35px; overflow: hidden; }
+        .book-price { color: var(--verde); font-weight: bold; font-size: 16px; }
+
+        /* Modal (Ficha del Libro) */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: white; width: 85%; max-width: 400px; padding: 20px; border-radius: 15px; text-align: center; position: relative; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="header">TU CASA DIGITAL</div>
+<div class="header">TU CASA DIGITAL</div>
 
-    <div class="search-container">
-        <input type="text" class="search-bar" placeholder="🔍 Buscar libros o servicios...">
+<div class="search-box">
+    <input type="text" id="searchInput" class="search-bar" placeholder="🔍 Buscar por nombre o tema..." onkeyup="filtrarTodo()">
+</div>
+
+<div class="age-filters">
+    <button class="btn" onclick="filtrarEdad('menores')">👦 Menores</button>
+    <button class="btn" onclick="filtrarEdad('mayores')">👨‍🦳 Mayores</button>
+    <button class="btn" onclick="resetarFiltros()">Todos</button>
+</div>
+
+<div class="filter-group">
+    <button class="btn" onclick="filtrarCategoria('Salud')">Mente Sana / Yoga</button>
+    <button class="btn" onclick="filtrarCategoria('Tecnología')">Tecnología y Motores</button>
+    <button class="btn" onclick="filtrarCategoria('Ficción')">Ficción y Literatura</button>
+</div>
+
+<div id="catalog" class="catalog">
     </div>
 
-    <div class="age-toggle">
-        <button class="age-btn">Menores</button>
-        <button class="age-btn">Mayores</button>
+<div id="bookModal" class="modal" onclick="cerrarModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-btn" onclick="cerrarModal()">&times;</span>
+        <img id="modalImg" class="book-img" style="height: 250px;">
+        <h2 id="modalTitle"></h2>
+        <p id="modalCategory" style="color: gray;"></p>
+        <p id="modalPrice" class="book-price" style="font-size: 24px;"></p>
+        <button class="btn" style="width: 100%; margin-top: 10px; background: var(--verde); color: white;">Comprar Ahora</button>
     </div>
+</div>
 
-    <div class="filters">
-        <button class="filter-btn">Mente Sana</button>
-        <button class="filter-btn">Yoga</button>
-        <button class="filter-btn">Tecnología</button>
-        <button class="filter-btn">Ficción</button>
-        <button class="filter-btn">Negocios</button>
-    </div>
+<script>
+    // Base de datos de tus libros e imágenes
+    const libros = [
+        { id: 1, titulo: "Mente Sana", precio: "$18.000", cat: "Salud", edad: "mayores", img: "https://via.placeholder.com/150/e8f5e9/1a4d2e?text=Mente+Sana" },
+        { id: 2, titulo: "Yoga Total", precio: "$16.000", cat: "Salud", edad: "mayores", img: "https://via.placeholder.com/150/e8f5e9/1a4d2e?text=Yoga+Total" },
+        { id: 3, titulo: "Electricidad Auto", precio: "$27.000", cat: "Tecnología", edad: "mayores", img: "https://via.placeholder.com/150/f5f5f5/1a4d2e?text=Motores" },
+        { id: 4, titulo: "Zero to One", precio: "Consultar", cat: "Ficción", edad: "menores", img: "https://via.placeholder.com/150/fff3e0/1a4d2e?text=Zero+to+One" },
+        { id: 5, titulo: "Ego is the Enemy", precio: "Consultar", cat: "Ficción", edad: "menores", img: "https://via.placeholder.com/150/fff3e0/1a4d2e?text=Ego+Enemy" }
+    ];
 
-    <div class="section-title">🧘 Salud y Bienestar</div>
-    <div class="card-container">
-        <div class="card">
-            <div style="height:100px; background:#e8f5e9; border-radius:5px;"></div>
-            <p>Mente Sana</p>
-            <p class="price">$18.000</p>
-        </div>
-        <div class="card">
-            <div style="height:100px; background:#e8f5e9; border-radius:5px;"></div>
-            <p>Yoga Total</p>
-            <p class="price">$16.000</p>
-        </div>
-    </div>
+    function mostrarLibros(lista) {
+        const contenedor = document.getElementById('catalog');
+        contenedor.innerHTML = '';
+        lista.forEach(libro => {
+            contenedor.innerHTML += `
+                <div class="book-card" onclick="abrirModal(${libro.id})">
+                    <img src="${libro.img}" class="book-img" alt="${libro.titulo}">
+                    <div class="book-title">${libro.titulo}</div>
+                    <div class="book-price">${libro.precio}</div>
+                </div>
+            `;
+        });
+    }
 
-    <div class="section-title">🛠️ Tecnología y Motores</div>
-    <div class="card-container">
-        <div class="card">
-            <div style="height:100px; background:#f5f5f5; border-radius:5px;"></div>
-            <p>Electricidad Auto</p>
-            <p class="price">$27.000</p>
-        </div>
-    </div>
+    function filtrarTodo() {
+        const busqueda = document.getElementById('searchInput').value.toLowerCase();
+        const filtrados = libros.filter(l => l.titulo.toLowerCase().includes(busqueda) || l.cat.toLowerCase().includes(busqueda));
+        mostrarLibros(filtrados);
+    }
 
-    <div class="section-title">📚 Ficción y Literatura</div>
-    <div class="card-container">
-        <div class="card">
-            <div style="height:100px; background:#fff3e0; border-radius:5px;"></div>
-            <p>Zero to One</p>
-            <p class="price">Consultar</p>
-        </div>
-    </div>
+    function filtrarEdad(rango) {
+        const filtrados = libros.filter(l => l.edad === rango);
+        mostrarLibros(filtrados);
+    }
+
+    function filtrarCategoria(categoria) {
+        const filtrados = libros.filter(l => l.cat === categoria);
+        mostrarLibros(filtrados);
+    }
+
+    function resetarFiltros() {
+        mostrarLibros(libros);
+    }
+
+    function abrirModal(id) {
+        const libro = libros.find(l => l.id === id);
+        document.getElementById('modalTitle').innerText = libro.titulo;
+        document.getElementById('modalPrice').innerText = libro.precio;
+        document.getElementById('modalCategory').innerText = "Categoría: " + libro.cat;
+        document.getElementById('modalImg').src = libro.img;
+        document.getElementById('bookModal').style.display = 'flex';
+    }
+
+    function cerrarModal() {
+        document.getElementById('bookModal').style.display = 'none';
+    }
+
+    // Carga inicial
+    mostrarLibros(libros);
+</script>
 
 </body>
 </html>
+
