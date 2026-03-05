@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Casa Digital - Tienda Oficial</title>
+    <title>Tu Casa Digital - Ebooks de Expertos</title>
     <style>
         :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 50px; }
@@ -13,8 +13,10 @@
         
         /* Filas con scroll */
         .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: none; }
-        .book-card { background: white; min-width: 170px; max-width: 170px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; transition: 0.3s; }
-        .book-card img { width: 100%; height: 230px; object-fit: cover; border-radius: 10px; cursor: pointer; }
+        .book-row::-webkit-scrollbar { display: none; } /* Ocultar scrollbar en Chrome/Safari */
+        
+        .book-card { background: white; min-width: 170px; max-width: 170px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; transition: 0.3s; cursor: pointer; }
+        .book-card img { width: 100%; height: 230px; object-fit: cover; border-radius: 10px; }
         .book-title { font-weight: bold; margin-top: 10px; font-size: 0.9rem; color: #333; height: 35px; overflow: hidden; }
         .price { color: var(--primary); font-weight: 800; font-size: 1.1rem; margin-top: 5px; }
 
@@ -24,7 +26,8 @@
         @keyframes aparecer { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
         .cerrar { position: absolute; right: 20px; top: 15px; font-size: 35px; cursor: pointer; color: #999; }
         
-        #modal-desc { color: #555; font-size: 0.95rem; line-height: 1.5; margin: 20px 0; text-align: left; background: #f9f9f9; padding: 10px; border-radius: 10px; }
+        #modal-img { width:100%; border-radius:12px; height: 250px; object-fit: cover; margin-bottom: 15px; }
+        #modal-desc { color: #555; font-size: 0.95rem; line-height: 1.5; margin: 20px 0; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px; border-left: 4px solid var(--accent); }
         .buy-btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); }
     </style>
 </head>
@@ -39,13 +42,13 @@
     
     <h2>🌸 Bienestar Integral</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Cuidado Propio', '15.000', 'Guía completa para transformar tu rutina diaria. Incluye ejercicios de meditación, consejos de nutrición y técnicas para reducir el estrés de forma natural.')">
-            <img src="https://picsum.photos/id/24/400/600">
+        <div class="book-card" onclick="abrirModal('Cuidado Propio', '15.000', 'Guía completa para transformar tu rutina diaria. Incluye ejercicios de meditación, consejos de nutrición y técnicas para reducir el estrés de forma natural.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=400&h=600&auto=format&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=400&h=600&auto=format&fit=crop" alt="Cuidado Propio">
             <div class="book-title">Cuidado Propio</div>
             <div class="price">$15.000</div>
         </div>
-        <div class="book-card" onclick="abrirModal('Mente Sana', '18.000', 'Descubre cómo controlar la ansiedad y mejorar tu enfoque mental con estrategias probadas por psicólogos.')">
-            <img src="https://picsum.photos/id/20/400/600">
+        <div class="book-card" onclick="abrirModal('Mente Sana', '18.000', 'Descubre cómo controlar la ansiedad y mejorar tu enfoque mental con estrategias probadas por psicólogos para encontrar equilibrio emocional.', 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400&h=600&auto=format&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=400&h=600&auto=format&fit=crop" alt="Mente Sana">
             <div class="book-title">Mente Sana</div>
             <div class="price">$18.000</div>
         </div>
@@ -53,13 +56,13 @@
 
     <h2>🛠️ Mecánica & Motores</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Diagnosis Electrónica', '29.000', 'Manual avanzado para entender escáneres OBD-II, sensores y fallos eléctricos en vehículos modernos.')">
-            <img src="https://picsum.photos/id/0/400/600">
+        <div class="book-card" onclick="abrirModal('Diagnosis Electrónica', '29.000', 'Manual avanzado para entender escáneres OBD-II, interpretación de datos en tiempo real, sensores y fallos eléctricos en vehículos modernos.', 'https://images.unsplash.com/photo-1599256621730-535171e18e50?q=80&w=400&h=600&auto=format&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1599256621730-535171e18e50?q=80&w=400&h=600&auto=format&fit=crop" alt="Diagnosis Electrónica">
             <div class="book-title">Diagnosis Electrónica</div>
             <div class="price">$29.000</div>
         </div>
-        <div class="book-card" onclick="abrirModal('Manual de Tuning', '30.000', 'Todo sobre reprogramación de ECUs, mejoras de flujo y aumento de potencia de forma segura.')">
-            <img src="https://picsum.photos/id/2/400/600">
+        <div class="book-card" onclick="abrirModal('Manual de Tuning', '30.000', 'Todo sobre reprogramación de ECUs, mejoras de flujo de aire, sistemas de escape y aumento de potencia de forma segura y eficiente.', 'https://images.unsplash.com/photo-1605515281257-783a4f2951b6?q=80&w=400&h=600&auto=format&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1605515281257-783a4f2951b6?q=80&w=400&h=600&auto=format&fit=crop" alt="Manual de Tuning">
             <div class="book-title">Manual Tuning</div>
             <div class="price">$30.000</div>
         </div>
@@ -67,8 +70,8 @@
 
     <h2>💻 Tecnología & Digital</h2>
     <div class="book-row">
-        <div class="book-card" onclick="abrirModal('Dominio IA', '22.000', 'Aprende a usar ChatGPT y herramientas de IA para duplicar tu productividad en el trabajo.')">
-            <img src="https://picsum.photos/id/1/400/600">
+        <div class="book-card" onclick="abrirModal('Dominio IA', '22.000', 'Aprende a usar ChatGPT y herramientas de Inteligencia Artificial generativa para duplicar tu productividad y creatividad en el trabajo.', 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=400&h=600&auto=format&fit=crop')">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=400&h=600&auto=format&fit=crop" alt="Dominio IA">
             <div class="book-title">Dominio IA</div>
             <div class="price">$22.000</div>
         </div>
@@ -79,23 +82,31 @@
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img id="modal-img" src="" style="width:100%; border-radius:12px; height: 200px; object-fit: cover;">
-        <h2 id="modal-titulo" style="margin: 15px 0 0 0; border:none; font-size: 1.5rem;"></h2>
+        <img id="modal-img" src="" alt="Portada del libro">
+        <h2 id="modal-titulo" style="margin: 0; border:none; font-size: 1.5rem; color: #333;"></h2>
         <div id="modal-desc"></div>
         <a id="modal-link" href="" class="buy-btn">🛒 Comprar por WhatsApp</a>
     </div>
 </div>
 
 <script>
-    function abrirModal(titulo, precio, desc) {
+    // Actualizamos la función para recibir también la URL de la imagen
+    function abrirModal(titulo, precio, desc, imgUrl) {
         document.getElementById("modal-titulo").innerText = titulo;
         document.getElementById("modal-desc").innerText = desc;
-        // Cargamos una imagen según la sección (provisional)
-        document.getElementById("modal-img").src = "https://picsum.photos/id/24/400/600";
+        // Cambiamos la imagen de la ventana flotante por la del libro tocado
+        document.getElementById("modal-img").src = imgUrl;
+        document.getElementById("modal-img").alt = "Portada de " + titulo;
+        
+        // Configuramos el enlace de WhatsApp
         document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20ebook%3A%20" + encodeURIComponent(titulo) + "%20por%20$" + precio;
+        
+        // Mostramos la ventana
         document.getElementById("miModal").style.display = "block";
     }
+    
     function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
+    // Cerrar si se toca fuera de la ventana blanca
     window.onclick = function(e) { if(e.target == document.getElementById("miModal")) cerrarModal(); }
 </script>
 
