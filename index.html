@@ -119,21 +119,11 @@
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        
         <img src="vista-previa.png" alt="Vista previa" style="width:100%; border-radius:10px; margin-bottom:15px;">
-        
         <h2>El Arte del Cuidado Propio</h2>
-        <p style="text-align:left; color:#555;">
-            <strong>Descripción:</strong> Guía completa para mejorar tu bienestar, gestionar el estrés y conectar contigo misma.
-        </p>
-        
-        <ul style="text-align:left; color:#555; font-size:14px;">
-            <li>✅ Rutinas de bienestar diarias.</li>
-            <li>✅ Técnicas de meditación.</li>
-        </ul>
-
-        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20libro%20del%20Cuidado%20Propio" 
-           style="display:block; background:#25d366; color:white; padding:15px; text-decoration:none; border-radius:10px; font-weight:bold; margin-top:20px; text-align:center;">
+        <p style="text-align:left; color:#555;">Guía completa para mejorar tu bienestar y gestionar el estrés.</p>
+        <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20comprar%20el%20libro%20de%20Cuidado%20Propio" 
+           style="display:block; background:#25d366; color:white; padding:15px; text-decoration:none; border-radius:10px; font-weight:bold; text-align:center;">
            Comprar por WhatsApp - $15.000
         </a>
     </div>
@@ -146,13 +136,13 @@
   function cerrarModal() {
     document.getElementById("miModal").style.display = "none";
   }
-  // Cerrar si hacen clic fuera de la ventana
+  // Cierra la ventana si tocan fuera de ella
   window.onclick = function(event) {
     if (event.target == document.getElementById("miModal")) {
       cerrarModal();
     }
   }
 </script>
-    
+
 </body>
 </html>
