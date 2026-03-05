@@ -11,23 +11,24 @@
         .container { padding: 15px; max-width: 1000px; margin: 0 auto; }
         h2 { color: var(--primary); border-bottom: 3px solid var(--accent); display: inline-block; margin-top: 30px; font-size: 1.4rem; }
         
-        /* Filas de libros con scroll horizontal */
         .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scrollbar-width: none; }
         .book-card { background: white; min-width: 180px; max-width: 180px; border-radius: 12px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; flex-shrink: 0; }
         .book-card img { width: 100%; height: 240px; object-fit: cover; border-radius: 8px; cursor: pointer; }
         
         /* Ventana flotante */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
-        .modal-contenido { background: white; margin: 15% auto; padding: 20px; width: 85%; max-width: 400px; border-radius: 20px; text-align: center; position: relative; }
+        .modal-contenido { background: white; margin: 10% auto; padding: 20px; width: 85%; max-width: 400px; border-radius: 20px; text-align: center; position: relative; }
         .cerrar { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; color: #aaa; }
         .buy-btn { display: block; background: #25d366; color: white; text-decoration: none; padding: 15px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+        
+        /* Estilo para la descripción */
+        #modal-desc { color: #4b5563; font-size: 0.95rem; line-height: 1.5; margin: 15px 0; text-align: left; }
     </style>
 </head>
 <body>
 
 <header>
     <div style="font-size: 1.6rem; font-weight: bold;">Tu Casa Digital</div>
-    <div style="font-size: 0.9rem;">Ebooks de Expertos</div>
 </header>
 
 <div class="container">
@@ -35,38 +36,23 @@
     <h2>🌸 Bienestar Integral</h2>
     <div class="book-row">
         <div class="book-card">
-            <img src="https://picsum.photos/id/24/400/600" onclick="abrirModal('Cuidado Propio', '15.000', 'Guía completa para tu bienestar.')">
+            <img src="https://picsum.photos/id/24/400/600" onclick="abrirModal('El Arte del Cuidado Propio', '15.000', 'Aprende a priorizar tu salud mental y física con rutinas diarias de meditación, alimentación consciente y gestión del estrés. ¡Transforma tu vida hoy!')">
             <div style="font-weight:bold; margin-top:10px;">Cuidado Propio</div>
             <div style="color:var(--primary); font-weight:bold;">$15.000</div>
         </div>
         <div class="book-card">
-            <img src="https://picsum.photos/id/20/400/600" onclick="abrirModal('Mente Sana', '18.000', 'Salud mental y enfoque.')">
+            <img src="https://picsum.photos/id/20/400/600" onclick="abrirModal('Mente Sana', '18.000', 'Una guía práctica para eliminar pensamientos negativos, mejorar la concentración y encontrar la paz interior en un mundo caótico.')">
             <div style="font-weight:bold; margin-top:10px;">Mente Sana</div>
             <div style="color:var(--primary); font-weight:bold;">$18.000</div>
-        </div>
-        <div class="book-card">
-            <img src="https://picsum.photos/id/1/400/600" onclick="abrirModal('Hábitos', '20.000', 'Pequeños cambios diarios.')">
-            <div style="font-weight:bold; margin-top:10px;">Hábitos</div>
-            <div style="color:var(--primary); font-weight:bold;">$20.000</div>
         </div>
     </div>
 
     <h2>🛠️ Mecánica & Motores</h2>
     <div class="book-row">
         <div class="book-card">
-            <img src="https://picsum.photos/id/0/400/600" onclick="abrirModal('Manual Motores', '25.000', 'Todo sobre mecánica avanzada.')">
+            <img src="https://picsum.photos/id/0/400/600" onclick="abrirModal('Manual de Motores', '25.000', 'Desde el funcionamiento básico hasta reparaciones avanzadas. Incluye diagramas detallados de sistemas de inyección y distribución.')">
             <div style="font-weight:bold; margin-top:10px;">Manual Motores</div>
             <div style="color:var(--primary); font-weight:bold;">$25.000</div>
-        </div>
-        <div class="book-card">
-            <img src="https://picsum.photos/id/2/400/600" onclick="abrirModal('Tuning Pro', '30.000', 'Potencia al máximo tu motor.')">
-            <div style="font-weight:bold; margin-top:10px;">Tuning Pro</div>
-            <div style="color:var(--primary); font-weight:bold;">$30.000</div>
-        </div>
-        <div class="book-card">
-            <img src="https://picsum.photos/id/3/400/600" onclick="abrirModal('Electricidad', '22.000', 'Sistemas eléctricos automotrices.')">
-            <div style="font-weight:bold; margin-top:10px;">Electricidad</div>
-            <div style="color:var(--primary); font-weight:bold;">$22.000</div>
         </div>
     </div>
 
@@ -75,10 +61,9 @@
 <div id="miModal" class="modal">
     <div class="modal-contenido">
         <span class="cerrar" onclick="cerrarModal()">&times;</span>
-        <img id="modal-img" src="" style="width:100%; border-radius:10px; margin-bottom:15px;">
-        <h2 id="modal-titulo" style="margin:0; border:none;"></h2>
-        <p id="modal-desc" style="color:#555; font-size:0.9rem;"></p>
-        <a id="modal-link" href="" class="buy-btn">Comprar - $<span id="modal-precio"></span></a>
+        <img id="modal-img" src="https://picsum.photos/id/24/400/600" style="width:100%; border-radius:10px;">
+        <h2 id="modal-titulo" style="margin: 15px 0 5px 0; border:none; display: block;"></h2>
+        <div id="modal-desc"></div> <a id="modal-link" href="" class="buy-btn">Comprar - $<span id="modal-precio"></span></a>
     </div>
 </div>
 
@@ -87,9 +72,7 @@
         document.getElementById("modal-titulo").innerText = titulo;
         document.getElementById("modal-precio").innerText = precio;
         document.getElementById("modal-desc").innerText = desc;
-        // La imagen del modal será la misma que la del libro (puedes ajustarlo luego)
-        document.getElementById("modal-img").src = "https://picsum.photos/id/24/400/600";
-        document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Hola!%20Quiero%20el%20libro%20" + titulo;
+        document.getElementById("modal-link").href = "https://wa.me/573223693926?text=Hola!%20Quiero%20el%20libro%3A%20" + encodeURIComponent(titulo);
         document.getElementById("miModal").style.display = "block";
     }
     function cerrarModal() { document.getElementById("miModal").style.display = "none"; }
