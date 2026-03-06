@@ -3,145 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperationEbook - Tienda Oficial</title>
+    <title>SuperationEbook | Catálogo S.E.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary: #1a5631; --accent: #f59e0b; --bg: #f3f4f6; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; scroll-behavior: smooth; }
-        
-        /* HEADER Y NAVEGACIÓN */
-        header { background: var(--primary); color: white; padding: 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .nav-categories { background: white; padding: 10px; display: flex; overflow-x: auto; gap: 10px; position: sticky; top: 0; z-index: 90; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .nav-btn { background: #eee; border: none; padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; white-space: nowrap; cursor: pointer; color: #444; font-weight: bold; text-decoration: none;}
+        :root {
+            --neon-green: #00ff66;
+            --dark-bg: #000000;
+            --card-gray: #121212;
+            --yellow-accent: #f1c40f;
+        }
 
-        /* BARRA DE CONFIANZA */
-        .trust-bar { display: flex; justify-content: space-around; background: #fff3cd; padding: 10px; font-size: 0.7rem; color: #856404; font-weight: bold; }
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 15px;
+        }
 
-        .container { padding: 15px; max-width: 1000px; margin: 0 auto; }
-        
-        /* SECCIÓN DE COMBOS */
-        .combo-section { background: linear-gradient(135deg, #1a5631, #2d8a4e); border-radius: 20px; padding: 20px; color: white; margin-bottom: 30px; }
-        .combo-card { background: rgba(255,255,255,0.1); border: 1px dashed white; border-radius: 15px; padding: 15px; margin-top: 10px; text-align: center; }
+        /* Banner Superior de Acceso */
+        .top-banner {
+            color: var(--neon-green);
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-        h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 10px; margin-top: 40px; font-size: 1.4rem; }
+        /* Barra de Búsqueda */
+        .search-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
 
-        /* LIBROS */
-        .book-row { display: flex; overflow-x: auto; gap: 15px; padding: 10px 5px; scrollbar-width: none; }
-        .book-row::-webkit-scrollbar { display: none; }
-        .book-card { background: white; min-width: 155px; max-width: 155px; border-radius: 15px; padding: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; flex-shrink: 0; }
-        .book-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; }
-        .price { color: var(--primary); font-weight: 800; font-size: 1rem; margin-top: 5px; }
+        .search-container input {
+            width: 100%;
+            background: #0a0a0a;
+            border: 1px solid var(--yellow-accent);
+            padding: 12px 40px;
+            border-radius: 25px;
+            color: #888;
+            box-sizing: border-box;
+        }
 
-        /* MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); }
-        .modal-content { background: white; margin: 10% auto; padding: 20px; width: 85%; max-width: 380px; border-radius: 20px; text-align: center; position: relative; }
-        .btn-ws { display: block; background: #25d366; color: white; text-decoration: none; padding: 12px; border-radius: 10px; font-weight: bold; margin-top: 15px; }
+        .search-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00bcd4;
+        }
 
-        /* WHATSAPP FLOTANTE */
-        .ws-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 100; text-decoration: none; }
+        /* Etiquetas de Filtro */
+        .filter-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            border: 1px solid var(--neon-green);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .tag.active {
+            background: var(--neon-green);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* Título de Sección */
+        .section-title {
+            border-left: 4px solid var(--neon-green);
+            padding-left: 15px;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--yellow-accent);
+        }
+
+        /* Tarjeta de Producto */
+        .product-card {
+            background: var(--card-gray);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            max-width: 400px;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-image: url('https://via.placeholder.com/400x200'); /* Reemplazar con tu imagen de motor */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .product-price {
+            color: var(--neon-green);
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div style="font-size: 1.6rem; font-weight: 900;">SUPERATIONEBOOK</div>
-</header>
-
-<div class="trust-bar">
-    <span>📥 Entrega Inmediata</span>
-    <span>✅ Pago Seguro</span>
-    <span>⭐ +500 Ventas</span>
-</div>
-
-<div class="nav-categories">
-    <a href="#combos" class="nav-btn" style="background: var(--accent); color: white;">🔥 Ofertas</a>
-    <a href="#gastronomia" class="nav-btn">🥘 Cocina</a>
-    <a href="#bienestar" class="nav-btn">🌸 Salud</a>
-    <a href="#motores" class="nav-btn">🛠️ Motores</a>
-    <a href="#ficcion" class="nav-btn">📚 Ficción</a>
-    <a href="#exito" class="nav-btn">📈 Éxito</a>
-</div>
-
-<div class="container">
-
-    <div id="combos" class="combo-section">
-        <h2 style="color: white; border: none; margin-top: 0;">🔥 Super Combos</h2>
-        <div class="combo-card">
-            <h3>PACK SALUD TOTAL</h3>
-            <p>Diabéticos + Postres + Yoga</p>
-            <div style="font-size: 1.5rem; font-weight: 900;">$39.000</div>
-            <p style="text-decoration: line-through; opacity: 0.7;">Antes $61.000</p>
-            <a href="https://wa.me/573223693926?text=Hola!%20Quiero%20el%20PACK%20SALUD%20TOTAL" class="btn-ws">Pedir Combo</a>
-        </div>
+    <div class="top-banner">
+        ⚡ ACCESO ELITE TERMINA EN: 9:44
     </div>
 
-    <h2 id="gastronomia">🥘 Gastronomía</h2>
-    <div class="book-row">
-        <div class="book-card" onclick="openModal('Menú Diabéticos', '$25.000', 'Salud en tu mesa.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400')">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400">
-            <div class="price">$25.000</div>
-        </div>
-        <div class="book-card" onclick="openModal('Postres Sin Culpa', '$20.000', 'Dulces sanos.', 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400')">
-            <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400">
-            <div class="price">$20.000</div>
-        </div>
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Buscar conocimiento S.E...">
     </div>
 
-    <h2 id="bienestar">🌸 Bienestar</h2>
-    <div class="book-row">
-        <div class="book-card" onclick="openModal('Cuidado Propio', '$15.000', 'Hábitos de vida.', 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400')">
-            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400">
-            <div class="price">$15.000</div>
-        </div>
-        <div class="book-card" onclick="openModal('Yoga Total', '$16.000', 'Cuerpo y alma.', 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400')">
-            <img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=400">
-            <div class="price">$16.000</div>
-        </div>
+    <div class="filter-tags">
+        <div class="tag active">TODO</div>
+        <div class="tag">JÓVENES</div>
+        <div class="tag">PRO S.E.</div>
+        <div class="tag">VER TODO</div>
+        <div class="tag">COMBOS</div>
+        <div class="tag">GUÍAS</div>
     </div>
 
-    <h2 id="motores">🛠️ Tecnología y Motores</h2>
-    <div class="book-row">
-        <div class="book-card" onclick="openModal('Electricidad Auto', '$27.000', 'Sistemas avanzados.', 'https://images.unsplash.com/photo-1487754169491-0f2022722b1e?w=400')">
-            <img src="https://images.unsplash.com/photo-1487754169491-0f2022722b1e?w=400">
-            <div class="price">$27.000</div>
-        </div>
-        <div class="book-card" onclick="openModal('Dominio IA', '$22.000', 'Futuro digital.', 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400')">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400">
-            <div class="price">$22.000</div>
+    <h2 class="section-title">COMBOS DE ALTO VALOR</h2>
+
+    <div class="product-card">
+        <div class="product-image"></div> <div class="product-info">
+            <div class="product-title">Master Combo Mecánico</div>
+            <div class="product-price">$48,000</div>
         </div>
     </div>
-
-    <h2 id="ficcion">📚 Ficción y Literatura</h2>
-    <div class="book-row">
-        <div class="book-card" onclick="openModal('Suspenso Oscuro', '$25.000', 'Thriller Adultos.', 'https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?w=400')">
-            <img src="https://images.unsplash.com/photo-1531988042231-d39a9cc12a9a?w=400">
-            <div class="price">$25.000</div>
-        </div>
-    </div>
-
-</div>
-
-<a href="https://wa.me/573223693926" class="ws-float">💬</a>
-
-<div id="bookModal" class="modal">
-    <div class="modal-content">
-        <span onclick="closeModal()" style="position:absolute; right:20px; cursor:pointer; font-size:30px;">&times;</span>
-        <img id="modal-img" src="" style="width:100%; border-radius:10px;">
-        <h3 id="modal-title"></h3>
-        <p id="modal-desc"></p>
-        <a id="modal-link" href="#" class="btn-ws">Comprar Ahora</a>
-    </div>
-</div>
-
-<script>
-    function openModal(t, p, d, i) {
-        document.getElementById('modal-title').innerText = t;
-        document.getElementById('modal-desc').innerText = d;
-        document.getElementById('modal-img').src = i;
-        document.getElementById('modal-link').href = "https://wa.me/573223693926?text=Me%20interesa%20" + t;
-        document.getElementById('bookModal').style.display = "block";
-    }
-    function closeModal() { document.getElementById('bookModal').style.display = "none"; }
-</script>
 
 </body>
 </html>
