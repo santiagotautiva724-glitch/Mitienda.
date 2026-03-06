@@ -3,153 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperationEbook | Catálogo S.E.</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>S.E. Elite - SuperationEbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-green: #00ff66;
-            --dark-bg: #000000;
-            --card-gray: #121212;
-            --yellow-accent: #f1c40f;
+            --fondo-dark: #020504;
+            --verde-neon: #00ff88;
+            --dorado: #ffcc00;
+            --cristal: rgba(255, 255, 255, 0.05);
+            --blanco: #ffffff;
         }
 
-        body {
-            background-color: var(--dark-bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 15px;
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            margin: 0; 
+            background: var(--fondo-dark) url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); 
+            color: var(--blanco); 
+            overflow-x: hidden;
         }
 
-        /* Banner Superior de Acceso */
-        .top-banner {
-            color: var(--neon-green);
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+        /* HEADER & LOGO */
+        .brand-header { 
+            text-align: center; padding: 40px 15px; 
+            border-bottom: 2px solid var(--dorado);
+        }
+        .full-logo { font-size: 28px; font-weight: 800; color: var(--blanco); text-transform: uppercase; letter-spacing: 3px; }
+        .full-logo span { color: var(--dorado); }
+
+        /* BARRA DE URGENCIA */
+        .urgency-bar {
+            background: var(--dorado); color: black; text-align: center;
+            padding: 5px; font-size: 11px; font-weight: 800; text-transform: uppercase;
         }
 
-        /* Barra de Búsqueda */
-        .search-container {
-            position: relative;
-            margin-bottom: 25px;
+        /* STICKY NAV */
+        .sticky-nav { 
+            position: sticky; top: 0; z-index: 2000; 
+            background: rgba(2, 5, 4, 0.9); backdrop-filter: blur(15px);
+            padding: 15px 10px; border-bottom: 1px solid var(--verde-neon);
+        }
+        .global-timer { text-align: center; color: var(--verde-neon); font-weight: 800; font-size: 13px; margin-bottom: 10px; }
+        
+        .search-input { 
+            width: 100%; max-width: 400px; display: block; margin: auto;
+            padding: 12px 20px; border-radius: 30px; border: 1px solid var(--dorado); 
+            background: rgba(255,255,255,0.05); color: white; outline: none;
         }
 
-        .search-container input {
-            width: 100%;
-            background: #0a0a0a;
-            border: 1px solid var(--yellow-accent);
-            padding: 12px 40px;
-            border-radius: 25px;
-            color: #888;
-            box-sizing: border-box;
+        .filters-container { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 15px; }
+        .btn-filter { 
+            padding: 8px 15px; border-radius: 20px; border: 1px solid var(--verde-neon); 
+            background: transparent; color: var(--verde-neon); cursor: pointer; font-size: 10px; font-weight: 700; transition: 0.3s;
         }
+        .btn-filter.active { background: var(--verde-neon); color: black; box-shadow: 0 0 15px var(--verde-neon); }
 
-        .search-container i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #00bcd4;
-        }
+        /* GRID */
+        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        .section-title { font-size: 18px; font-weight: 800; color: var(--dorado); margin: 40px 0 20px; text-transform: uppercase; border-left: 4px solid var(--verde-neon); padding-left: 15px; }
 
-        /* Etiquetas de Filtro */
-        .filter-tags {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { 
+            background: var(--cristal); border-radius: 15px; overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; position: relative;
         }
+        .card:hover { transform: scale(1.03); border-color: var(--verde-neon); }
+        .card img { width: 100%; height: 160px; object-fit: cover; }
+        .card-body { padding: 12px; }
+        .price { color: var(--verde-neon); font-weight: 800; font-size: 17px; }
 
-        .tag {
-            border: 1px solid var(--neon-green);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+        /* TESTIMONIOS */
+        .testimonials { display: flex; overflow-x: auto; gap: 15px; padding: 20px 0; scrollbar-width: none; }
+        .testi-card { min-width: 250px; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; border: 1px solid var(--verde-premium); }
+        .testi-text { font-size: 12px; font-style: italic; opacity: 0.8; }
+        .testi-user { font-weight: 800; color: var(--dorado); font-size: 11px; margin-top: 10px; display: block; }
 
-        .tag.active {
-            background: var(--neon-green);
-            color: black;
-            box-shadow: 0 0 15px var(--neon-green);
+        /* MODAL */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 5000; justify-content: center; align-items: center; padding: 10px; }
+        .modal-content { 
+            background: #0a0a0a; width: 100%; max-width: 400px; border-radius: 25px; 
+            padding: 20px; border: 2px solid var(--verde-neon); color: white; position: relative;
         }
+        .stock-tag { color: #ff4444; font-size: 12px; font-weight: 800; text-align: center; margin-bottom: 10px; }
+        .bonus-tag { background: var(--verde-premium); color: var(--verde-neon); padding: 10px; border-radius: 10px; font-size: 11px; margin: 15px 0; border: 1px dashed var(--verde-neon); }
+        
+        .btn-buy { background: var(--verde-neon); color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 800; width: 100%; cursor: pointer; font-size: 15px; }
 
-        /* Título de Sección */
-        .section-title {
-            border-left: 4px solid var(--neon-green);
-            padding-left: 15px;
-            text-transform: uppercase;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: var(--yellow-accent);
-        }
-
-        /* Tarjeta de Producto */
-        .product-card {
-            background: var(--card-gray);
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 25px;
-            max-width: 400px;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background-image: url('https://via.placeholder.com/400x200'); /* Reemplazar con tu imagen de motor */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-title {
-            font-size: 1rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .product-price {
-            color: var(--neon-green);
-            font-size: 1.4rem;
-            font-weight: bold;
-        }
+        /* FOOTER VISION */
+        .footer-vision { background: var(--cristal); padding: 30px; border-radius: 20px; border: 1px solid var(--dorado); margin: 40px 0; text-align: center; }
     </style>
 </head>
 <body>
 
-    <div class="top-banner">
-        ⚡ ACCESO ELITE TERMINA EN: 9:44
+<div class="urgency-bar">🎁 BONO EXTRA: Recibe "Lectura Rápida S.E." por cualquier compra hoy</div>
+
+<div class="brand-header">
+    <div class="full-logo">Superation<span>Ebook</span></div>
+    <p style="font-size: 10px; letter-spacing: 2px; opacity: 0.6;">ESTRATEGIA • DISCIPLINA • RESULTADOS</p>
+</div>
+
+<div class="sticky-nav">
+    <div class="global-timer">OFERTA TERMINA EN: <span id="timer">09:59</span></div>
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar conocimiento..." onkeyup="app.render()">
+    <div class="filters-container">
+        <div style="display:flex; gap:8px;">
+            <button id="btnAgeTodos" class="btn-filter active" onclick="app.setAge('Todos')">TODO</button>
+            <button id="btnAgeMenores" class="btn-filter" onclick="app.setAge('Menores')">MENORES</button>
+            <button id="btnAgeMayores" class="btn-filter" onclick="app.setAge('Mayores')">MAYORES</button>
+        </div>
     </div>
+</div>
 
-    <div class="search-container">
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input type="text" placeholder="Buscar conocimiento S.E...">
-    </div>
-
-    <div class="filter-tags">
-        <div class="tag active">TODO</div>
-        <div class="tag">JÓVENES</div>
-        <div class="tag">PRO S.E.</div>
-        <div class="tag">VER TODO</div>
-        <div class="tag">COMBOS</div>
-        <div class="tag">GUÍAS</div>
-    </div>
-
-    <h2 class="section-title">COMBOS DE ALTO VALOR</h2>
-
-    <div class="product-card">
-        <div class="product-image"></div> <div class="product-info">
-            <div class="product-title">Master Combo Mecánico</div>
-            <div class="product-price">$48,000</div>
+<div class="container">
+    <div id="mainCatalog"></div>
+    
+    <div class="section-title">Resultados SuperationEbook</div>
+    <div class="testimonials">
+        <div class="testi-card">
+            <p class="testi-text">"Traje mi primer pedido de China gracias a la guía de Importaciones. Recuperé la inversión en 1 semana."</p>
+            <span class="testi-user">@Carlos_Mkt</span>
+        </div>
+        <div class="testi-card">
+            <p class="testi-text">"Tengo 17 años y el libro de Inversionista Joven me abrió los ojos. Ya tengo mi primera cuenta de ahorros activa."</p>
+            <span class="testi-user">@Kevin_S</span>
+        </div>
+        <div class="testi-card">
+            <p class="testi-text">"El combo mecánico es de otro nivel. Los diagramas de inyección son muy claros."</p>
+            <span class="testi-user">@Taller_Pro</span>
         </div>
     </div>
 
+    <div class="footer-vision">
+        <h3 style="color:var(--dorado); margin-top:0;">Misión Estratégica S.E.</h3>
+        <p style="font-size:13px; opacity:0.8; line-height:1.6;">A mis 16 años, creé **SuperationEbook** para hackear el sistema. No te damos teoría, te damos las armas técnicas para tu libertad. +1,500 alumnos ya están en el siguiente nivel.</p>
+    </div>
+</div>
+
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <div class="stock-tag">⚠️ SOLO QUEDAN 3 ACCESOS DISPONIBLES</div>
+        <span onclick="app.closeM()" style="position:absolute; right:20px; top:15px; cursor:pointer; font-size:24px;">&times;</span>
+        <img id="mImg" style="width:100%; border-radius:15px; margin-bottom:15px; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+        <h2 id="mTitle" style="color:var(--verde-neon); margin:0; font-size:18px;"></h2>
+        <p id="mDesc" style="font-size:12px; color:#bbb; line-height:1.5; margin:10px 0;"></p>
+        
+        <div class="bonus-tag">
+            <strong>BONO S.E. INCLUIDO:</strong><br>
+            Acceso a la comunidad privada + Guía de Productividad Élite.
+        </div>
+
+        <div id="mPrice" style="font-size:30px; font-weight:800; color:var(--verde-neon); text-align:center; margin-bottom:15px;"></div>
+        <button class="btn-buy" onclick="app.buy()">ADQUIRIR ACCESO INMEDIATO 💬</button>
+        <p style="font-size:9px; text-align:center; opacity:0.5; margin-top:10px;">Garantía de satisfacción SuperationEbook</p>
+    </div>
+</div>
+
+<script>
+    const app = {
+        tel: "573223693926",
+        ageFilter: 'Todos',
+        timeLeft: 599,
+
+        products: [
+            { id: 101, tipo: "Packs", edad: "Mayores", best: true, t: "Master Combo Mecánico Pro", p: 75000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=500", desc: "Formación completa en inyección y electricidad. Olvida los cursos caros, aquí tienes el conocimiento real." },
+            { id: 2, tipo: "Guias", edad: "Mayores", best: true, t: "Importaciones Elite", p: 48000, img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500", desc: "Aprende a importar y revender. El mapa exacto que los grandes proveedores no quieren que sepas." },
+            { id: 12, tipo: "Guias", edad: "Mayores", t: "Crypto & Trading S.E.", p: 55000, img: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=500", desc: "No regales tu dinero al mercado. Aprende gestión de riesgo y análisis técnico profesional." },
+            { id: 6, tipo: "Libros", edad: "Menores", t: "Inversionista Joven", p: 25000, img: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=500", desc: "Para menores que no quieren depender de sus padres. Mentalidad y ahorro estratégico." },
+            { id: 14, tipo: "Libros", edad: "Menores", t: "Mentalidad Ganadora", p: 20000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=500", desc: "El libro que debieron enseñarte en la escuela. Disciplina de acero." }
+        ],
+
+        init() { this.render(); this.startTimer(); },
+
+        startTimer() {
+            setInterval(() => {
+                this.timeLeft--;
+                if (this.timeLeft <= 0) this.timeLeft = 599;
+                let m = Math.floor(this.timeLeft / 60); let s = this.timeLeft % 60;
+                document.getElementById('timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+            }, 1000);
+        },
+
+        setAge(v) { 
+            this.ageFilter = v; 
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            document.getElementById('btnAge' + v).classList.add('active');
+            this.render(); 
+        },
+
+        render() {
+            const catalog = document.getElementById('mainCatalog');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            catalog.innerHTML = '';
+
+            // Mostrar "Destacados" primero
+            const bests = this.products.filter(p => p.best && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
+            if(bests.length > 0 && !search) {
+                let html = `<div class="section-title">🔥 Más vendidos S.E.</div><div class="grid">`;
+                bests.forEach(p => {
+                    html += `<div class="card" onclick="app.openM(${p.id})">
+                        <div class="best-seller-badge">TOP</div>
+                        <img src="${p.img}"><div class="card-body">
+                        <div style="font-size:11px; height:32px; font-weight:800;">${p.t}</div>
+                        <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
+                });
+                catalog.innerHTML += html + '</div>';
+            }
+
+            // Resto de categorías
+            const categories = ["Guias", "Libros"];
+            categories.forEach(cat => {
+                const items = this.products.filter(p => p.tipo === cat && p.t.toLowerCase().includes(search) && (this.ageFilter === 'Todos' || p.edad === this.ageFilter));
+                if(items.length > 0) {
+                    let html = `<div class="section-title">${cat}</div><div class="grid">`;
+                    items.forEach(p => {
+                        html += `<div class="card" onclick="app.openM(${p.id})">
+                            <img src="${p.img}"><div class="card-body">
+                            <div style="font-size:11px; height:32px; font-weight:600;">${p.t}</div>
+                            <div class="price">$${p.p.toLocaleString()}</div></div></div>`;
+                    });
+                    catalog.innerHTML += html + '</div>';
+                }
+            });
+        },
+
+        openM(id) {
+            const p = this.products.find(x => x.id === id);
+            this.selectedId = id;
+            document.getElementById('mTitle').innerText = p.t;
+            document.getElementById('mDesc').innerText = p.desc;
+            document.getElementById('mPrice').innerText = `$${p.p.toLocaleString()}`;
+            document.getElementById('mImg').src = p.img;
+            document.getElementById('infoModal').style.display = 'flex';
+        },
+
+        closeM() { document.getElementById('infoModal').style.display = 'none'; },
+
+        buy() {
+            const p = this.products.find(x => x.id === this.selectedId);
+            window.open(`https://wa.me/${this.tel}?text=Hola! Vengo de la web y quiero mi acceso Élite a: ${p.t}. Aplicar bono de regalo.`);
+        }
+    };
+
+    app.init();
+</script>
 </body>
 </html>
