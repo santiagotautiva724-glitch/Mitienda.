@@ -3,183 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperationEbook | Elite Academy</title>
+    <title>SuperationEbook | Elite Academy & Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --dark: #020504; --neon: #00ff88; --gold: #ffcc00; --white: #ffffff;
-            --glass: rgba(255, 255, 255, 0.05); --shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+            --glass: rgba(255, 255, 255, 0.05); --red: #ff4444;
         }
         body { font-family: 'Poppins', sans-serif; background: var(--dark); color: var(--white); margin: 0; overflow-x: hidden; }
         
         /* HEADER */
-        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.8); position: sticky; top:0; z-index: 1000; border-bottom: 1px solid var(--neon); }
-        .logo { font-family: 'Orbitron'; font-size: 18px; color: var(--white); letter-spacing: 2px; }
+        .header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--neon); background: rgba(0,0,0,0.9); position: sticky; top:0; z-index: 1000; }
+        .logo { font-family: 'Orbitron'; font-size: 18px; color: var(--white); }
         .logo span { color: var(--gold); }
-        .nav-icons { display: flex; gap: 20px; font-size: 20px; }
-        .icon-btn { cursor: pointer; position: relative; transition: 0.3s; }
-        .icon-btn:hover { color: var(--neon); }
-        #cart-count { position: absolute; top: -8px; right: -10px; background: #ff4444; font-size: 10px; padding: 2px 6px; border-radius: 50%; }
 
-        /* FILTROS DE EDAD */
-        .age-nav { display: flex; justify-content: center; gap: 10px; padding: 15px; background: #0a0a0a; border-bottom: 1px solid #222; }
-        .age-btn { padding: 8px 15px; border-radius: 20px; border: 1px solid var(--neon); background: transparent; color: var(--neon); font-size: 10px; font-weight: 800; cursor: pointer; }
-        .age-btn.active { background: var(--neon); color: black; box-shadow: var(--shadow); }
+        /* NAV FILTERS */
+        .nav-section { background: #080808; padding: 15px 0; text-align: center; }
+        .age-filter { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .btn-age { padding: 6px 15px; border-radius: 20px; border: 1px solid var(--neon); background: transparent; color: var(--neon); font-size: 10px; font-weight: 800; cursor: pointer; }
+        .btn-age.active { background: var(--neon); color: black; box-shadow: 0 0 15px var(--neon); }
 
-        /* BUSCADOR Y CATEGORÍAS */
-        .search-box { padding: 20px; text-align: center; }
-        .search-bar { width: 90%; max-width: 450px; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--gold); background: #111; color: white; outline: none; }
-        .quick-tags { display: flex; overflow-x: auto; gap: 10px; padding: 15px; scrollbar-width: none; }
-        .tag { white-space: nowrap; padding: 7px 15px; background: var(--glass); border-radius: 20px; font-size: 11px; border: 1px solid #333; cursor: pointer; }
-        .tag:hover { border-color: var(--neon); color: var(--neon); }
+        .cat-scroll { display: flex; overflow-x: auto; gap: 10px; padding: 0 15px; scrollbar-width: none; }
+        .cat-tag { white-space: nowrap; padding: 8px 18px; background: var(--glass); border-radius: 20px; font-size: 10px; border: 1px solid #333; cursor: pointer; color: #888; }
+        .cat-tag.active { border-color: var(--gold); color: var(--gold); }
 
         /* SECCIONES HORIZONTALES */
-        .section-header { padding: 0 20px; margin-top: 30px; display: flex; align-items: center; gap: 10px; }
-        .section-header h2 { font-family: 'Orbitron'; font-size: 13px; color: var(--gold); text-transform: uppercase; margin: 0; }
-        .line { height: 2px; flex-grow: 1; background: linear-gradient(90deg, var(--neon), transparent); }
-
-        .scroller { display: flex; overflow-x: auto; gap: 15px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-        .card { min-width: 170px; background: #0d0d0d; border-radius: 15px; border: 1px solid #222; overflow: hidden; transition: 0.3s; }
+        .section-container { margin: 30px 0; padding-left: 20px; }
+        .section-title { font-family: 'Orbitron'; font-size: 13px; color: var(--gold); margin-bottom: 15px; border-left: 3px solid var(--neon); padding-left: 10px; text-transform: uppercase; }
+        .scroll-wrapper { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; scrollbar-width: none; }
+        
+        /* CARDS */
+        .card { min-width: 170px; background: #0d0d0d; border-radius: 18px; border: 1px solid #222; overflow: hidden; position: relative; transition: 0.3s; }
         .card:hover { border-color: var(--neon); transform: translateY(-5px); }
-        .card img { width: 100%; height: 180px; object-fit: cover; }
-        .card-body { padding: 12px; }
-        .stars { color: var(--gold); font-size: 10px; margin-bottom: 5px; }
-        .title { font-size: 11px; font-weight: 600; line-height: 1.3; height: 30px; }
-        .price { color: var(--neon); font-weight: 800; font-size: 15px; margin-top: 8px; }
-        .add-btn { width: 100%; padding: 10px; background: var(--neon); border: none; font-weight: 800; font-size: 10px; cursor: pointer; }
+        .card img { width: 100%; height: 210px; object-fit: cover; cursor: pointer; }
+        .badge-promo { position: absolute; top: 10px; right: 10px; background: var(--red); color: white; padding: 3px 8px; border-radius: 5px; font-size: 9px; font-weight: 900; }
+        .card-info { padding: 12px; }
+        .title { font-size: 11px; font-weight: 600; line-height: 1.3; height: 30px; margin-bottom: 8px; }
+        .price-box { display: flex; flex-direction: column; }
+        .old-price { font-size: 11px; color: #777; text-decoration: line-through; }
+        .new-price { color: var(--neon); font-weight: 800; font-size: 16px; }
 
-        /* MODALES (CARRITO Y CUENTA) */
-        .side-modal { display: none; position: fixed; top: 0; right: 0; width: 85%; max-width: 320px; height: 100%; background: #050505; z-index: 2000; padding: 25px; border-left: 2px solid var(--neon); box-shadow: -10px 0 30px rgba(0,0,0,0.9); }
-        .user-badge { background: var(--gold); color: black; padding: 5px 10px; border-radius: 5px; font-weight: 800; font-size: 10px; display: inline-block; margin-top: 10px; }
+        /* MODAL */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index: 5000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px); }
+        .modal-content { background: #050505; border: 1px solid var(--neon); padding: 25px; border-radius: 25px; max-width: 400px; width: 100%; text-align: center; position: relative; }
+        .modal-img { width: 100%; border-radius: 15px; margin-bottom: 15px; }
+
+        /* FOOTER INFO */
+        .footer-info { padding: 40px 20px; background: #050505; border-top: 1px solid #111; }
+        .info-box { background: var(--glass); padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 3px solid var(--gold); }
+        .info-box h3 { font-family: 'Orbitron'; font-size: 13px; color: var(--gold); margin: 0 0 10px 0; }
+        .info-box p { font-size: 12px; opacity: 0.7; line-height: 1.6; margin: 0; }
+
+        /* CARRITO */
+        .cart-bar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--neon); color: black; padding: 15px; border-radius: 40px; font-weight: 800; text-align: center; z-index: 4000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); cursor: pointer; display: flex; justify-content: center; gap: 10px; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <div class="logo">Superation<span>Ebook</span></div>
-        <div class="nav-icons">
-            <div class="icon-btn" onclick="toggleModal('user-modal')"><i class="fas fa-user-circle"></i></div>
-            <div class="icon-btn" onclick="toggleModal('cart-modal')">
-                <i class="fas fa-shopping-basket"></i>
-                <span id="cart-count">0</span>
+        <div style="font-size: 10px; color: var(--gold); font-weight: 800;">DASHBOARD ALUMNO</div>
+    </div>
+
+    <div class="nav-section">
+        <div class="age-filter">
+            <button class="btn-age active" onclick="app.setAge('Todos', this)">TODO</button>
+            <button class="btn-age" onclick="app.setAge('Menores', this)">JÓVENES</button>
+            <button class="btn-age" onclick="app.setAge('Mayores', this)">PRO S.E.</button>
+        </div>
+        <div class="cat-scroll">
+            <div class="cat-tag active" onclick="app.setCat('Todas', this)">Todas</div>
+            <div class="cat-tag" onclick="app.setCat('Combos', this)">🔥 Combos</div>
+            <div class="cat-tag" onclick="app.setCat('Importaciones', this)">Importaciones</div>
+            <div class="cat-tag" onclick="app.setCat('Dropshipping', this)">Dropshipping</div>
+            <div class="cat-tag" onclick="app.setCat('Mecánica', this)">Mecánica</div>
+            <div class="cat-tag" onclick="app.setCat('Ingeniería', this)">Ingeniería</div>
+            <div class="cat-tag" onclick="app.setCat('Cocina', this)">Cocina</div>
+        </div>
+    </div>
+
+    <div id="main-catalog"></div>
+
+    <div class="footer-info">
+        <div class="info-box">
+            <h3>Nuestra Empresa</h3>
+            <p>SuperationEbook es la plataforma líder en educación técnica y estratégica. Nos especializamos en condensar años de experiencia en guías prácticas de ejecución inmediata.</p>
+        </div>
+        <div class="info-box">
+            <h3>Nuestra Visión</h3>
+            <p>Liderar la transformación digital en Latinoamérica, proveyendo las herramientas necesarias para que cada individuo construya su propia fuente de ingresos de alto valor.</p>
+        </div>
+    </div>
+
+    <div id="descModal" class="modal">
+        <div class="modal-content">
+            <span onclick="app.closeModal()" style="position:absolute; right:20px; top:10px; cursor:pointer; font-size:24px; opacity:0.5;">&times;</span>
+            <img id="mImg" class="modal-img">
+            <h2 id="mTitle" style="color:var(--neon); font-size:18px; margin:10px 0;"></h2>
+            <p id="mDesc" style="font-size:11px; opacity:0.7; margin-bottom:20px;"></p>
+            <div class="price-box" style="align-items:center;">
+                <span id="mOld" class="old-price" style="font-size:16px;"></span>
+                <span id="mNew" class="new-price" style="font-size:28px;"></span>
             </div>
+            <button onclick="app.addToCart()" style="width:100%; background:var(--neon); border:none; padding:15px; border-radius:15px; font-weight:800; margin-top:20px; cursor:pointer;">AGREGAR AL PEDIDO 🛒</button>
         </div>
     </div>
 
-    <div class="age-nav">
-        <button class="age-btn active" onclick="app.filterAge('todos', this)">TODO</button>
-        <button class="age-btn" onclick="app.filterAge('menores', this)">JÓVENES (-18)</button>
-        <button class="age-btn" onclick="app.filterAge('mayores', this)">PRO S.E. (+18)</button>
-    </div>
-
-    <div class="search-box">
-        <input type="text" class="search-bar" placeholder="🔍 Buscar en SuperationEbook..." onkeyup="app.search()">
-        <div class="quick-tags">
-            <div class="tag">Mecánica</div><div class="tag">Cocina</div><div class="tag">Ingeniería</div>
-            <div class="tag">Dropshipping</div><div class="tag">Trading</div><div class="tag">Fitness</div>
-        </div>
-    </div>
-
-    <div id="main-content"></div>
-
-    <div id="cart-modal" class="side-modal">
-        <h3 style="font-family:'Orbitron'; color:var(--neon)">CARRITO S.E.</h3>
-        <div id="cart-list" style="margin: 20px 0; font-size: 12px; max-height: 60%; overflow-y: auto;"></div>
-        <hr style="border: 0.5px solid #333;">
-        <div id="cart-total" style="font-size: 20px; font-weight: 800; margin: 20px 0;">TOTAL: $0</div>
-        <button onclick="app.checkout()" style="width:100%; background:var(--neon); color:black; padding:15px; border:none; border-radius:10px; font-weight:800; cursor:pointer;">COMPRAR AHORA 💬</button>
-        <p onclick="toggleModal('cart-modal')" style="text-align:center; margin-top:20px; font-size:12px; opacity:0.5; cursor:pointer;">Regresar</p>
-    </div>
-
-    <div id="user-modal" class="side-modal">
-        <h3 style="font-family:'Orbitron';">MI CUENTA S.E.</h3>
-        <p style="font-size:12px; opacity:0.7;">Bienvenido a la Academia.</p>
-        <div class="user-badge">ALUMNO BRONCE</div>
-        <div style="margin-top:30px;">
-            <p style="font-size:11px;"><i class="fas fa-check-circle" style="color:var(--neon)"></i> Mis compras: 0</p>
-            <p style="font-size:11px;"><i class="fas fa-gift" style="color:var(--gold)"></i> Bonos activos: 1</p>
-        </div>
-        <button onclick="toggleModal('user-modal')" style="margin-top:40px; width:100%; background:transparent; border:1px solid white; color:white; padding:10px; border-radius:10px; cursor:pointer;">Cerrar</button>
+    <div class="cart-bar" onclick="app.checkout()">
+        <i class="fas fa-shopping-cart"></i> FINALIZAR COMPRA <span id="cart-count">(0)</span>
     </div>
 
 <script>
     const app = {
-        tel: "573223693926",
+        currentAge: 'Todos',
+        currentCat: 'Todas',
         cart: [],
         products: [
-            { id: 1, cat: "Mecánica Pro", age: "mayores", t: "Inyección y Sensores", p: 48000, img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=300" },
-            { id: 2, cat: "Mecánica Pro", age: "mayores", t: "Electricidad Automotriz", p: 35000, img: "https://images.unsplash.com/photo-1504222490345-c075b6008014?w=300" },
-            { id: 3, cat: "Cocinando S.E.", age: "todos", t: "Gourmet en 30 min", p: 18000, img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=300" },
-            { id: 4, cat: "Ingeniería Digital", age: "mayores", t: "Python para Negocios", p: 32000, img: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=300" },
-            { id: 5, cat: "Dropshipping", age: "mayores", t: "Shopify Elite", p: 27000, img: "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=300" },
-            { id: 6, cat: "Jóvenes", age: "menores", t: "Mentalidad de Acero", p: 15000, img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=300" }
+            { 
+                cat: "Combos", age: "Mayores", t: "Master Combo Mecánico Pro", p: 48000, old: 120000, promo: "60% OFF", 
+                img: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400", 
+                desc: "Incluye Inyección Electrónica, Sensores y Electricidad Automotriz." 
+            },
+            { 
+                cat: "Combos", age: "Mayores", t: "Pack Elite: Importaciones + Shopify", p: 39000, old: 85000, promo: "AHORRA 54%", 
+                img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400", 
+                desc: "Domina el Sello Trade Assurance y la Configuración de Oro para tu tienda online." 
+            },
+            { 
+                cat: "Importaciones", age: "Mayores", t: "Importaciones Élite: Mapa del Dinero", p: 22000, old: 45000, 
+                img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400", 
+                desc: "Aprende a identificar proveedores reales y calcular márgenes exactos." 
+            },
+            { 
+                cat: "Dropshipping", age: "Mayores", t: "Shopify Élite: Domina el Dropshipping", p: 27000, old: 50000, 
+                img: "https://images.unsplash.com/photo-1556742044-3c52d6e88c62?w=400", 
+                desc: "Guía completa: desde la creación de la tienda hasta la cacería de productos." 
+            },
+            { 
+                cat: "Ingeniería", age: "Mayores", t: "Manual de Planos Digitales", p: 35000, old: 70000, 
+                img: "https://images.unsplash.com/photo-1503387762-592dea58ef23?w=400", 
+                desc: "Estructuras, resistencia de materiales y diseño técnico avanzado." 
+            },
+            { 
+                cat: "Cocina", age: "Todos", t: "Chef Pro: Cocina de Autor", p: 15000, old: 35000, 
+                img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400", 
+                desc: "Técnicas gourmet para transformar ingredientes simples en platos de lujo." 
+            }
         ],
 
-        render(filter = 'todos') {
-            const content = document.getElementById('main-content');
-            content.innerHTML = '';
-            const cats = [...new Set(this.products.map(p => p.cat))];
+        render() {
+            const container = document.getElementById('main-catalog');
+            container.innerHTML = '';
+            
+            let catsToRender = this.currentCat === 'Todas' ? [...new Set(this.products.map(p => p.cat))] : [this.currentCat];
 
-            cats.forEach(cat => {
-                const filtered = this.products.filter(p => p.cat === cat && (filter === 'todos' || p.age === filter));
-                if (filtered.length === 0) return;
-
-                let html = `<div class="section-header"><h2>${cat}</h2><div class="line"></div></div><div class="scroller">`;
-                filtered.forEach(p => {
-                    const rating = (Math.random() * (5.0 - 4.7) + 4.7).toFixed(1);
-                    html += `
-                    <div class="card">
-                        <img src="${p.img}">
-                        <div class="card-body">
-                            <div class="stars"><i class="fas fa-star"></i> ${rating}</div>
-                            <div class="title">${p.t}</div>
-                            <div class="price">$${p.p.toLocaleString()}</div>
-                        </div>
-                        <button class="add-btn" onclick="app.addToCart(${p.id})">AÑADIR AL PACK</button>
-                    </div>`;
-                });
-                content.innerHTML += html + '</div>';
+            catsToRender.forEach(c => {
+                const items = this.products.filter(p => p.cat === c && (this.currentAge === 'Todos' || p.age === this.currentAge));
+                if (items.length > 0) {
+                    let html = `<div class="section-container"><div class="section-title">${c === 'Combos' ? '🔥 Combos de Alto Valor' : c}</div><div class="scroll-wrapper">`;
+                    items.forEach(p => {
+                        html += `
+                        <div class="card" onclick="app.openModal('${p.t}')">
+                            ${p.promo ? `<div class="badge-promo">${p.promo}</div>` : ''}
+                            <img src="${p.img}">
+                            <div class="card-info">
+                                <div class="title">${p.t}</div>
+                                <div class="price-box">
+                                    <span class="old-price">$${p.old.toLocaleString()}</span>
+                                    <span class="new-price">$${p.p.toLocaleString()}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                    });
+                    container.innerHTML += html + `</div></div>`;
+                }
             });
         },
 
-        filterAge(age, btn) {
-            document.querySelectorAll('.age-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            this.render(age);
+        setAge(val, el) {
+            document.querySelectorAll('.btn-age').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            this.currentAge = val;
+            this.render();
         },
 
-        addToCart(id) {
-            const p = this.products.find(x => x.id === id);
-            this.cart.push(p);
-            this.updateCartUI();
-            alert(`¡${p.t} añadido a SuperationEbook!`);
+        setCat(val, el) {
+            document.querySelectorAll('.cat-tag').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            this.currentCat = val;
+            this.render();
         },
 
-        updateCartUI() {
-            document.getElementById('cart-count').innerText = this.cart.length;
-            const list = document.getElementById('cart-list');
-            list.innerHTML = this.cart.map((i, idx) => `
-                <div style="display:flex; justify-content:space-between; margin-bottom:15px; border-bottom:1px solid #222; padding-bottom:5px;">
-                    <span>${i.t}</span>
-                    <span style="color:var(--neon)">$${i.p.toLocaleString()}</span>
-                </div>
-            `).join('');
-            const total = this.cart.reduce((s, i) => s + i.p, 0);
-            document.getElementById('cart-total').innerText = "TOTAL: $" + total.toLocaleString();
+        openModal(t) {
+            const p = this.products.find(x => x.t === t);
+            this.selected = p;
+            document.getElementById('mTitle').innerText = p.t;
+            document.getElementById('mDesc').innerText = p.desc;
+            document.getElementById('mImg').src = p.img;
+            document.getElementById('mOld').innerText = `$${p.old.toLocaleString()}`;
+            document.getElementById('mNew').innerText = `$${p.p.toLocaleString()}`;
+            document.getElementById('descModal').style.display = 'flex';
+        },
+
+        closeModal() { document.getElementById('descModal').style.display = 'none'; },
+
+        addToCart() {
+            this.cart.push(this.selected);
+            document.getElementById('cart-count').innerText = `(${this.cart.length})`;
+            this.closeModal();
+            alert(`¡${this.selected.t} añadido a tu pack de SuperationEbook!`);
         },
 
         checkout() {
-            if(this.cart.length === 0) return alert("El carrito está vacío.");
-            const msg = encodeURIComponent(`¡Hola! Vengo de SuperationEbook. Quiero adquirir:\n` + this.cart.map(i => `- ${i.t}`).join('\n') + `\nTotal: $${this.cart.reduce((s,i)=>s+i.p,0).toLocaleString()}`);
-            window.open(`https://wa.me/${this.tel}?text=${msg}`);
+            if(this.cart.length === 0) return alert("Tu carrito está vacío.");
+            const total = this.cart.reduce((s, i) => s + i.p, 0);
+            const msg = encodeURIComponent(`¡Hola SuperationEbook! Quiero mi pack élite con:\n${this.cart.map(i => "- " + i.t).join('\n')}\nTOTAL: $${total.toLocaleString()}`);
+            window.open(`https://wa.me/573223693926?text=${msg}`);
         }
     };
-
-    function toggleModal(id) {
-        const m = document.getElementById(id);
-        m.style.display = (m.style.display === 'block') ? 'none' : 'block';
-    }
 
     app.render();
 </script>
