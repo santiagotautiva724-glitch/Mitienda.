@@ -154,42 +154,78 @@
 
     <!-- Aquí pondremos la lógica (JavaScript) al final -->
     <script>
-                const productos = [
-            { 
-                id: 1, 
-                nombre: "AirPods Pro 3", 
-                precio: 90000, 
-                precioAnterior: 120000, 
-                img: "https://i.ibb.co/WvR0dy0s/Screenshot-2026-05-30-02-36-31-71-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
-                descripcion: "Sonido de alta calidad, cancelación de ruido, modo ambiente/adaptativo y traducción en tiempo real."
-            }
+                        // 1. Lista de todos tus productos con su respectiva "categoria"
+        const productos = [
+            { id: 1, categoria: "Tecnología", nombre: "AirPods Pro 3", precio: 90000, precioAnterior: 120000, img: "https://i.ibb.co/WvR0dy0s/Screenshot-2026-05-30-02-36-31-71-40deb401b9ffe8e1df2f1cc5ba480b12.jpg", descripcion: "Sonido de alta calidad, cancelación de ruido." },
+            { id: 2, categoria: "Perfumería", nombre: "1.1 UNISEX LATTAFA AMETHYST", precio: 79900, precioAnterior: 90000, img: "https://i.ibb.co/WvR0dy0s/Screenshot-2026-05-30-02-36-31-71-40deb401b9ffe8e1df2f1cc5ba480b12.jpg", descripcion: "Aroma dulce y sofisticado." },
+            { id: 3, categoria: "Barberías", nombre: "Máquina de motilar (Ejemplo)", precio: 50000, precioAnterior: 70000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 4, categoria: "Belleza", nombre: "Plancha para cabello (Ejemplo)", precio: 60000, precioAnterior: 85000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 5, categoria: "Cacharrería", nombre: "Producto Cacharrería (Ejemplo)", precio: 10000, precioAnterior: 15000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 6, categoria: "Camisas de fútbol", nombre: "Camisa Selección Colombia", precio: 80000, precioAnterior: 120000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 7, categoria: "Canasta familiar", nombre: "Mercado Básico (Ejemplo)", precio: 150000, precioAnterior: 180000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 8, categoria: "Contenedor de china", nombre: "Mini ventilador USB", precio: 15000, precioAnterior: 25000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 9, categoria: "Deportes", nombre: "Pesas 5kg (Ejemplo)", precio: 45000, precioAnterior: 60000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 10, categoria: "Ferreteria", nombre: "Set de destornilladores", precio: 25000, precioAnterior: 35000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 11, categoria: "Halloween", nombre: "Máscara LED (Ejemplo)", precio: 30000, precioAnterior: 45000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 12, categoria: "Hogar", nombre: "Juego de Sábanas (Ejemplo)", precio: 70000, precioAnterior: 90000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 13, categoria: "Joyería", nombre: "Cadena de Plata (Ejemplo)", precio: 120000, precioAnterior: 150000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 14, categoria: "Mascotas", nombre: "Cama para perro (Ejemplo)", precio: 55000, precioAnterior: 75000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 15, categoria: "Papelería", nombre: "Kit de Marcadores (Ejemplo)", precio: 20000, precioAnterior: 30000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 16, categoria: "Relojería original", nombre: "Reloj Casio Original", precio: 200000, precioAnterior: 250000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 17, categoria: "Relojería 1.1", nombre: "Reloj Replica Rolex", precio: 150000, precioAnterior: 200000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 18, categoria: "Sex shop", nombre: "Aceite para masajes", precio: 30000, precioAnterior: 40000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 19, categoria: "Vapes", nombre: "Vape Desechable (Ejemplo)", precio: 40000, precioAnterior: 55000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." },
+            { id: 20, categoria: "Promociones", nombre: "Combo Oferta Sorpresa", precio: 50000, precioAnterior: 100000, img: "PONER_LINK_AQUI", descripcion: "Añade aquí la descripción de tu producto." }
         ];
 
         let carrito = [];
         const contenedor = document.getElementById('lista-productos');
+        
+        // Ajuste automático para que los títulos se organicen bien de arriba a abajo
+        contenedor.style.display = "block";
 
-        productos.forEach(p => {
-            contenedor.innerHTML += `
+        // 2. Extraer las categorías para crear los apartados automáticamente
+        const categoriasActuales = [...new Set(productos.map(p => p.categoria))];
+
+        categoriasActuales.forEach(cat => {
+            const productosDeCategoria = productos.filter(p => p.categoria === cat);
+            
+            // Crea el título de cada apartado
+            contenedor.innerHTML += `<h2 style="text-align: left; margin-top: 50px; margin-bottom: 20px; font-size: 26px; border-bottom: 3px solid #000; padding-bottom: 10px; text-transform: uppercase;">${cat}</h2>`;
+            
+            // Crea el espacio para las tarjetas de esa categoría
+            let gridHTML = `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-bottom: 40px;">`;
+            
+            productosDeCategoria.forEach(p => {
+                gridHTML += `
                 <div class="card">
                     <img src="${p.img}" alt="${p.nombre}">
                     <h3>${p.nombre}</h3>
-                    <p class="precio-antes">$${p.precioAnterior.toLocaleString()}</p>
-                    <p class="precio-ahora">$${p.precio.toLocaleString()}</p>
+                    <p class="precio-antes">$${p.precioAnterior}</p>
+                    <p class="precio-ahora">$${p.precio}</p>
                     <p class="descripcion">${p.descripcion}</p>
                     <button onclick="agregar(${p.id})">Añadir al Carrito</button>
-                </div>
-            `;
+                </div>`;
+            });
+            
+            gridHTML += `</div>`;
+            contenedor.innerHTML += gridHTML;
         });
 
+        // 3. Funciones del carrito
         function agregar(id) {
             carrito.push(productos.find(p => p.id === id));
             document.getElementById('contador').innerText = carrito.length;
         }
 
         function enviarWhatsApp() {
-            if(carrito.length === 0) { alert("El carrito está vacío"); return; }
-            let nombres = carrito.map(p => p.nombre).join(", ");
-            window.open(`https://wa.me/573223693926?text=Hola, quiero comprar: ${nombres}`);
+            if(carrito.length === 0) {
+                alert("El carrito está vacío");
+                return;
+            }
+            let nombres = carrito.map(p => p.nombre).join(', ');
+            let total = carrito.reduce((sum, p) => sum + p.precio, 0);
+            window.open(`https://wa.me/573223693926?text=Hola,%20quiero%20comprar:%20${nombres}.%20Total:%20$${total}`, '_blank');
         }
         
     </script>
