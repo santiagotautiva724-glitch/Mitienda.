@@ -1,29 +1,75 @@
-// --- CONFIGURA TUS PRODUCTOS AQUÍ ---
-const productos = [
-    { 
-        id: 1, 
-        nombre: "AirPods Pro 3", 
-        precio: 90000, 
-        precioAnterior: 120000, 
-        img: "https://via.placeholder.com/200", // Reemplaza este link por la URL de tu imagen
-        descripcion: "Sonido de alta calidad, cancelación de ruido, modo ambiente/adaptativo, traducción en tiempo real y diseño ergonómico."
-    }
-];
-const miNumeroWhatsApp = "573000000000"; // CAMBIA ESTO POR TU NÚMERO
-// -------------------------------------
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperationEbook | Transformando tu Futuro</title>
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
 
-// --- LÓGICA PARA MOSTRAR PRODUCTO CON PRECIO TACHADO ---
-const contenedor = document.getElementById('lista-productos');
-
-productos.forEach(p => {
-    contenedor.innerHTML += `
-        <div class="card">
-            <img src="${p.img}" alt="${p.nombre}">
-            <h3>${p.nombre}</h3>
-            <p style="text-decoration: line-through; color: gray; margin: 0;">$${p.precioAnterior.toLocaleString()}</p>
-            <p style="font-weight: bold; font-size: 18px;">$${p.precio.toLocaleString()}</p>
-            <p style="font-size: 12px;">${p.descripcion}</p>
-            <button onclick="agregar(${p.id})">Añadir al Carrito</button>
+    <!-- Navegación -->
+    <nav class="flex justify-between items-center py-6 px-10 bg-white shadow-sm">
+        <div class="text-2xl font-bold text-indigo-600">SuperationEbook</div>
+        <div class="space-x-6 hidden md:block">
+            <a href="#inicio" class="hover:text-indigo-600">Inicio</a>
+            <a href="#servicios" class="hover:text-indigo-600">Servicios</a>
+            <a href="#contacto" class="hover:text-indigo-600">Contacto</a>
         </div>
-    `;
-});
+    </nav>
+
+    <!-- Sección Hero -->
+    <header id="inicio" class="gradient-bg text-white py-20 px-10 text-center">
+        <h1 class="text-5xl font-extrabold mb-4">Bienvenido a SuperationEbook</h1>
+        <p class="text-xl mb-8">Tu plataforma digital de crecimiento y aprendizaje.</p>
+        <button onclick="document.getElementById('contacto').scrollIntoView()" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">Comenzar Ahora</button>
+    </header>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="py-20 px-10 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-center mb-12">Nuestros Servicios</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
+                <h3 class="text-xl font-bold mb-2">Consultoría Digital</h3>
+                <p>Estrategias personalizadas para impulsar tu proyecto al siguiente nivel.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
+                <h3 class="text-xl font-bold mb-2">Desarrollo Ebook</h3>
+                <p>Creamos contenido de alto impacto para tu audiencia global.</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500">
+                <h3 class="text-xl font-bold mb-2">Capacitación</h3>
+                <p>Sesiones guiadas para dominar nuevas habilidades tecnológicas.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="bg-gray-100 py-20 px-10">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center">Contacto</h2>
+            <form id="contactForm" onsubmit="event.preventDefault(); alert('¡Gracias por tu mensaje, nos pondremos en contacto pronto!');">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1">Nombre</label>
+                    <input type="text" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-1">Correo Electrónico</label>
+                    <input type="email" required class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none">
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700 transition">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center text-gray-500 text-sm">
+        &copy; 2026 SuperationEbook. Todos los derechos reservados.
+    </footer>
+
+</body>
+</html>
