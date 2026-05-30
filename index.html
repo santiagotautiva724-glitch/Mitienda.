@@ -1,58 +1,29 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperationEbook Store</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; padding: 20px; background: #f4f4f4; }
-        .productos { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
-        .card { background: white; padding: 15px; border-radius: 10px; width: 200px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        img { width: 100%; height: 150px; object-fit: cover; border-radius: 5px; }
-        button { background: #25D366; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; margin-top: 10px; }
-        #btn-finalizar { position: fixed; bottom: 20px; right: 20px; padding: 15px; font-size: 18px; }
-    </style>
-</head>
-<body>
+// --- CONFIGURA TUS PRODUCTOS AQUÍ ---
+const productos = [
+    { 
+        id: 1, 
+        nombre: "AirPods Pro 3", 
+        precio: 90000, 
+        precioAnterior: 120000, 
+        img: "https://via.placeholder.com/200", // Reemplaza este link por la URL de tu imagen
+        descripcion: "Sonido de alta calidad, cancelación de ruido, modo ambiente/adaptativo, traducción en tiempo real y diseño ergonómico."
+    }
+];
+const miNumeroWhatsApp = "573000000000"; // CAMBIA ESTO POR TU NÚMERO
+// -------------------------------------
 
-    <h1>SuperationEbook</h1>
-    <div id="lista-productos" class="productos"></div>
-    <button id="btn-finalizar" onclick="enviarWhatsApp()">Comprar por WhatsApp (<span id="contador">0</span>)</button>
+// --- LÓGICA PARA MOSTRAR PRODUCTO CON PRECIO TACHADO ---
+const contenedor = document.getElementById('lista-productos');
 
-    <script>
-        // --- CONFIGURA TUS PRODUCTOS AQUÍ ---
-        const productos = [
-            { id: 1, nombre: "Ebook 1", precio: 10, img: "https://via.placeholder.com/200" },
-            { id: 2, nombre: "Ebook 2", precio: 20, img: "https://via.placeholder.com/200" }
-        ];
-        const miNumeroWhatsApp = "573000000000"; // CAMBIA ESTO POR TU NÚMERO
-        // -------------------------------------
-
-        let carrito = [];
-        const contenedor = document.getElementById('lista-productos');
-
-        productos.forEach(p => {
-            contenedor.innerHTML += `
-                <div class="card">
-                    <img src="${p.img}" alt="${p.nombre}">
-                    <h3>${p.nombre}</h3>
-                    <p>$${p.precio}</p>
-                    <button onclick="agregar(${p.id})">Añadir al Carrito</button>
-                </div>
-            `;
-        });
-
-        function agregar(id) {
-            carrito.push(productos.find(p => p.id === id));
-            document.getElementById('contador').innerText = carrito.length;
-        }
-
-        function enviarWhatsApp() {
-            if(carrito.length === 0) { alert("El carrito está vacío"); return; }
-            let nombres = carrito.map(p => p.nombre).join(", ");
-            let link = `https://wa.me/${miNumeroWhatsApp}?text=Hola, quiero comprar: ${nombres}`;
-            window.open(link, '_blank');
-        }
-    </script>
-</body>
-</html>
+productos.forEach(p => {
+    contenedor.innerHTML += `
+        <div class="card">
+            <img src="${p.img}" alt="${p.nombre}">
+            <h3>${p.nombre}</h3>
+            <p style="text-decoration: line-through; color: gray; margin: 0;">$${p.precioAnterior.toLocaleString()}</p>
+            <p style="font-weight: bold; font-size: 18px;">$${p.precio.toLocaleString()}</p>
+            <p style="font-size: 12px;">${p.descripcion}</p>
+            <button onclick="agregar(${p.id})">Añadir al Carrito</button>
+        </div>
+    `;
+});
